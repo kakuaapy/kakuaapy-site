@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KakuaaPY — crescer · conectar · prosperar</title>
+<meta name="description" content="A plataforma que conecta empresas do mundo ao Paraguai com inteligência, dados e propósito. Ferramenta gratuita de análise estratégica.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════
+   SHARED — KAKUAAPY
+   ══════════════════════════════════════ */
+:root {
+  --kk-primary:   #1A2B23;
+  --kk-secondary: #1D4E3A;
+  --kk-accent:    #4DB88A;
+  --kk-cream:     #F5F4F0;
+  --kk-graphite:  #2C2C2A;
+  --kk-muted:     #6B7A72;
+  --kk-border:    #D8DDD9;
+  --gold:         #C8A84B;
+  --gold-dim:     rgba(200,168,75,0.15);
+  --gold-line:    rgba(200,168,75,0.3);
+  --dark:         #0E1A14;
+  --serif:        'Playfair Display', Georgia, serif;
+  --sans:         'DM Sans', 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--kk-cream); color: var(--kk-graphite); }
+
+/* ── NAV ── */
+.site-nav {
+  background: var(--kk-primary);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid rgba(77,184,138,0.15);
+}
+.site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.site-logo-name { font-size: 18px; display: flex; align-items: baseline; }
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; letter-spacing: 0.3px; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+.site-logo-tagline { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.28); letter-spacing: 2.5px; text-transform: uppercase; display: block; margin-top: 2px; }
+
+.site-nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.site-nav-links a {
+  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 6px 12px; border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.site-nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.site-nav-links a.active { color: var(--kk-accent); font-weight: 500; }
+.nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 6px; }
+
+.mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.mobile-menu-btn span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--kk-primary); z-index: 190; padding: 16px 24px 24px; border-bottom: 1px solid rgba(77,184,138,0.15); flex-direction: column; gap: 4px; }
+.mobile-menu a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--kk-accent); }
+.mobile-menu .mobile-cta { color: var(--gold) !important; font-weight: 600; border: none !important; }
+.mobile-menu.open { display: flex; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--kk-primary); color: rgba(255,255,255,0.4); }
+.site-footer-inner { max-width: 1100px; margin: 0 auto; padding: 48px 40px 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 56px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand .brand-name { font-size: 17px; margin-bottom: 4px; }
+.footer-brand .brand-name .kakuaa { font-weight: 300; color: #fff; }
+.footer-brand .brand-name .py     { font-weight: 600; color: var(--kk-accent); }
+.footer-brand .brand-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 16px; }
+.footer-brand p { font-size: 12px; line-height: 1.75; color: rgba(255,255,255,0.32); max-width: 260px; margin-bottom: 0; }
+.footer-cols { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
+.footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 9px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.42); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--kk-accent); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-bottom-accent { color: rgba(77,184,138,0.38); letter-spacing: 0.12em; }
+
+/* ── UTILITÁRIOS ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  color: var(--kk-accent); text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--kk-accent); }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--kk-accent); color: var(--kk-primary);
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  padding: 12px 26px; border-radius: 7px; border: none; cursor: pointer;
+  text-decoration: none; letter-spacing: 0.03em;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-ghost-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: rgba(255,255,255,0.75);
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  padding: 11px 22px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost-light:hover { border-color: var(--kk-accent); color: var(--kk-accent); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--kk-primary);
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  padding: 11px 22px; border-radius: 7px;
+  border: 1px solid var(--kk-border); cursor: pointer;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--kk-accent); color: var(--kk-secondary); }
+
+/* ── ÍCONES FLUTUANTES ── */
+.float-icons {
+  position: fixed; right: 20px; top: 50%;
+  transform: translateY(-50%); z-index: 999;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.float-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; position: relative;
+  transition: all 0.25s cubic-bezier(0.34,1.2,0.64,1); overflow: visible;
+}
+.float-icon-tool { background: rgba(26,43,35,0.82); border: 1px solid rgba(77,184,138,0.25); color: rgba(77,184,138,0.85); backdrop-filter: blur(8px); }
+.float-icon-wa   { background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.3); color: #25D366; backdrop-filter: blur(8px); }
+.float-icon:hover { transform: scale(1.12); }
+.float-icon-tool:hover { background: rgba(26,43,35,0.95); border-color: rgba(77,184,138,0.5); box-shadow: 0 4px 20px rgba(77,184,138,0.15); }
+.float-icon-wa:hover   { background: rgba(37,211,102,0.22); border-color: rgba(37,211,102,0.5); box-shadow: 0 4px 20px rgba(37,211,102,0.2); }
+.float-icon-label {
+  position: absolute; right: 52px;
+  background: rgba(15,26,20,0.95); color: rgba(255,255,255,0.85);
+  font-family: var(--sans); font-size: 11px; font-weight: 500;
+  white-space: nowrap; padding: 6px 12px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  opacity: 0; pointer-events: none;
+  transform: translateX(6px); transition: opacity 0.2s, transform 0.2s;
+  backdrop-filter: blur(8px);
+}
+.float-icon-label::after {
+  content: ''; position: absolute; right: -5px; top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent; border-right: none;
+  border-left-color: rgba(15,26,20,0.95);
+}
+.float-icon:hover .float-icon-label { opacity: 1; transform: translateX(0); }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes floatSlow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes breathe {
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}
+  50%{transform:translate(-50%,-50%) scale(1.04);opacity:0.7}
+}
+
+/* ══════════════════════════════════════
+   INÍCIO — ESTILOS ESPECÍFICOS
+   ══════════════════════════════════════ */
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark);
+  min-height: 94vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234DB88A' fill-opacity='0.025'%3E%3Cpath d='M40 0L80 40L40 80L0 40z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-glow-left {
+  position: absolute; left: -80px; top: 40%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(77,184,138,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow-right {
+  position: absolute; right: -80px; top: 20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(200,168,75,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-left {
+  position: relative; z-index: 2;
+  padding: 80px 64px 80px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-overline {
+  font-family: var(--sans); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--kk-accent);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-overline::before { content: ''; width: 32px; height: 1px; background: var(--kk-accent); }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 62px);
+  font-weight: 400; color: #fff;
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+}
+.hero h1 em { font-style: italic; color: var(--kk-accent); }
+.hero h1 .gold { color: var(--gold); font-style: normal; }
+
+.hero-lead {
+  font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.55);
+  line-height: 1.85; max-width: 460px; margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s 0.65s forwards;
+}
+
+/* Destaque ferramenta no hero */
+.hero-tool-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(77,184,138,0.08);
+  border: 1px solid rgba(77,184,138,0.2);
+  border-radius: 8px; padding: 10px 16px;
+  margin-top: 28px;
+  opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+}
+.hero-tool-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--kk-accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+.hero-tool-badge span {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6);
+}
+.hero-tool-badge strong { color: var(--kk-accent); font-weight: 600; }
+
+/* Hero right */
+.hero-right {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  padding: 80px 40px;
+  opacity: 0; animation: fadeIn 1.2s 0.6s forwards;
+}
+.hero-symbol-wrap { position: relative; }
+.hero-symbol-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(200,168,75,0.12);
+  top: 50%; left: 50%;
+  animation: breathe 6s ease-in-out infinite;
+}
+.hero-symbol-ring:nth-child(1) { width: 180px; height: 180px; }
+.hero-symbol-ring:nth-child(2) { width: 280px; height: 280px; animation-delay: 0.5s; }
+.hero-symbol-ring:nth-child(3) { width: 380px; height: 380px; animation-delay: 1s; border-color: rgba(200,168,75,0.06); }
+.hero-symbol-svg {
+  position: relative; z-index: 2;
+  filter: drop-shadow(0 0 40px rgba(77,184,138,0.18));
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+/* ── DIVISOR EDITORIAL ── */
+.divisor-editorial {
+  background: #fff;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--kk-border);
+}
+.divisor-inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 48px; flex-wrap: wrap;
+}
+.divisor-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; color: var(--kk-muted); font-weight: 400;
+}
+.divisor-item strong { color: var(--kk-primary); font-weight: 600; }
+.divisor-sep { width: 1px; height: 28px; background: var(--kk-border); }
+
+/* ── ESTRATÉGIA ── */
+.estrategia {
+  padding: 100px 0;
+  background: var(--kk-cream);
+  position: relative; overflow: hidden;
+}
+.estrategia::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--kk-border), transparent);
+}
+.estrategia-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.estrategia-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 400; color: var(--kk-primary);
+  line-height: 1.2; margin-bottom: 28px;
+}
+.estrategia-text h2 em { font-style: italic; color: var(--kk-accent); }
+.estrategia-text p {
+  font-size: 14px; color: var(--kk-muted);
+  line-height: 1.9; margin-bottom: 20px;
+}
+.estrategia-text p:last-of-type { margin-bottom: 0; }
+.estrategia-text p strong { color: var(--kk-primary); font-weight: 600; }
+
+.estrategia-dados {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.dado-card {
+  background: #fff; border: 1px solid var(--kk-border);
+  border-radius: 12px; padding: 24px 26px;
+  display: flex; align-items: flex-start; gap: 20px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.dado-card:hover { box-shadow: 0 8px 32px rgba(26,43,35,0.08); transform: translateX(4px); }
+.dado-card-accent {
+  width: 3px; flex-shrink: 0; border-radius: 2px;
+  align-self: stretch;
+}
+.dado-card-accent.verde { background: linear-gradient(to bottom, var(--kk-accent), rgba(77,184,138,0.3)); }
+.dado-card-accent.dourado { background: linear-gradient(to bottom, var(--gold), rgba(200,168,75,0.3)); }
+.dado-num {
+  font-family: var(--serif); font-size: 34px; font-weight: 700;
+  color: var(--kk-primary); line-height: 1; margin-bottom: 5px;
+  letter-spacing: -0.02em;
+}
+.dado-num span { color: var(--kk-accent); }
+.dado-num.gold span { color: var(--gold); }
+.dado-label { font-size: 13px; color: var(--kk-muted); line-height: 1.5; }
+
+/* ── VÍDEOS INSTITUCIONAIS ── */
+.videos-section {
+  background: var(--kk-primary);
+  padding: 72px 0;
+  position: relative; overflow: hidden;
+}
+.videos-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(77,184,138,0.06) 0%, transparent 100%);
+  pointer-events: none;
+}
+.videos-header { text-align: center; margin-bottom: 40px; position: relative; z-index: 1; }
+.videos-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 400; color: #fff; line-height: 1.2; margin-bottom: 10px;
+}
+.videos-header h2 em { font-style: italic; color: var(--kk-accent); }
+.videos-header p { font-size: 13px; color: rgba(255,255,255,0.38); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+.videos-fonte {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(77,184,138,0.5);
+  margin-bottom: 32px;
+}
+.videos-fonte::before, .videos-fonte::after { content: ''; width: 32px; height: 1px; background: rgba(77,184,138,0.25); }
+.videos-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 18px; position: relative; z-index: 1;
+}
+.video-card {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(77,184,138,0.15);
+  background: rgba(0,0,0,0.25);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.video-card:hover { border-color: rgba(77,184,138,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.video-card iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+.video-card-caption { padding: 14px 16px 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+.video-card-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kk-accent); margin-bottom: 5px; display: block; }
+.video-card-title { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); line-height: 1.4; margin-bottom: 4px; }
+.video-card-source { font-size: 10px; color: rgba(255,255,255,0.25); }
+
+/* ── IMPACTO SOCIAL ── */
+.social {
+  padding: 100px 0;
+  background: var(--dark);
+  position: relative; overflow: hidden;
+}
+.social::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 50%, rgba(77,184,138,0.07) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 50% at 90% 30%, rgba(200,168,75,0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+.social-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.social-symbol {
+  display: flex; align-items: center; justify-content: center;
+}
+.social-symbol svg { filter: drop-shadow(0 0 30px rgba(77,184,138,0.15)); }
+
+.social-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 400; color: #fff;
+  line-height: 1.25; margin-bottom: 24px;
+}
+.social-text h2 em { font-style: italic; color: var(--gold); }
+.social-text p {
+  font-size: 14px; color: rgba(255,255,255,0.52);
+  line-height: 1.9; margin-bottom: 18px;
+}
+.social-text p strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+.social-text p:last-of-type { margin-bottom: 0; }
+
+.social-quote {
+  margin-top: 32px;
+  border-left: 3px solid var(--gold);
+  padding: 14px 20px;
+  background: rgba(200,168,75,0.05);
+  border-radius: 0 8px 8px 0;
+}
+.social-quote p {
+  font-family: var(--serif);
+  font-size: 15px; font-style: italic;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65; margin: 0;
+}
+
+/* ── FERRAMENTA ── */
+.ferramenta {
+  padding: 100px 0;
+  background: #fff;
+  position: relative;
+}
+.ferramenta-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.ferramenta-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 400; color: var(--kk-primary);
+  line-height: 1.25; margin-bottom: 20px;
+}
+.ferramenta-text h2 em { font-style: italic; color: var(--kk-accent); }
+.ferramenta-text p {
+  font-size: 14px; color: var(--kk-muted);
+  line-height: 1.85; margin-bottom: 18px;
+}
+.ferramenta-text p strong { color: var(--kk-primary); font-weight: 600; }
+
+.gratuito-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(77,184,138,0.08);
+  border: 1px solid rgba(77,184,138,0.25);
+  border-radius: 6px; padding: 8px 16px;
+  margin-bottom: 24px;
+}
+.gratuito-badge span {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--kk-accent);
+}
+
+.ferramenta-modulos {
+  display: flex; flex-direction: column; gap: 10px;
+  margin: 28px 0;
+}
+.modulo-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; color: var(--kk-graphite);
+}
+.modulo-item::before {
+  content: ''; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--kk-accent);
+  flex-shrink: 0;
+}
+
+/* Preview card da ferramenta */
+.ferramenta-preview {
+  background: var(--kk-primary);
+  border-radius: 16px; padding: 36px;
+  position: relative; overflow: hidden;
+}
+.ferramenta-preview::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--kk-accent), var(--gold));
+}
+.preview-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 20px;
+}
+.preview-row {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 16px 18px;
+  margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.preview-row:last-of-type { margin-bottom: 0; }
+.preview-row.highlight {
+  border-color: rgba(77,184,138,0.3);
+  background: rgba(77,184,138,0.07);
+}
+.prev-label { font-size: 12px; color: rgba(255,255,255,0.45); }
+.prev-val { font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.prev-val.br  { color: #4DB88A; }
+.prev-val.py  { color: #60A5FA; }
+.prev-val.eco { color: var(--gold); }
+.prev-pct { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--gold); }
+.preview-note {
+  font-size: 10px; color: rgba(255,255,255,0.2);
+  font-style: italic; margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ── CTA FINAL ── */
+.cta-final {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--kk-primary) 0%, var(--dark) 100%);
+  position: relative; overflow: hidden; text-align: center;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(77,184,138,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta-final h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400; color: #fff;
+  line-height: 1.2; margin-bottom: 16px; position: relative;
+}
+.cta-final h2 em { font-style: italic; color: var(--kk-accent); }
+.cta-final p {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  max-width: 500px; margin: 0 auto 40px;
+  line-height: 1.75; position: relative;
+}
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .site-nav { padding: 0 20px; }
+  .site-nav-links { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .container { padding: 0 20px; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 24px; text-align: center; }
+  .float-icons { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 64px 24px 56px; }
+  .divisor-inner { gap: 24px; }
+  .divisor-sep { display: none; }
+  .videos-grid { grid-template-columns: 1fr; }
+  .estrategia-inner { grid-template-columns: 1fr; gap: 48px; }
+  .social-inner { grid-template-columns: 1fr; gap: 40px; }
+  .social-symbol { display: none; }
+  .ferramenta-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+/* ══════════════════════════════════════
+   IDENTIDADE VISUAL V3.3 — KAKUAAPY
+   ══════════════════════════════════════ */
+:root {
+  --kk-vermelho:     #C8102E;
+  --kk-azul:         #002868;
+  --kk-borda-azul:   #5A8FBF;
+  --kk-borda-branco: #C8C8C8;
+}
+
+/* Logo nav — nova versão */
+.site-logo-name {
+  font-size: 18px;
+  display: flex;
+  align-items: baseline;
+  letter-spacing: 2px;
+}
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+
+
+.kk-tricolor {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.kk-tricolor span:nth-child(3) { background: var(--kk-azul); }
+.kk-tricolor.dark  span:nth-child(2) { background: #FFFFFF; }
+.kk-tricolor.light span:nth-child(2) { background: #D3D1C7; }
+
+/* Tricolor no footer */
+.site-footer .kk-tricolor { height: 3px; }
+
+/* Tricolor no topo do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: var(--kk-azul); }
+
+
+/* Faixa tricolor — borda inferior do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+  position: sticky;
+  top: 60px;
+  z-index: 199;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: #C8102E; }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: #002868; }
+
+/* Faixa tricolor — footer */
+.kk-tricolor { height: 3px; display: flex; width: 100%; }
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: #C8102E; }
+.kk-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.kk-tricolor span:nth-child(3) { background: #002868; }
+
+</style>
+</head>
+<body>
+
+<!-- KakuaaPY — SVG Symbols V3.3 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="kk-sym-light" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90" stroke="#C8C8C8" stroke-width="1" stroke-linejoin="round"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85"/>
+    </symbol>
+    <symbol id="kk-sym-dark" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85" stroke="#5A8FBF" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<!-- ── NAV ── -->
+<nav class="site-nav">
+  <a href="/" class="site-logo">
+    <div>
+      <svg width="22" height="31"><use href="#kk-sym-dark"/></svg>
+    </div>
+    <div style="margin-left:12px;">
+      <div class="site-logo-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <span class="site-logo-tagline">crescer · conectar · prosperar</span>
+    </div>
+  </a>
+  <ul class="site-nav-links">
+    <li><a href="/" class="active">Início</a></li>
+    <li><a href="/sobre">Sobre</a></li>
+    <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+    <li><a href="/servicos">Serviços</a></li>
+    <li><a href="/news">News &amp; Social</a></li>
+    <li><a href="/contato">Contato</a></li>
+    <li><div class="nav-divider"></div></li>
+    <li><a href="/cliente" class="site-nav-cta" style="background:rgba(200,168,75,0.15) !important; border:1px solid rgba(200,168,75,0.35) !important; color:#C8A84B !important;">Área do cliente</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.getElementById('mobile-menu-inicio').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="site-nav-tricolor"><span></span><span></span><span></span></div>
+<div class="mobile-menu" id="mobile-menu-inicio">
+  <a href="/">Início</a>
+  <a href="/sobre">Sobre</a>
+  <a href="/ferramenta">Ferramenta KakuaaPY</a>
+  <a href="/servicos">Serviços</a>
+  <a href="/news">News &amp; Social</a>
+  <a href="/contato">Contato</a>
+  <a href="/cliente" class="mobile-cta">Área do cliente</a>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO
+     ══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow-left"></div>
+  <div class="hero-glow-right"></div>
+
+  <div class="hero-left">
+    <div class="hero-overline">Plataforma Brasil · Paraguai · Mundo</div>
+    <h1>Uma decisão<br>estratégica.<br>Um impacto <em>real.</em></h1>
+    <p class="hero-lead">Expandir para o Paraguai não é apenas uma oportunidade tributária. É uma decisão que estrutura o futuro da sua empresa — e que, feita com responsabilidade, transforma a realidade de quem vive no território onde você opera.</p>
+    <div class="hero-actions">
+      <a href="/ferramenta" class="btn-primary">Acessar a ferramenta →</a>
+      <a href="/sobre" class="btn-ghost-light">Conhecer a KakuaaPY</a>
+    </div>
+    <div class="hero-tool-badge">
+      <div class="hero-tool-badge-dot"></div>
+      <span>A <strong>Ferramenta KakuaaPY</strong> é 100% gratuita — sem cadastro, sem compromisso.</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-symbol-wrap">
+      <div class="hero-symbol-ring"></div>
+      <div class="hero-symbol-ring"></div>
+      <div class="hero-symbol-ring"></div>
+      <svg class="hero-symbol-svg" width="120" height="170"><use href="#kk-sym-dark"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIVISOR EDITORIAL ── -->
+<div class="divisor-editorial">
+  <div class="container">
+    <div class="divisor-inner">
+      <div class="divisor-item">🇧🇷 <strong>Brasil</strong> para <strong>Paraguai</strong> — sem intermediários desnecessários</div>
+      <div class="divisor-sep"></div>
+      <div class="divisor-item">📊 Dados de fontes oficiais · <strong>mai/2026</strong></div>
+      <div class="divisor-sep"></div>
+      <div class="divisor-item">🌎 Atendimento em <strong>PT · ES · EN</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ESTRATÉGIA
+     ══════════════════════════════════ -->
+<section class="estrategia">
+  <div class="container">
+    <div class="estrategia-inner">
+      <div class="estrategia-text reveal">
+        <div class="section-eyebrow">Por que o Paraguai</div>
+        <h2>A lógica de uma<br>expansão <em>bem estruturada</em></h2>
+        <p>O Paraguai ocupa uma posição singular na América do Sul: economia estável, câmbio fixo histórico, carga tributária entre as mais competitivas do continente e localização estratégica no coração do Mercosul.</p>
+        <p>Para empresas brasileiras, a decisão de expandir ao Paraguai vai muito além da redução do IRPJ de 34% para 10%. Trata-se de <strong>reestruturar a operação em um ambiente regulatório mais ágil</strong>, com acesso a mão de obra crescente e custos operacionais significativamente menores.</p>
+        <p>O que diferencia as expansões bem-sucedidas das mal executadas não é o tamanho da empresa — é a qualidade da análise prévia e a solidez da estruturação. É exatamente para isso que a KakuaaPY existe.</p>
+      </div>
+      <div class="estrategia-dados reveal reveal-delay-2">
+        <div class="dado-card">
+          <div class="dado-card-accent verde"></div>
+          <div>
+            <div class="dado-num"><span>10</span>%</div>
+            <div class="dado-label">IRACIS — imposto sobre lucro no Paraguai,<br>contra 34% de IRPJ+CSLL no Brasil</div>
+          </div>
+        </div>
+        <div class="dado-card">
+          <div class="dado-card-accent verde"></div>
+          <div>
+            <div class="dado-num"><span>1</span>%</div>
+            <div class="dado-label">Tributação sobre valor agregado<br>no Regime Maquila — para indústrias exportadoras</div>
+          </div>
+        </div>
+        <div class="dado-card">
+          <div class="dado-card-accent dourado"></div>
+          <div>
+            <div class="dado-num gold"><span>30</span> dias</div>
+            <div class="dado-label">Prazo médio para abertura de empresa no Paraguai,<br>com documentação em ordem</div>
+          </div>
+        </div>
+        <div class="dado-card">
+          <div class="dado-card-accent dourado"></div>
+          <div>
+            <div class="dado-num gold"><span>+1.200</span></div>
+            <div class="dado-label">Empresas brasileiras com operação formal<br>no Paraguai — um mercado em aceleração</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     VÍDEOS INSTITUCIONAIS
+     ══════════════════════════════════ -->
+<section class="videos-section">
+  <div class="container">
+    <div class="videos-header reveal">
+      <div class="videos-fonte">Fontes oficiais do governo paraguaio</div>
+      <h2>O Paraguai que<br><em>os dados confirmam</em></h2>
+      <p>Vídeos institucionais do Ministério de Indústria e Comércio, REDIEX e CNIME — órgãos oficiais do governo paraguaio responsáveis por investimentos, exportações e o Regime Maquila.</p>
+    </div>
+    <div class="videos-grid">
+      <div class="video-card reveal">
+        <iframe
+          src="https://www.youtube.com/embed/9ZmIR2gTcTo"
+          title="Rruta PY15 - Corredor Bioceánico"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy">
+        </iframe>
+        <div class="video-card-caption">
+          <span class="video-card-tag">🏗️ Infraestrutura</span>
+          <div class="video-card-title">Rruta PY15 — Corredor Bioceánico</div>
+          <div class="video-card-source">O projeto vai redefinir as regras da logística mundial — impacto econômico direto para o Paraguai</div>
+        </div>
+      </div>
+      <div class="video-card reveal reveal-delay-2">
+        <iframe
+          src="https://www.youtube.com/embed/UXW6yFoqUcE"
+          title="Vídeo institucional — Governo do Paraguai"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy">
+        </iframe>
+        <div class="video-card-caption">
+          <span class="video-card-tag">⚡ Energia & Investimentos</span>
+          <div class="video-card-title">Empresas brasileiras encontram no Paraguai oportunidade de crescer</div>
+          <div class="video-card-source">Vídeo institucional · Governo do Paraguai</div>
+        </div>
+      </div>
+      <div class="video-card reveal reveal-delay-4">
+        <iframe
+          src="https://www.youtube.com/embed/bKXziU4HGOs"
+          title="SOMOS PARAGUAY. SOMOS ENERGÍA QUE CONECTA."
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy">
+        </iframe>
+        <div class="video-card-caption">
+          <span class="video-card-tag">🌎 Identidade & Propósito</span>
+          <div class="video-card-title">Somos Paraguay. Somos Energía que Conecta.</div>
+          <div class="video-card-source">Não somos só um país: somos uma energia que une, avança e transforma — Governo do Paraguai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     IMPACTO SOCIAL
+     ══════════════════════════════════ -->
+<section class="social">
+  <div class="container">
+    <div class="social-inner">
+      <div class="social-symbol reveal">
+        <svg width="160" height="227"><use href="#kk-sym-dark"/></svg>
+      </div>
+      <div class="social-text reveal reveal-delay-2">
+        <div class="section-eyebrow" style="color:rgba(200,168,75,0.7);">Propósito</div>
+        <h2>Crescer no Paraguai<br>é também uma<br><em>responsabilidade social</em></h2>
+        <p>O Paraguai é um país em desenvolvimento com imenso potencial humano. Cada empresa brasileira que se instala com estrutura formal, <strong>gerando emprego com carteira assinada, benefícios e seguridade social</strong>, representa uma transformação concreta na vida de famílias e comunidades inteiras.</p>
+        <p>A KakuaaPY não orienta empresas apenas para a eficiência fiscal. Orientamos para a <strong>construção de operações responsáveis</strong> — que cumprem obrigações trabalhistas, respeitam a cultura local e contribuem com o desenvolvimento econômico do território onde se instalam.</p>
+        <p>Em 20 anos, queremos olhar para as regiões onde nossos clientes se instalaram e ver cidades com mais emprego formal, maior poder de compra, melhor saúde e educação. Esse é o nosso horizonte.</p>
+        <div class="social-quote">
+          <p>"Crescer no Paraguai é uma oportunidade de negócio. Fazê-lo bem é uma responsabilidade."</p>
+          <div style="margin-top:10px; font-size:11px; font-weight:600; color:rgba(200,168,75,0.6); letter-spacing:0.08em; font-family:var(--sans); font-style:normal;">Thiago Oliveira — CEO, KakuaaPY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FERRAMENTA
+     ══════════════════════════════════ -->
+<section class="ferramenta">
+  <div class="container">
+    <div class="ferramenta-inner">
+      <div class="ferramenta-text reveal">
+        <div class="gratuito-badge">
+          <span>✦ 100% Gratuita — sem cadastro</span>
+        </div>
+        <div class="section-eyebrow">Ferramenta KakuaaPY</div>
+        <h2>Tome decisões baseadas<br>em <em>dados reais</em></h2>
+        <p>A Ferramenta KakuaaPY foi desenvolvida para que qualquer empresa — independente do tamanho — possa acessar uma análise estratégica completa da expansão ao Paraguai, de forma imediata e sem custo.</p>
+        <p>Em menos de 5 minutos, você obtém um <strong>comparativo personalizado</strong> com impostos, encargos trabalhistas, custos operacionais, logística, Regime Maquila e estimativa de investimento inicial — tudo em um relatório interativo.</p>
+        <div class="ferramenta-modulos">
+          <div class="modulo-item">Comparativo tributário Brasil × Paraguai</div>
+          <div class="modulo-item">Módulo Regime Maquila (Lei 1.064/97)</div>
+          <div class="modulo-item">Estimativa de logística e frete</div>
+          <div class="modulo-item">Projeção de investimento inicial</div>
+          <div class="modulo-item">Análise estratégica gerada por IA</div>
+          <div class="modulo-item">Relatório executivo em dashboard</div>
+        </div>
+        <a href="/ferramenta" class="btn-primary">Acessar a ferramenta gratuitamente →</a>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="ferramenta-preview">
+          <div class="preview-label">Exemplo de resultado — dados ilustrativos</div>
+          <div class="preview-row">
+            <div class="prev-label">🇧🇷 Custo anual Brasil</div>
+            <div class="prev-val br">R$ 1.240.000</div>
+          </div>
+          <div class="preview-row">
+            <div class="prev-label">🇵🇾 Custo anual Paraguai</div>
+            <div class="prev-val py">R$ 498.000</div>
+          </div>
+          <div class="preview-row highlight">
+            <div>
+              <div class="prev-label" style="color:rgba(200,168,75,0.6); margin-bottom:4px;">💰 Economia potencial anual</div>
+              <div class="prev-val eco">R$ 742.000</div>
+            </div>
+            <div class="prev-pct">−59%</div>
+          </div>
+          <div class="preview-note">* Valores ilustrativos. Seu relatório será gerado com os dados reais da sua empresa.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA FINAL
+     ══════════════════════════════════ -->
+<section class="cta-final">
+  <div class="container reveal">
+    <div class="section-eyebrow" style="justify-content:center; color:rgba(77,184,138,0.6);">Próximo passo</div>
+    <h2>A análise que você precisa<br>está a um clique de distância.<br><em>E é gratuita.</em></h2>
+    <p>Acesse a Ferramenta KakuaaPY, preencha os dados da sua empresa e obtenha em minutos um comparativo completo — sem cadastro, sem compromisso.</p>
+    <div class="cta-actions">
+      <a href="/ferramenta" class="btn-primary">Acessar a ferramenta →</a>
+      <a href="/contato" class="btn-ghost-light">Falar com especialista</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+
+<div class="kk-tricolor dark" style="margin-top:0;"><span></span><span></span><span></span></div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <div class="brand-tag">crescer · conectar · prosperar</div>
+      <p>Plataforma de serviços empresariais focada em conectar empresas do mundo ao Paraguai, com raízes na cultura Guarani e visão internacional.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Ferramentas</div>
+        <ul>
+          <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+          <li><a href="/ferramenta">Simulador Tributário</a></li>
+          <li><a href="/ferramenta">Guia Bancário</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <ul>
+          <li><a href="/sobre">Sobre a KakuaaPY</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/news">News &amp; Social</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Acesso interno</div>
+        <ul>
+          <li><a href="/colaborador" style="color:rgba(255,255,255,0.25); font-size:12px;">Área do colaborador</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KakuaaPY · Todos os direitos reservados · Dados: Maio/2026</span>
+    <span class="footer-bottom-accent">crescer · conectar · prosperar</span>
+  </div>
+</footer>
+
+<!-- Ícones flutuantes -->
+<div class="float-icons">
+  <a href="/ferramenta" class="float-icon float-icon-tool" title="Acessar a ferramenta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/>
+      <line x1="16" y1="17" x2="8" y2="17"/>
+      <polyline points="10 9 9 9 8 9"/>
+    </svg>
+    <span class="float-icon-label">Nossa ferramenta</span>
+  </a>
+  <a href="https://wa.me/5511972414707?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="float-icon float-icon-wa" title="Fale com especialista">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="float-icon-label">Fale com especialista</span>
+  </a>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

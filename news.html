@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News & Social — KakuaaPY</title>
+<meta name="description" content="Acompanhe as novidades, análises e atualizações da KakuaaPY sobre o mercado Brasil-Paraguai.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════
+   SHARED + IDENTIDADE V3.3
+   ══════════════════════════════════════ */
+:root {
+  --kk-primary:   #1A2B23;
+  --kk-secondary: #1D4E3A;
+  --kk-accent:    #4DB88A;
+  --kk-cream:     #F5F4F0;
+  --kk-graphite:  #2C2C2A;
+  --kk-muted:     #6B7A72;
+  --kk-border:    #D8DDD9;
+  --gold:         #C8A84B;
+  --dark:         #0E1A14;
+  --kk-vermelho:  #C8102E;
+  --kk-azul:      #002868;
+  --serif:        'Playfair Display', Georgia, serif;
+  --sans:         'DM Sans', 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--kk-cream); color: var(--kk-graphite); }
+
+/* NAV */
+.site-nav { background: var(--kk-primary); height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; z-index: 200; border-bottom: 1px solid rgba(77,184,138,0.15); }
+.site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.site-logo-name { font-size: 18px; display: flex; align-items: baseline; letter-spacing: 2px; }
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+.site-logo-tagline { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.28); letter-spacing: 2.5px; text-transform: uppercase; display: block; margin-top: 2px; }
+.site-nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.site-nav-links a { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+.site-nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.site-nav-links a.active { color: var(--kk-accent); font-weight: 500; }
+.nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 6px; }
+.mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.mobile-menu-btn span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; }
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--kk-primary); z-index: 190; padding: 16px 24px 24px; border-bottom: 1px solid rgba(77,184,138,0.15); flex-direction: column; gap: 4px; }
+.mobile-menu a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.mobile-menu .mobile-cta { color: var(--gold) !important; font-weight: 600; border: none !important; }
+.mobile-menu.open { display: flex; }
+
+/* TRICOLOR */
+.site-nav-tricolor { height: 3px; display: flex; width: 100%; position: sticky; top: 60px; z-index: 199; }
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: var(--kk-azul); }
+.kk-tricolor { height: 3px; display: flex; width: 100%; }
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.kk-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.kk-tricolor span:nth-child(3) { background: var(--kk-azul); }
+
+/* FOOTER */
+.site-footer { background: var(--kk-primary); color: rgba(255,255,255,0.4); }
+.site-footer-inner { max-width: 1100px; margin: 0 auto; padding: 48px 40px 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 56px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand .brand-name { font-size: 17px; margin-bottom: 4px; }
+.footer-brand .brand-name .kakuaa { font-weight: 300; color: #fff; }
+.footer-brand .brand-name .py     { font-weight: 600; color: var(--kk-accent); }
+.footer-brand .brand-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 16px; }
+.footer-brand p { font-size: 12px; line-height: 1.75; color: rgba(255,255,255,0.32); max-width: 260px; }
+.footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 9px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.42); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--kk-accent); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-bottom-accent { color: rgba(77,184,138,0.38); letter-spacing: 0.12em; }
+
+/* UTILITÁRIOS */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--kk-accent); text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--kk-accent); }
+
+/* FLOAT ICONS */
+.float-icons { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+.float-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative; transition: all 0.25s cubic-bezier(0.34,1.2,0.64,1); overflow: visible; }
+.float-icon-tool { background: rgba(26,43,35,0.82); border: 1px solid rgba(77,184,138,0.25); color: rgba(77,184,138,0.85); backdrop-filter: blur(8px); }
+.float-icon-wa   { background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.3); color: #25D366; backdrop-filter: blur(8px); }
+.float-icon:hover { transform: scale(1.12); }
+.float-icon-tool:hover { background: rgba(26,43,35,0.95); border-color: rgba(77,184,138,0.5); box-shadow: 0 4px 20px rgba(77,184,138,0.15); }
+.float-icon-wa:hover { background: rgba(37,211,102,0.22); border-color: rgba(37,211,102,0.5); box-shadow: 0 4px 20px rgba(37,211,102,0.2); }
+.float-icon-label { position: absolute; right: 52px; background: rgba(15,26,20,0.95); color: rgba(255,255,255,0.85); font-family: var(--sans); font-size: 11px; font-weight: 500; white-space: nowrap; padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); opacity: 0; pointer-events: none; transform: translateX(6px); transition: opacity 0.2s, transform 0.2s; }
+.float-icon-label::after { content: ''; position: absolute; right: -5px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right: none; border-left-color: rgba(15,26,20,0.95); }
+.float-icon:hover .float-icon-label { opacity: 1; transform: translateX(0); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══════════════════════════════════════
+   NEWS & SOCIAL — ESTILOS ESPECÍFICOS
+   ══════════════════════════════════════ */
+
+/* HERO */
+.page-hero {
+  background: var(--dark); padding: 72px 0 56px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234DB88A' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.page-hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+.hero-overline { font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--kk-accent); display: flex; align-items: center; gap: 12px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+.hero-overline::before { content: ''; width: 24px; height: 1px; background: var(--kk-accent); }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(30px, 5vw, 50px); font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 14px; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+.page-hero h1 em { font-style: italic; color: var(--kk-accent); }
+.page-hero-desc { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 520px; line-height: 1.8; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+.hero-badge { opacity: 0; animation: fadeUp 0.7s 0.6s forwards; text-align: right; }
+.hero-badge-inner { display: inline-flex; align-items: center; gap: 8px; background: rgba(77,184,138,0.1); border: 1px solid rgba(77,184,138,0.25); border-radius: 8px; padding: 12px 18px; }
+.hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--kk-accent); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+.hero-badge span { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.hero-badge strong { color: var(--kk-accent); }
+
+/* FILTROS */
+.feed-filters {
+  background: #fff; border-bottom: 1px solid var(--kk-border);
+  position: sticky; top: 63px; z-index: 100;
+}
+.feed-filters-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: flex; gap: 0; overflow-x: auto; }
+.filter-btn { font-size: 12px; font-weight: 500; color: var(--kk-muted); padding: 14px 20px; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+.filter-btn:hover { color: var(--kk-primary); }
+.filter-btn.active { color: var(--kk-primary); border-bottom-color: var(--kk-accent); font-weight: 600; }
+
+/* LAYOUT PRINCIPAL */
+.feed-layout { padding: 48px 0 80px; }
+.feed-inner { display: grid; grid-template-columns: 1fr 320px; gap: 36px; align-items: start; }
+
+/* FEED DE POSTS */
+.feed-list { display: flex; flex-direction: column; gap: 20px; }
+
+/* POST CARD */
+.post-card {
+  background: #fff; border: 1px solid var(--kk-border);
+  border-radius: 14px; overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.post-card:hover { box-shadow: 0 8px 36px rgba(26,43,35,0.09); transform: translateY(-2px); }
+
+.post-card-header { padding: 20px 24px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.post-author { display: flex; align-items: center; gap: 12px; }
+.post-author-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--kk-primary); display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 15px; font-weight: 700; color: var(--kk-accent);
+  flex-shrink: 0;
+}
+.post-author-name { font-size: 13px; font-weight: 600; color: var(--kk-primary); }
+.post-author-role { font-size: 11px; color: var(--kk-muted); }
+.post-meta-right { text-align: right; }
+.post-date { font-size: 11px; color: var(--kk-muted); }
+.post-category {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 4px; margin-top: 3px;
+}
+.post-category.tributario  { background: rgba(77,184,138,0.1);  color: var(--kk-secondary); }
+.post-category.maquila     { background: rgba(91,79,207,0.1);   color: #5B4FCF; }
+.post-category.mercado     { background: rgba(200,168,75,0.12); color: #8B6914; }
+.post-category.logistica   { background: rgba(196,80,0,0.08);   color: #C45000; }
+.post-category.institucional { background: rgba(26,43,35,0.07); color: var(--kk-primary); }
+
+/* Imagem do post */
+.post-image {
+  width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block;
+  background: var(--kk-primary);
+}
+.post-image-placeholder {
+  width: 100%; aspect-ratio: 16/7;
+  background: linear-gradient(135deg, var(--kk-primary), var(--kk-secondary));
+  display: flex; align-items: center; justify-content: center; font-size: 48px;
+  position: relative; overflow: hidden;
+}
+.post-image-placeholder::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(77,184,138,0.12) 0%, transparent 60%);
+}
+
+/* Corpo do post */
+.post-body { padding: 20px 24px; }
+.post-title { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--kk-primary); line-height: 1.35; margin-bottom: 10px; cursor: pointer; transition: color 0.2s; }
+.post-title:hover { color: var(--kk-accent); }
+.post-excerpt { font-size: 13px; color: var(--kk-muted); line-height: 1.75; margin-bottom: 0; }
+
+/* Tags */
+.post-tags { padding: 0 24px 16px; display: flex; gap: 6px; flex-wrap: wrap; }
+.post-tag { font-size: 11px; color: var(--kk-muted); background: var(--kk-cream); border: 1px solid var(--kk-border); padding: 3px 10px; border-radius: 4px; }
+
+/* Ações do post */
+.post-actions {
+  padding: 14px 24px 18px;
+  display: flex; align-items: center; gap: 0;
+  border-top: 1px solid var(--kk-border);
+}
+.action-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 500; color: var(--kk-muted);
+  background: none; border: none; cursor: pointer;
+  padding: 7px 14px; border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+.action-btn:hover { background: var(--kk-cream); color: var(--kk-primary); }
+.action-btn.liked { color: var(--kk-vermelho); }
+.action-btn.liked svg { fill: var(--kk-vermelho); stroke: var(--kk-vermelho); }
+.action-btn svg { transition: transform 0.15s; }
+.action-btn:active svg { transform: scale(1.3); }
+.action-sep { width: 1px; height: 20px; background: var(--kk-border); margin: 0 4px; }
+.action-share-wrap { margin-left: auto; position: relative; }
+.share-dropdown {
+  display: none; position: absolute; bottom: 44px; right: 0;
+  background: #fff; border: 1px solid var(--kk-border);
+  border-radius: 10px; padding: 8px; box-shadow: 0 8px 32px rgba(26,43,35,0.12);
+  min-width: 180px; z-index: 50;
+}
+.share-dropdown.open { display: block; }
+.share-option {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--kk-graphite);
+  padding: 9px 12px; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s;
+}
+.share-option:hover { background: var(--kk-cream); }
+
+/* SEÇÃO DE COMENTÁRIOS */
+.post-comments { border-top: 1px solid var(--kk-border); padding: 20px 24px; display: none; }
+.post-comments.open { display: block; }
+.comments-title { font-size: 13px; font-weight: 600; color: var(--kk-primary); margin-bottom: 16px; }
+
+/* Lista de comentários */
+.comment-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+.comment-item { display: flex; gap: 12px; }
+.comment-avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--kk-cream); border: 1px solid var(--kk-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--kk-muted);
+}
+.comment-bubble {
+  flex: 1; background: var(--kk-cream); border-radius: 0 10px 10px 10px;
+  padding: 10px 14px;
+}
+.comment-author { font-size: 12px; font-weight: 600; color: var(--kk-primary); margin-bottom: 3px; }
+.comment-text { font-size: 13px; color: var(--kk-graphite); line-height: 1.6; }
+.comment-time { font-size: 10px; color: var(--kk-muted); margin-top: 4px; }
+.comment-moderation {
+  font-size: 10px; color: rgba(200,168,75,0.8); font-style: italic;
+  background: rgba(200,168,75,0.06); border: 1px solid rgba(200,168,75,0.2);
+  border-radius: 4px; padding: 4px 10px; margin-top: 6px; display: inline-block;
+}
+
+/* Formulário de comentário */
+.comment-form { display: flex; gap: 10px; align-items: flex-start; }
+.comment-form-avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--kk-cream); border: 1px solid var(--kk-border);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.comment-form-inner { flex: 1; }
+.comment-input {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid var(--kk-border); border-radius: 8px;
+  font-family: var(--sans); font-size: 13px; color: var(--kk-graphite);
+  background: var(--kk-cream); resize: none; outline: none;
+  transition: border-color 0.2s, height 0.2s;
+  min-height: 40px; max-height: 120px;
+}
+.comment-input:focus { border-color: var(--kk-accent); background: #fff; }
+.comment-input::placeholder { color: #B8B5B0; }
+.comment-form-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.comment-name-input {
+  font-family: var(--sans); font-size: 12px; color: var(--kk-graphite);
+  border: 1px solid var(--kk-border); border-radius: 6px;
+  padding: 6px 12px; background: var(--kk-cream); outline: none;
+  transition: border-color 0.2s; width: 160px;
+}
+.comment-name-input:focus { border-color: var(--kk-accent); }
+.comment-name-input::placeholder { color: #B8B5B0; }
+.comment-submit {
+  font-family: var(--sans); font-size: 12px; font-weight: 600;
+  color: var(--kk-primary); background: var(--kk-accent);
+  border: none; border-radius: 6px; padding: 7px 16px;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.comment-submit:hover { opacity: 0.88; }
+.comment-notice { font-size: 10px; color: var(--kk-muted); font-style: italic; margin-top: 8px; }
+
+/* POST DESTAQUE (primeiro post) */
+.post-card.destaque .post-title { font-size: 24px; }
+.post-card.destaque .post-excerpt { font-size: 14px; }
+
+/* SIDEBAR */
+.feed-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 110px; }
+
+.sidebar-card {
+  background: #fff; border: 1px solid var(--kk-border);
+  border-radius: 12px; padding: 22px;
+}
+.sidebar-card-title { font-size: 13px; font-weight: 700; color: var(--kk-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--kk-border); }
+
+/* Sobre a página */
+.about-text { font-size: 12px; color: var(--kk-muted); line-height: 1.7; margin-bottom: 16px; }
+.about-badge { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--kk-muted); margin-bottom: 6px; }
+.about-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--kk-accent); }
+
+/* Tópicos */
+.topic-list { display: flex; flex-direction: column; gap: 0; }
+.topic-item {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; color: var(--kk-muted); padding: 9px 0;
+  border-bottom: 1px solid var(--kk-border); cursor: pointer;
+  transition: color 0.2s;
+}
+.topic-item:last-child { border-bottom: none; }
+.topic-item:hover { color: var(--kk-accent); }
+.topic-count { font-size: 11px; font-weight: 600; color: var(--kk-accent); background: rgba(77,184,138,0.08); padding: 2px 8px; border-radius: 4px; }
+
+/* Newsletter */
+.newsletter-card { background: var(--kk-primary); border: none; }
+.newsletter-card .sidebar-card-title { color: var(--kk-accent); border-color: rgba(255,255,255,0.1); }
+.newsletter-card p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 14px; }
+.newsletter-input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 7px; color: #fff; font-family: var(--sans); font-size: 13px; outline: none; margin-bottom: 10px; }
+.newsletter-input::placeholder { color: rgba(255,255,255,0.25); }
+.newsletter-input:focus { border-color: var(--kk-accent); }
+.newsletter-btn { width: 100%; padding: 10px; background: var(--kk-accent); color: var(--kk-primary); font-family: var(--sans); font-size: 12px; font-weight: 700; border: none; border-radius: 7px; cursor: pointer; transition: opacity 0.2s; }
+.newsletter-btn:hover { opacity: 0.88; }
+
+/* Posts populares sidebar */
+.popular-item { display: flex; flex-direction: column; gap: 3px; padding: 10px 0; border-bottom: 1px solid var(--kk-border); cursor: pointer; }
+.popular-item:last-child { border-bottom: none; padding-bottom: 0; }
+.popular-title { font-size: 12px; font-weight: 600; color: var(--kk-primary); line-height: 1.4; transition: color 0.2s; }
+.popular-item:hover .popular-title { color: var(--kk-accent); }
+.popular-meta { font-size: 10px; color: var(--kk-muted); }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--kk-primary); color: #fff; font-size: 13px; font-weight: 500;
+  padding: 12px 24px; border-radius: 8px; border: 1px solid rgba(77,184,138,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 999;
+  transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+  pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .site-nav { padding: 0 20px; }
+  .site-nav-links { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .container { padding: 0 20px; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 24px; text-align: center; }
+  .float-icons { display: none; }
+  .feed-inner { grid-template-columns: 1fr; }
+  .feed-sidebar { display: none; }
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .hero-badge { display: none; }
+  .feed-filters-inner { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Symbols V3.3 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="kk-sym-dark" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF" opacity="0.90"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85" stroke="#5A8FBF" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/" class="site-logo">
+    <svg width="22" height="31"><use href="#kk-sym-dark"/></svg>
+    <div style="margin-left:12px;">
+      <div class="site-logo-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <span class="site-logo-tagline">crescer · conectar · prosperar</span>
+    </div>
+  </a>
+  <ul class="site-nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/sobre">Sobre</a></li>
+    <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+    <li><a href="/servicos">Serviços</a></li>
+    <li><a href="/news" class="active">News &amp; Social</a></li>
+    <li><a href="/contato">Contato</a></li>
+    <li><div class="nav-divider"></div></li>
+    <li><a href="/cliente" style="background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.35);color:#C8A84B;padding:6px 14px;border-radius:6px;font-weight:600;font-size:12px;">Área do cliente</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.getElementById('mobile-nav-news').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="site-nav-tricolor"><span></span><span></span><span></span></div>
+<div class="mobile-menu" id="mobile-nav-news">
+  <a href="/">Início</a>
+  <a href="/sobre">Sobre</a>
+  <a href="/ferramenta">Ferramenta KakuaaPY</a>
+  <a href="/servicos">Serviços</a>
+  <a href="/news">News &amp; Social</a>
+  <a href="/contato">Contato</a>
+  <a href="/cliente" class="mobile-cta">Área do cliente</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="hero-overline">News &amp; Social</div>
+        <h1>Inteligência sobre<br><em>Brasil e Paraguai</em></h1>
+        <p class="page-hero-desc">Análises, atualizações de mercado e conteúdo estratégico publicados pela equipe KakuaaPY. Comente, curta e compartilhe.</p>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-inner">
+          <div class="hero-badge-dot"></div>
+          <span>Atualizado pela <strong>equipe KakuaaPY</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTROS -->
+<div class="feed-filters">
+  <div class="feed-filters-inner">
+    <button class="filter-btn active" data-filter="todos">Todos</button>
+    <button class="filter-btn" data-filter="tributario">Tributário</button>
+    <button class="filter-btn" data-filter="maquila">Maquila</button>
+    <button class="filter-btn" data-filter="mercado">Mercado PY</button>
+    <button class="filter-btn" data-filter="logistica">Logística</button>
+    <button class="filter-btn" data-filter="institucional">Institucional</button>
+  </div>
+</div>
+
+<!-- FEED -->
+<section class="feed-layout">
+  <div class="container">
+    <div class="feed-inner">
+
+      <!-- LISTA DE POSTS -->
+      <div class="feed-list" id="feed-list">
+
+        <!-- POST 1 — DESTAQUE -->
+        <div class="post-card destaque reveal" data-category="tributario">
+          <div class="post-card-header">
+            <div class="post-author">
+              <div class="post-author-avatar">TO</div>
+              <div>
+                <div class="post-author-name">Thiago Oliveira</div>
+                <div class="post-author-role">CEO · KakuaaPY</div>
+              </div>
+            </div>
+            <div class="post-meta-right">
+              <div class="post-date">27 mai 2026</div>
+              <span class="post-category tributario">Tributário</span>
+            </div>
+          </div>
+          <div class="post-image-placeholder">
+            <span style="position:relative;z-index:1;">⚖️</span>
+          </div>
+          <div class="post-body">
+            <div class="post-title" onclick="toggleComments('post1')">IRACIS 2026: o que mudou e o que permanece vantajoso para empresas brasileiras</div>
+            <p class="post-excerpt">Com o fechamento do exercício fiscal paraguaio, consolidamos os dados mais relevantes para quem considera — ou já realizou — a expansão ao Paraguai. A alíquota de 10% sobre o lucro real segue inalterada, mas há nuances importantes no Regime Maquila e nos créditos de IVA que impactam diretamente o planejamento de 2026.</p>
+          </div>
+          <div class="post-tags">
+            <span class="post-tag">IRACIS</span>
+            <span class="post-tag">Planejamento tributário</span>
+            <span class="post-tag">2026</span>
+          </div>
+          <div class="post-actions">
+            <button class="action-btn" onclick="toggleLike(this, 'post1')" id="like-post1">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span id="likes-post1">24</span>
+            </button>
+            <div class="action-sep"></div>
+            <button class="action-btn" onclick="toggleComments('post1')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span id="comments-count-post1">3</span> comentários
+            </button>
+            <div class="action-sep"></div>
+            <div class="action-share-wrap">
+              <button class="action-btn" onclick="toggleShare('share-post1')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Compartilhar
+              </button>
+              <div class="share-dropdown" id="share-post1">
+                <div class="share-option" onclick="sharePost('whatsapp', 'IRACIS 2026: o que mudou')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp
+                </div>
+                <div class="share-option" onclick="sharePost('linkedin', 'IRACIS 2026: o que mudou')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </div>
+                <div class="share-option" onclick="sharePost('copy', 'IRACIS 2026: o que mudou')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copiar link
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- COMENTÁRIOS -->
+          <div class="post-comments" id="comments-post1">
+            <div class="comments-title">Comentários</div>
+            <div class="comment-list" id="comment-list-post1">
+              <div class="comment-item">
+                <div class="comment-avatar">👤</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Carlos M.</div>
+                  <div class="comment-text">Excelente análise. Estávamos justamente revisando nosso planejamento para 2026. A questão do crédito de IVA na Maquila é um ponto que poucos abordam com clareza.</div>
+                  <div class="comment-time">25 mai 2026 · 14h32</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">👤</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Ana Paula R.</div>
+                  <div class="comment-text">Vocês têm algum material mais detalhado sobre os créditos de IVA? Estamos em fase de diagnóstico.</div>
+                  <div class="comment-time">26 mai 2026 · 09h15</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar" style="background:var(--kk-primary);color:var(--kk-accent);font-size:11px;font-weight:700;">KKP</div>
+                <div class="comment-bubble" style="background:rgba(77,184,138,0.06);border:1px solid rgba(77,184,138,0.15);">
+                  <div class="comment-author" style="color:var(--kk-secondary);">KakuaaPY — Equipe</div>
+                  <div class="comment-text">Ana Paula, temos sim! Envie uma mensagem pelo WhatsApp ou preencha o formulário de contato — encaminhamos o material completo e podemos agendar uma conversa sobre a fase de diagnóstico.</div>
+                  <div class="comment-time">26 mai 2026 · 11h40</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-form">
+              <div class="comment-form-avatar">😊</div>
+              <div class="comment-form-inner">
+                <textarea class="comment-input" placeholder="Escreva um comentário..." rows="1" id="comment-input-post1" oninput="autoResize(this)"></textarea>
+                <div class="comment-form-footer">
+                  <input type="text" class="comment-name-input" placeholder="Seu nome (opcional)" id="comment-name-post1">
+                  <button class="comment-submit" onclick="submitComment('post1')">Comentar</button>
+                </div>
+                <div class="comment-notice">Comentários passam por moderação antes de aparecer.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- POST 2 -->
+        <div class="post-card reveal reveal-delay-1" data-category="maquila">
+          <div class="post-card-header">
+            <div class="post-author">
+              <div class="post-author-avatar">KK</div>
+              <div>
+                <div class="post-author-name">Equipe KakuaaPY</div>
+                <div class="post-author-role">Análise de Mercado</div>
+              </div>
+            </div>
+            <div class="post-meta-right">
+              <div class="post-date">22 mai 2026</div>
+              <span class="post-category maquila">Maquila</span>
+            </div>
+          </div>
+          <div class="post-body">
+            <div class="post-title" onclick="toggleComments('post2')">Regime Maquila em 2026: 36 novos programas aprovados e o que isso significa para o setor industrial</div>
+            <p class="post-excerpt">O CNIME registrou um recorde histórico de novos contratos no último trimestre. Setores como têxtil, eletrônico e agroindustrial lideram a expansão. Analisamos os dados e o que representam para empresas brasileiras que avaliam o Paraguai como destino de produção.</p>
+          </div>
+          <div class="post-tags">
+            <span class="post-tag">CNIME</span>
+            <span class="post-tag">Maquila 2026</span>
+            <span class="post-tag">Indústria</span>
+          </div>
+          <div class="post-actions">
+            <button class="action-btn" onclick="toggleLike(this, 'post2')" id="like-post2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span id="likes-post2">17</span>
+            </button>
+            <div class="action-sep"></div>
+            <button class="action-btn" onclick="toggleComments('post2')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span id="comments-count-post2">1</span> comentário
+            </button>
+            <div class="action-sep"></div>
+            <div class="action-share-wrap">
+              <button class="action-btn" onclick="toggleShare('share-post2')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Compartilhar
+              </button>
+              <div class="share-dropdown" id="share-post2">
+                <div class="share-option" onclick="sharePost('whatsapp', 'Regime Maquila em 2026')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp
+                </div>
+                <div class="share-option" onclick="sharePost('linkedin', 'Regime Maquila em 2026')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </div>
+                <div class="share-option" onclick="sharePost('copy', 'Regime Maquila em 2026')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copiar link
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="post-comments" id="comments-post2">
+            <div class="comments-title">Comentários</div>
+            <div class="comment-list" id="comment-list-post2">
+              <div class="comment-item">
+                <div class="comment-avatar">👤</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Roberto S.</div>
+                  <div class="comment-text">Muito relevante. O setor têxtil é exatamente onde estamos avaliando. Vocês têm dados específicos para esse segmento?</div>
+                  <div class="comment-time">23 mai 2026 · 16h20</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-form">
+              <div class="comment-form-avatar">😊</div>
+              <div class="comment-form-inner">
+                <textarea class="comment-input" placeholder="Escreva um comentário..." rows="1" id="comment-input-post2" oninput="autoResize(this)"></textarea>
+                <div class="comment-form-footer">
+                  <input type="text" class="comment-name-input" placeholder="Seu nome (opcional)" id="comment-name-post2">
+                  <button class="comment-submit" onclick="submitComment('post2')">Comentar</button>
+                </div>
+                <div class="comment-notice">Comentários passam por moderação antes de aparecer.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- POST 3 -->
+        <div class="post-card reveal reveal-delay-2" data-category="mercado">
+          <div class="post-card-header">
+            <div class="post-author">
+              <div class="post-author-avatar">KK</div>
+              <div>
+                <div class="post-author-name">Equipe KakuaaPY</div>
+                <div class="post-author-role">Mercado &amp; Economia</div>
+              </div>
+            </div>
+            <div class="post-meta-right">
+              <div class="post-date">18 mai 2026</div>
+              <span class="post-category mercado">Mercado PY</span>
+            </div>
+          </div>
+          <div class="post-body">
+            <div class="post-title" onclick="toggleComments('post3')">Paraguai mantém crescimento de 4,1% em 2025 e consolida investment grade S&P</div>
+            <p class="post-excerpt">Com a confirmação do investment grade pela S&P em dezembro de 2025, o Paraguai fecha um ciclo histórico de reconhecimento externo à solidez da sua política econômica. Analisamos o que isso muda — e o que não muda — para quem investe no país.</p>
+          </div>
+          <div class="post-tags">
+            <span class="post-tag">Investment Grade</span>
+            <span class="post-tag">S&amp;P</span>
+            <span class="post-tag">Crescimento PY</span>
+          </div>
+          <div class="post-actions">
+            <button class="action-btn" onclick="toggleLike(this, 'post3')" id="like-post3">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span id="likes-post3">31</span>
+            </button>
+            <div class="action-sep"></div>
+            <button class="action-btn" onclick="toggleComments('post3')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span id="comments-count-post3">0</span> comentários
+            </button>
+            <div class="action-sep"></div>
+            <div class="action-share-wrap">
+              <button class="action-btn" onclick="toggleShare('share-post3')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Compartilhar
+              </button>
+              <div class="share-dropdown" id="share-post3">
+                <div class="share-option" onclick="sharePost('whatsapp', 'Paraguai consolida investment grade S&P')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967c-.273-.099-.471-.148-.67.15c-.197.297-.767.966-.94 1.164c-.173.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.018-.458.13-.606c.134-.133.298-.347.446-.52c.149-.174.198-.298.298-.497c.099-.198.05-.371-.025-.52c-.075-.149-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51c-.173-.008-.371-.01-.57-.01c-.198 0-.52.074-.792.372c-.272.297-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625c.712.227 1.36.195 1.871.118c.571-.085 1.758-.719 2.006-1.413c.248-.694.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347M12 21.23l-7.78-7.78-1.06-1.06a5.5 5.5 0 0 1 7.78-7.78L12 5.67l1.06-1.06a5.5 5.5 0 0 1 7.78 7.78l-1.06 1.06z"/></svg>
+                  WhatsApp
+                </div>
+                <div class="share-option" onclick="sharePost('copy', 'Paraguai consolida investment grade')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copiar link
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="post-comments" id="comments-post3">
+            <div class="comments-title">Comentários</div>
+            <div class="comment-list" id="comment-list-post3"></div>
+            <div class="comment-form">
+              <div class="comment-form-avatar">😊</div>
+              <div class="comment-form-inner">
+                <textarea class="comment-input" placeholder="Seja o primeiro a comentar..." rows="1" id="comment-input-post3" oninput="autoResize(this)"></textarea>
+                <div class="comment-form-footer">
+                  <input type="text" class="comment-name-input" placeholder="Seu nome (opcional)" id="comment-name-post3">
+                  <button class="comment-submit" onclick="submitComment('post3')">Comentar</button>
+                </div>
+                <div class="comment-notice">Comentários passam por moderação antes de aparecer.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- fim feed-list -->
+
+      <!-- SIDEBAR -->
+      <aside class="feed-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sobre este canal</div>
+          <p class="about-text">Conteúdo publicado diretamente pela equipe KakuaaPY — análises de mercado, atualizações regulatórias e perspectivas sobre o corredor Brasil-Paraguai.</p>
+          <div class="about-badge"><div class="about-badge-dot"></div> Publicações em PT · ES</div>
+          <div class="about-badge"><div class="about-badge-dot"></div> Comentários moderados</div>
+          <div class="about-badge"><div class="about-badge-dot"></div> Atualizado semanalmente</div>
+        </div>
+
+        <div class="sidebar-card newsletter-card">
+          <div class="sidebar-card-title">📬 Newsletter</div>
+          <p>Receba as análises da KakuaaPY direto no seu e-mail.</p>
+          <input type="email" class="newsletter-input" placeholder="seu@email.com.br" id="newsletter-email" />
+          <button class="newsletter-btn" onclick="subscribeNewsletter()">Assinar grátis</button>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">🗂️ Tópicos</div>
+          <div class="topic-list">
+            <div class="topic-item" onclick="filterPosts('tributario')"><span>Tributário</span><span class="topic-count">5</span></div>
+            <div class="topic-item" onclick="filterPosts('maquila')"><span>Regime Maquila</span><span class="topic-count">4</span></div>
+            <div class="topic-item" onclick="filterPosts('mercado')"><span>Mercado PY</span><span class="topic-count">6</span></div>
+            <div class="topic-item" onclick="filterPosts('logistica')"><span>Logística</span><span class="topic-count">3</span></div>
+            <div class="topic-item" onclick="filterPosts('institucional')"><span>Institucional</span><span class="topic-count">2</span></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">🔥 Mais curtidos</div>
+          <div class="popular-item" onclick="toggleComments('post3')">
+            <div class="popular-title">Paraguai consolida investment grade S&P após crescimento de 4,1%</div>
+            <div class="popular-meta">31 curtidas · 18 mai 2026</div>
+          </div>
+          <div class="popular-item" onclick="toggleComments('post1')">
+            <div class="popular-title">IRACIS 2026: o que mudou e o que permanece vantajoso</div>
+            <div class="popular-meta">24 curtidas · 27 mai 2026</div>
+          </div>
+          <div class="popular-item" onclick="toggleComments('post2')">
+            <div class="popular-title">Regime Maquila: 36 novos programas aprovados</div>
+            <div class="popular-meta">17 curtidas · 22 mai 2026</div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="kk-tricolor"><span></span><span></span><span></span></div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <svg width="16" height="23"><use href="#kk-sym-dark"/></svg>
+        <div class="brand-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      </div>
+      <div class="brand-tag">crescer · conectar · prosperar</div>
+      <p>Plataforma de serviços empresariais focada em conectar empresas do mundo ao Paraguai.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Ferramentas</div>
+        <ul>
+          <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+          <li><a href="/ferramenta">Simulador Tributário</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <ul>
+          <li><a href="/sobre">Sobre a KakuaaPY</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/news">News &amp; Social</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Acesso interno</div>
+        <ul>
+          <li><a href="/colaborador" style="color:rgba(255,255,255,0.25);font-size:12px;">Área do colaborador</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KakuaaPY · Todos os direitos reservados</span>
+    <span class="footer-bottom-accent">crescer · conectar · prosperar</span>
+  </div>
+</footer>
+
+<!-- Float icons -->
+<div class="float-icons">
+  <a href="/ferramenta" class="float-icon float-icon-tool" title="Acessar a ferramenta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <span class="float-icon-label">Nossa ferramenta</span>
+  </a>
+  <a href="https://wa.me/5511972414707?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="float-icon float-icon-wa" title="Fale com especialista">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="float-icon-label">Fale com especialista</span>
+  </a>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════
+// FEED — INTERATIVIDADE
+// ══════════════════════════════════════
+
+// Estado local (substituído por Supabase na versão com banco)
+const state = {
+  likes: { post1: 24, post2: 17, post3: 31 },
+  liked: { post1: false, post2: false, post3: false },
+};
+
+// ── CURTIR ──
+function toggleLike(btn, postId) {
+  const isLiked = state.liked[postId];
+  state.liked[postId] = !isLiked;
+  state.likes[postId] += isLiked ? -1 : 1;
+  document.getElementById('likes-' + postId).textContent = state.likes[postId];
+  btn.classList.toggle('liked', !isLiked);
+  if (!isLiked) showToast('❤️ Você curtiu esta publicação');
+}
+
+// ── COMENTÁRIOS ──
+function toggleComments(postId) {
+  const section = document.getElementById('comments-' + postId);
+  section.classList.toggle('open');
+  if (section.classList.contains('open')) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function submitComment(postId) {
+  const input = document.getElementById('comment-input-' + postId);
+  const nameInput = document.getElementById('comment-name-' + postId);
+  const text = input.value.trim();
+  if (!text) return;
+
+  const name = nameInput.value.trim() || 'Visitante anônimo';
+  const list = document.getElementById('comment-list-' + postId);
+
+  // Comentário pendente de moderação
+  const pending = document.createElement('div');
+  pending.className = 'comment-item';
+  pending.innerHTML = `
+    <div class="comment-avatar">😊</div>
+    <div class="comment-bubble">
+      <div class="comment-author">${escapeHtml(name)}</div>
+      <div class="comment-text">${escapeHtml(text)}</div>
+      <div class="comment-time">Agora</div>
+      <div class="comment-moderation">⏳ Aguardando moderação da KakuaaPY</div>
+    </div>`;
+  list.appendChild(pending);
+
+  input.value = '';
+  nameInput.value = '';
+  input.style.height = 'auto';
+  showToast('💬 Comentário enviado! Será publicado após moderação.');
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── COMPARTILHAR ──
+function toggleShare(id) {
+  document.querySelectorAll('.share-dropdown').forEach(d => {
+    if (d.id !== id) d.classList.remove('open');
+  });
+  document.getElementById(id).classList.toggle('open');
+}
+
+function sharePost(platform, title) {
+  const url = window.location.href;
+  const text = encodeURIComponent(title + ' — KakuaaPY');
+  if (platform === 'whatsapp') window.open('https://wa.me/?text=' + text + '%20' + encodeURIComponent(url), '_blank');
+  if (platform === 'linkedin')  window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank');
+  if (platform === 'copy') {
+    navigator.clipboard.writeText(url).then(() => showToast('🔗 Link copiado!'));
+  }
+  document.querySelectorAll('.share-dropdown').forEach(d => d.classList.remove('open'));
+}
+
+// Fechar share ao clicar fora
+document.addEventListener('click', e => {
+  if (!e.target.closest('.action-share-wrap')) {
+    document.querySelectorAll('.share-dropdown').forEach(d => d.classList.remove('open'));
+  }
+});
+
+// ── FILTROS ──
+function filterPosts(category) {
+  const posts = document.querySelectorAll('.post-card');
+  posts.forEach(p => {
+    if (category === 'todos' || p.dataset.category === category) {
+      p.style.display = '';
+    } else {
+      p.style.display = 'none';
+    }
+  });
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === category);
+  });
+  // Sidebar topics
+  document.querySelectorAll('.topic-item').forEach(t => {
+    t.style.fontWeight = t.querySelector('span').textContent.toLowerCase().includes(category) ? '600' : '';
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => filterPosts(btn.dataset.filter));
+});
+
+// ── NEWSLETTER ──
+function subscribeNewsletter() {
+  const email = document.getElementById('newsletter-email').value.trim();
+  if (!email || !email.includes('@')) {
+    showToast('⚠️ Informe um e-mail válido');
+    return;
+  }
+  document.getElementById('newsletter-email').value = '';
+  showToast('✅ Inscrição realizada! Você receberá nossas análises em breve.');
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

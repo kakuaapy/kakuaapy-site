@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — KakuaaPY</title>
+<style>
+/* ══════════════════════════════════════
+   KAKUAAPY — ESTILOS COMPARTILHADOS
+   ══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@500;600;700;800&display=swap');
+
+:root {
+  --kk-primary:    #1A2B23;
+  --kk-secondary:  #1D4E3A;
+  --kk-accent:     #4DB88A;
+  --kk-cream:      #F5F4F0;
+  --kk-graphite:   #2C2C2A;
+  --kk-muted:      #6B7A72;
+  --kk-border:     #D8DDD9;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--kk-cream); color: var(--kk-graphite); }
+
+/* ── NAV ── */
+.site-nav {
+  background: var(--kk-primary);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid rgba(77,184,138,0.15);
+}
+
+.site-logo {
+  display: flex; align-items: center; gap: 12px; text-decoration: none;
+}
+.site-logo-name { font-size: 18px; display: flex; align-items: baseline; }
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; letter-spacing: 0.3px; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+.site-logo-tagline { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.28); letter-spacing: 2.5px; text-transform: uppercase; display: block; margin-top: 2px; }
+
+.site-nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.site-nav-links a {
+  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 6px 12px; border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.site-nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.site-nav-links a.active { color: var(--kk-accent); font-weight: 500; }
+.nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 6px; }
+.site-nav-cta {
+  font-size: 12px !important; font-weight: 600 !important;
+  color: var(--kk-primary) !important; background: var(--kk-accent) !important;
+  padding: 7px 16px !important; border-radius: 6px !important; letter-spacing: 0.04em;
+}
+.site-nav-cta:hover { opacity: 0.88; }
+
+/* Mobile nav */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.mobile-menu-btn span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--kk-primary); z-index: 190; padding: 16px 24px 24px; border-bottom: 1px solid rgba(77,184,138,0.15); flex-direction: column; gap: 4px; }
+.mobile-menu a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--kk-accent); }
+.mobile-menu .mobile-cta { color: var(--kk-accent) !important; font-weight: 600; border: none !important; }
+.mobile-menu.open { display: flex; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--kk-primary); color: rgba(255,255,255,0.4); }
+.site-footer-inner { max-width: 1100px; margin: 0 auto; padding: 48px 40px 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 56px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand .brand-name { font-size: 17px; margin-bottom: 4px; }
+.footer-brand .brand-name .kakuaa { font-weight: 300; color: #fff; }
+.footer-brand .brand-name .py     { font-weight: 600; color: var(--kk-accent); }
+.footer-brand .brand-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 16px; }
+.footer-brand p { font-size: 12px; line-height: 1.75; color: rgba(255,255,255,0.32); max-width: 260px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a { color: rgba(255,255,255,0.35); transition: color 0.2s; display: flex; align-items: center; }
+.footer-social a:hover { color: var(--kk-accent); }
+.footer-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 9px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.42); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--kk-accent); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-bottom-accent { color: rgba(77,184,138,0.38); letter-spacing: 0.12em; }
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  background: #25D366;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px 14px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.35), 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: wa-pulse 3s ease-in-out infinite;
+}
+.wa-float:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.45), 0 4px 12px rgba(0,0,0,0.2);
+  animation: none;
+}
+.wa-float svg { flex-shrink: 0; }
+.wa-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.35), 0 2px 8px rgba(0,0,0,0.15); }
+  50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.55), 0 2px 8px rgba(0,0,0,0.15); }
+}
+
+/* ── ÁREAS RESTRITAS — CARTÕES NA NAV ── */
+.nav-areas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 6px;
+}
+.nav-area-card {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.nav-area-card-cliente {
+  background: rgba(77,184,138,0.12);
+  border-color: rgba(77,184,138,0.25);
+  color: var(--kk-accent);
+}
+.nav-area-card-cliente:hover {
+  background: rgba(77,184,138,0.2);
+  border-color: rgba(77,184,138,0.4);
+  color: #fff;
+}
+.nav-area-card-colab {
+  background: rgba(200,168,75,0.1);
+  border-color: rgba(200,168,75,0.22);
+  color: rgba(200,168,75,0.9);
+}
+.nav-area-card-colab:hover {
+  background: rgba(200,168,75,0.18);
+  border-color: rgba(200,168,75,0.4);
+  color: #fff;
+}
+.mobile-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 0 4px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 6px;
+}
+.mobile-area-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.mobile-area-card-cliente {
+  background: rgba(77,184,138,0.1);
+  border-color: rgba(77,184,138,0.2);
+  color: var(--kk-accent);
+}
+.mobile-area-card-colab {
+  background: rgba(200,168,75,0.08);
+  border-color: rgba(200,168,75,0.18);
+  color: rgba(200,168,75,0.9);
+}
+
+/* ── UTILITÁRIOS GLOBAIS ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  color: var(--kk-accent); text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--kk-accent); }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--kk-accent); color: var(--kk-primary);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+  padding: 12px 24px; border-radius: 7px; border: none; cursor: pointer;
+  text-decoration: none; letter-spacing: 0.03em;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--kk-primary);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 11px 22px; border-radius: 7px;
+  border: 1px solid var(--kk-border); cursor: pointer;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--kk-accent); color: var(--kk-secondary); }
+
+.btn-ghost-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: rgba(255,255,255,0.8);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 11px 22px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost-light:hover { border-color: var(--kk-accent); color: var(--kk-accent); }
+
+@media (max-width: 768px) {
+  .site-nav { padding: 0 20px; }
+  .site-nav-links { display: none; }
+  .nav-areas { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .container { padding: 0 20px; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 24px; text-align: center; }
+  .wa-float { bottom: 20px; right: 20px; padding: 13px 18px 13px 14px; }
+  .wa-label { font-size: 12px; }
+}
+
+
+/* ══════════════════════════════════════
+   IDENTIDADE VISUAL V3.3 — KAKUAAPY
+   ══════════════════════════════════════ */
+:root {
+  --kk-vermelho:     #C8102E;
+  --kk-azul:         #002868;
+  --kk-borda-azul:   #5A8FBF;
+  --kk-borda-branco: #C8C8C8;
+}
+
+/* Logo nav — nova versão */
+.site-logo-name {
+  font-size: 18px;
+  display: flex;
+  align-items: baseline;
+  letter-spacing: 2px;
+}
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+
+
+.kk-tricolor {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.kk-tricolor span:nth-child(3) { background: var(--kk-azul); }
+.kk-tricolor.dark  span:nth-child(2) { background: #FFFFFF; }
+.kk-tricolor.light span:nth-child(2) { background: #D3D1C7; }
+
+/* Tricolor no footer */
+.site-footer .kk-tricolor { height: 3px; }
+
+/* Tricolor no topo do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: var(--kk-azul); }
+
+
+/* Faixa tricolor — borda inferior do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+  position: sticky;
+  top: 60px;
+  z-index: 199;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: #C8102E; }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: #002868; }
+
+/* Faixa tricolor — footer */
+.kk-tricolor { height: 3px; display: flex; width: 100%; }
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: #C8102E; }
+.kk-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.kk-tricolor span:nth-child(3) { background: #002868; }
+
+</style>
+<style>
+.page-hero { background: var(--kk-primary); padding: 80px 0 64px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234DB88A' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E"); }
+.page-hero-inner { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.page-hero h1 { font-size: clamp(30px, 5vw, 50px); font-weight: 300; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+.page-hero h1 strong { font-weight: 700; color: var(--kk-accent); }
+.page-hero p { font-size: 15px; color: rgba(255,255,255,0.55); max-width: 520px; line-height: 1.75; font-weight: 300; }
+
+/* CONTATO MAIN */
+.contato-section { padding: 80px 0; background: var(--kk-cream); }
+.contato-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+
+/* FORMULÁRIO */
+.contato-form-card { background: #fff; border: 1px solid var(--kk-border); border-radius: 14px; padding: 40px; }
+.contato-form-card h2 { font-size: 22px; font-weight: 600; color: var(--kk-primary); margin-bottom: 6px; }
+.contato-form-card p { font-size: 13px; color: var(--kk-muted); margin-bottom: 28px; line-height: 1.6; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-group:last-of-type { margin-bottom: 0; }
+.form-label { font-size: 11px; font-weight: 600; color: var(--kk-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.form-input, .form-select, .form-textarea {
+  padding: 11px 14px; border: 1.5px solid var(--kk-border);
+  border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px;
+  color: var(--kk-graphite); background: var(--kk-cream);
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--kk-accent); background: #fff;
+  box-shadow: 0 0 0 3px rgba(77,184,138,0.1);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: #B8B5B0; }
+.form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7A72' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-color: var(--kk-cream); padding-right: 36px; }
+.form-select:focus { background-color: #fff; }
+.form-select option { background: #fff; }
+.form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+.form-submit-row { margin-top: 24px; display: flex; gap: 12px; align-items: center; }
+.form-note { font-size: 11px; color: var(--kk-muted); }
+.success-msg { display: none; background: rgba(77,184,138,0.08); border: 1px solid rgba(77,184,138,0.3); border-radius: 8px; padding: 16px 20px; font-size: 13px; color: var(--kk-secondary); margin-top: 16px; line-height: 1.6; }
+
+/* SIDEBAR */
+.contato-sidebar { display: flex; flex-direction: column; gap: 20px; }
+.contato-info-card { background: #fff; border: 1px solid var(--kk-border); border-radius: 12px; padding: 28px; }
+.contato-info-card h3 { font-size: 15px; font-weight: 600; color: var(--kk-primary); margin-bottom: 6px; }
+.contato-info-card p { font-size: 13px; color: var(--kk-muted); line-height: 1.6; margin-bottom: 16px; }
+.contato-channels { display: flex; flex-direction: column; gap: 10px; }
+.contato-channel {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border-radius: 10px;
+  border: 1px solid var(--kk-border); text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.contato-channel:hover { border-color: var(--kk-accent); background: rgba(77,184,138,0.04); }
+.contato-channel-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contato-channel-icon.wa  { background: rgba(37,211,102,0.12); }
+.contato-channel-icon.em  { background: rgba(77,184,138,0.1); }
+.contato-channel-icon.li  { background: rgba(10,102,194,0.1); }
+.contato-channel-label { font-size: 11px; color: var(--kk-muted); }
+.contato-channel-value { font-size: 13px; font-weight: 600; color: var(--kk-primary); }
+
+.escritorios-card { background: var(--kk-primary); border-radius: 12px; padding: 28px; }
+.escritorios-card h3 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 20px; }
+.escritorio { margin-bottom: 18px; }
+.escritorio:last-child { margin-bottom: 0; }
+.escritorio-city { font-size: 12px; font-weight: 600; color: var(--kk-accent); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.escritorio-addr { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+.horario-card { background: rgba(77,184,138,0.06); border: 1px solid rgba(77,184,138,0.2); border-radius: 12px; padding: 24px; }
+.horario-card h3 { font-size: 13px; font-weight: 600; color: var(--kk-secondary); margin-bottom: 14px; }
+.horario-row { display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px solid rgba(77,184,138,0.1); color: var(--kk-muted); }
+.horario-row:last-child { border-bottom: none; }
+.horario-row span:last-child { font-weight: 600; color: var(--kk-graphite); }
+
+/* FAQ */
+.faq { padding: 80px 0; background: #fff; }
+.faq h2 { font-size: 28px; font-weight: 300; color: var(--kk-primary); margin-bottom: 40px; }
+.faq h2 strong { font-weight: 700; }
+.faq-list { max-width: 720px; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { border: 1px solid var(--kk-border); border-radius: 10px; overflow: hidden; }
+.faq-question {
+  padding: 18px 22px; font-size: 14px; font-weight: 600; color: var(--kk-primary);
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  transition: background 0.2s; user-select: none;
+}
+.faq-question:hover { background: var(--kk-cream); }
+.faq-arrow { font-size: 12px; color: var(--kk-accent); transition: transform 0.25s; flex-shrink: 0; }
+.faq-answer { display: none; padding: 0 22px 18px; font-size: 13px; color: var(--kk-muted); line-height: 1.75; }
+.faq-item.open .faq-arrow { transform: rotate(90deg); }
+.faq-item.open .faq-answer { display: block; }
+
+@media (max-width: 768px) {
+  .contato-inner { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- KakuaaPY — SVG Symbols V3.3 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="kk-sym-light" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90" stroke="#C8C8C8" stroke-width="1" stroke-linejoin="round"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85"/>
+    </symbol>
+    <symbol id="kk-sym-dark" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85" stroke="#5A8FBF" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+
+<nav class="site-nav">
+  <a href="/" class="site-logo">
+    <svg width="22" height="31"><use href="#kk-sym-dark"/></svg>
+    <div style="margin-left:12px;">
+      <div class="site-logo-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <span class="site-logo-tagline">crescer · conectar · prosperar</span>
+    </div>
+  </a>
+  <ul class="site-nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/sobre">Sobre</a></li>
+    <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+    <li><a href="/servicos">Serviços</a></li>
+    <li><a href="/news">News &amp; Social</a></li>
+    <li><a href="/contato" class="active">Contato</a></li>
+    <li><div class="nav-divider"></div></li>
+    <li><a href="/cliente" style="background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.35);color:#C8A84B;padding:6px 14px;border-radius:6px;font-weight:600;font-size:12px;">Área do cliente</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.getElementById('mobile-nav-ct').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="site-nav-tricolor"><span></span><span></span><span></span></div>
+<div class="mobile-menu" id="mobile-nav-ct">
+  <a href="/">Início</a>
+  <a href="/sobre">Sobre</a>
+  <a href="/ferramenta">Ferramenta KakuaaPY</a>
+  <a href="/servicos">Serviços</a>
+  <a href="/news">News &amp; Social</a>
+  <a href="/contato">Contato</a>
+  <a href="/cliente" class="mobile-cta">Área do cliente</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-eyebrow" style="color:rgba(77,184,138,0.7);">Contato</div>
+    <h1>Vamos conversar sobre<br>a <strong>sua expansão</strong></h1>
+    <p>Nossa equipe bilíngue está pronta para responder suas dúvidas, aprofundar a análise do seu relatório e guiar cada etapa do processo.</p>
+  </div>
+</section>
+
+<section class="contato-section">
+  <div class="container">
+    <div class="contato-inner">
+
+      <!-- FORM -->
+      <div class="contato-form-card">
+        <h2>Fale com um especialista</h2>
+        <p>Preencha o formulário e nossa equipe entra em contato em até 1 dia útil.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome completo *</label>
+            <input type="text" class="form-input" id="f_nome" placeholder="Seu nome" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Empresa *</label>
+            <input type="text" class="form-input" id="f_empresa" placeholder="Nome da empresa" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">E-mail *</label>
+            <input type="email" class="form-input" id="f_email" placeholder="seu@email.com.br" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input type="tel" class="form-input" id="f_tel" placeholder="+55 11 99999-9999" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Assunto *</label>
+          <select class="form-select" id="f_assunto">
+            <option value="">Selecione o assunto...</option>
+            <option>Planejamento tributário Brasil-Paraguai</option>
+            <option>Abertura de empresa no Paraguai</option>
+            <option>Regime Maquila (CIND)</option>
+            <option>Abertura de conta bancária PJ</option>
+            <option>Comércio exterior / Logística</option>
+            <option>Compliance e obrigações acessórias</option>
+            <option>Dúvida sobre o relatório gerado</option>
+            <option>Outro assunto</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Faturamento anual aproximado</label>
+          <select class="form-select">
+            <option value="">Prefiro não informar</option>
+            <option>Até R$ 1 milhão</option>
+            <option>R$ 1 mi – R$ 5 mi</option>
+            <option>R$ 5 mi – R$ 20 mi</option>
+            <option>R$ 20 mi – R$ 100 mi</option>
+            <option>Acima de R$ 100 mi</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">Mensagem</label>
+          <textarea class="form-textarea" placeholder="Conte um pouco sobre sua empresa e o que você está buscando..."></textarea>
+        </div>
+        <div class="form-submit-row">
+          <button class="btn-primary" onclick="enviarFormulario()">Enviar mensagem →</button>
+          <span class="form-note">Respondemos em até 1 dia útil</span>
+        </div>
+        <div class="success-msg" id="success-msg">
+          ✅ Mensagem enviada com sucesso! Nossa equipe entrará em contato em breve. Enquanto isso, você pode nos chamar diretamente no WhatsApp.
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="contato-sidebar">
+        <div class="contato-info-card">
+          <h3>Canais de atendimento</h3>
+          <p>Escolha o canal de sua preferência. Falamos português, espanhol e inglês.</p>
+          <div class="contato-channels">
+            <a href="https://wa.me/5511972414707?text=Olá!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="contato-channel">
+              <div class="contato-channel-icon wa">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <div class="contato-channel-label">WhatsApp</div>
+                <div class="contato-channel-value">+55 11 97241-4707</div>
+              </div>
+            </a>
+            <a href="mailto:contato@kakuaapy.com" class="contato-channel">
+              <div class="contato-channel-icon em">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4DB88A" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <div class="contato-channel-label">E-mail</div>
+                <div class="contato-channel-value">contato@kakuaapy.com</div>
+              </div>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="contato-channel">
+              <div class="contato-channel-icon li">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              <div>
+                <div class="contato-channel-label">LinkedIn</div>
+                <div class="contato-channel-value">KakuaaPY</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-eyebrow">Dúvidas frequentes</div>
+    <h2>Perguntas <strong>frequentes</strong></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Quanto tempo leva para abrir uma empresa no Paraguai?
+          <span class="faq-arrow">▶</span>
+        </div>
+        <div class="faq-answer">Para uma SRL (Sociedad de Responsabilidad Limitada), o prazo médio é de 7 a 15 dias úteis com toda a documentação em ordem. Para uma S.A. ou Maquiladora, o prazo pode variar de 30 a 90 dias, especialmente no caso da Maquiladora devido à aprovação do CIND.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Preciso morar no Paraguai para ter uma empresa lá?
+          <span class="faq-arrow">▶</span>
+        </div>
+        <div class="faq-answer">Não é obrigatório residir no Paraguai para ser sócio de uma empresa. No entanto, é necessário ter ao menos um representante legal com residência permanente no país. A KakuaaPY oferece serviços de representação legal para sócios estrangeiros.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          O Regime Maquila é só para indústria?
+          <span class="faq-arrow">▶</span>
+        </div>
+        <div class="faq-answer">O Regime Maquila foi criado originalmente para indústrias exportadoras, mas ao longo dos anos foi expandido para incluir serviços, tecnologia e outras atividades que agreguem valor localmente e exportem o produto final. É fundamental avaliar a elegibilidade de cada caso com nossos especialistas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          É possível transferir minha empresa do Brasil para o Paraguai?
+          <span class="faq-arrow">▶</span>
+        </div>
+        <div class="faq-answer">Sim, embora tecnicamente não seja uma transferência direta — o processo envolve a constituição de uma nova entidade no Paraguai e a reestruturação das operações. Dependendo do caso, pode ser mais eficiente criar uma holding internacional. Nossa equipe analisa cada situação individualmente.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          A Ferramenta KakuaaPY é realmente gratuita?
+          <span class="faq-arrow">▶</span>
+        </div>
+        <div class="faq-answer">Sim, 100% gratuita. Você pode acessar a <a href="/ferramenta" style="color:var(--kk-accent); font-weight:600; text-decoration:none;">Ferramenta KakuaaPY</a> e gerar quantos comparativos quiser, incluindo os módulos de Maquila, Logística e Investimento Inicial, sem nenhum custo. Para assessoria personalizada e execução da expansão, oferecemos planos detalhados na página de Serviços.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Qual a diferença entre SRL e S.A. no Paraguai?
+          <span class="faq-arrow">▶</span>
+        </div>
+        <div class="faq-answer">A SRL (Sociedad de Responsabilidad Limitada) é equivalente à Ltda. brasileira — mais simples, sem capital mínimo obrigatório e ideal para PMEs. A S.A. (Sociedad Anónima) requer capital mínimo de USD 5.000, é mais adequada para empresas de maior porte ou que pretendem captar investimento. Para a maioria das expansões de empresas brasileiras, a SRL é a recomendação padrão.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="kk-tricolor dark" style="margin-top:0;"><span></span><span></span><span></span></div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <div class="brand-tag">crescer · conectar · prosperar</div>
+      <p>Plataforma de serviços empresariais focada em conectar empresas do mundo ao Paraguai, com raízes na cultura Guarani e visão internacional.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Ferramentas</div>
+        <ul>
+          <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+          <li><a href="/ferramenta">Simulador Tributário</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <ul>
+          <li><a href="/sobre">Sobre a KakuaaPY</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/news">News &amp; Social</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Acesso interno</div>
+        <ul>
+          <li><a href="/colaborador" style="color:rgba(255,255,255,0.25); font-size:12px;">Área do colaborador</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KakuaaPY · Todos os direitos reservados</span>
+    <span class="footer-bottom-accent">crescer · conectar · prosperar</span>
+  </div>
+</footer>
+
+<div class="float-icons">
+  <a href="/ferramenta" class="float-icon float-icon-tool" title="Acessar a ferramenta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <span class="float-icon-label">Nossa ferramenta</span>
+  </a>
+  <a href="https://wa.me/5511972414707?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="float-icon float-icon-wa" title="Fale com especialista">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="float-icon-label">Fale com especialista</span>
+  </a>
+</div>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+function enviarFormulario() {
+  const nome    = document.getElementById('f_nome').value.trim();
+  const empresa = document.getElementById('f_empresa').value.trim();
+  const email   = document.getElementById('f_email').value.trim();
+  const assunto = document.getElementById('f_assunto').value;
+  if (!nome || !empresa || !email || !assunto) {
+    alert('Por favor, preencha todos os campos obrigatórios.');
+    return;
+  }
+  document.getElementById('success-msg').style.display = 'block';
+  setTimeout(() => document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+}
+</script>
+</body>
+</html>

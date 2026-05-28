@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serviços — KakuaaPY</title>
+<meta name="description" content="Cinco fases de acompanhamento completo para sua expansão ao Paraguai — do diagnóstico à consolidação da operação.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════
+   SHARED — KAKUAAPY
+   ══════════════════════════════════════ */
+:root {
+  --kk-primary:   #1A2B23;
+  --kk-secondary: #1D4E3A;
+  --kk-accent:    #4DB88A;
+  --kk-cream:     #F5F4F0;
+  --kk-graphite:  #2C2C2A;
+  --kk-muted:     #6B7A72;
+  --kk-border:    #D8DDD9;
+  --gold:         #C8A84B;
+  --dark:         #0E1A14;
+  --serif:        'Playfair Display', Georgia, serif;
+  --sans:         'DM Sans', 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--kk-cream); color: var(--kk-graphite); }
+
+/* NAV */
+.site-nav {
+  background: var(--kk-primary); height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; position: sticky; top: 0; z-index: 200;
+  border-bottom: 1px solid rgba(77,184,138,0.15);
+}
+.site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.site-logo-name { font-size: 18px; display: flex; align-items: baseline; }
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; letter-spacing: 0.3px; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+.site-logo-tagline { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.28); letter-spacing: 2.5px; text-transform: uppercase; display: block; margin-top: 2px; }
+.site-nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.site-nav-links a { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+.site-nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.site-nav-links a.active { color: var(--kk-accent); font-weight: 500; }
+.nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 6px; }
+.mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.mobile-menu-btn span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; }
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--kk-primary); z-index: 190; padding: 16px 24px 24px; border-bottom: 1px solid rgba(77,184,138,0.15); flex-direction: column; gap: 4px; }
+.mobile-menu a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--kk-accent); }
+.mobile-menu .mobile-cta { color: var(--gold) !important; font-weight: 600; border: none !important; }
+.mobile-menu.open { display: flex; }
+
+/* FOOTER */
+.site-footer { background: var(--kk-primary); color: rgba(255,255,255,0.4); }
+.site-footer-inner { max-width: 1100px; margin: 0 auto; padding: 48px 40px 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 56px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand .brand-name { font-size: 17px; margin-bottom: 4px; }
+.footer-brand .brand-name .kakuaa { font-weight: 300; color: #fff; }
+.footer-brand .brand-name .py     { font-weight: 600; color: var(--kk-accent); }
+.footer-brand .brand-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 16px; }
+.footer-brand p { font-size: 12px; line-height: 1.75; color: rgba(255,255,255,0.32); max-width: 260px; }
+.footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 9px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.42); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--kk-accent); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-bottom-accent { color: rgba(77,184,138,0.38); letter-spacing: 0.12em; }
+
+/* UTILITÁRIOS */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--kk-accent); text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--kk-accent); }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--kk-accent); color: var(--kk-primary); font-family: var(--sans); font-size: 13px; font-weight: 600; padding: 12px 26px; border-radius: 7px; border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-ghost-light { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(255,255,255,0.75); font-family: var(--sans); font-size: 13px; font-weight: 500; padding: 11px 22px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+.btn-ghost-light:hover { border-color: var(--kk-accent); color: var(--kk-accent); }
+
+/* FLOAT ICONS */
+.float-icons { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+.float-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative; transition: all 0.25s cubic-bezier(0.34,1.2,0.64,1); overflow: visible; }
+.float-icon-tool { background: rgba(26,43,35,0.82); border: 1px solid rgba(77,184,138,0.25); color: rgba(77,184,138,0.85); backdrop-filter: blur(8px); }
+.float-icon-wa   { background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.3); color: #25D366; backdrop-filter: blur(8px); }
+.float-icon:hover { transform: scale(1.12); }
+.float-icon-tool:hover { background: rgba(26,43,35,0.95); border-color: rgba(77,184,138,0.5); box-shadow: 0 4px 20px rgba(77,184,138,0.15); }
+.float-icon-wa:hover   { background: rgba(37,211,102,0.22); border-color: rgba(37,211,102,0.5); box-shadow: 0 4px 20px rgba(37,211,102,0.2); }
+.float-icon-label { position: absolute; right: 52px; background: rgba(15,26,20,0.95); color: rgba(255,255,255,0.85); font-family: var(--sans); font-size: 11px; font-weight: 500; white-space: nowrap; padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); opacity: 0; pointer-events: none; transform: translateX(6px); transition: opacity 0.2s, transform 0.2s; backdrop-filter: blur(8px); }
+.float-icon-label::after { content: ''; position: absolute; right: -5px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right: none; border-left-color: rgba(15,26,20,0.95); }
+.float-icon:hover .float-icon-label { opacity: 1; transform: translateX(0); }
+
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══════════════════════════════════════
+   SERVIÇOS — ESTILOS ESPECÍFICOS
+   ══════════════════════════════════════ */
+
+/* HERO */
+.page-hero {
+  background: var(--dark);
+  padding: 88px 0 72px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234DB88A' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.page-hero-glow {
+  position: absolute; right: -60px; top: 20%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(77,184,138,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.page-hero-inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+}
+.hero-overline {
+  font-family: var(--sans); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--kk-accent);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-overline::before { content: ''; width: 32px; height: 1px; background: var(--kk-accent); }
+.page-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 400; color: #fff;
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 22px;
+  opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+}
+.page-hero h1 em { font-style: italic; color: var(--kk-accent); }
+.page-hero-desc {
+  font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5);
+  line-height: 1.85; max-width: 440px;
+  opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+}
+
+/* Timeline de fases — lado direito do hero */
+.hero-phases {
+  opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  display: flex; flex-direction: column; gap: 0;
+}
+.hero-phase-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+.hero-phase-item:last-child { border-bottom: none; }
+.hero-phase-num {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(77,184,138,0.1);
+  border: 1px solid rgba(77,184,138,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--kk-accent);
+  font-family: var(--sans);
+}
+.hero-phase-num.destaque {
+  background: var(--kk-accent); color: var(--kk-primary); border-color: var(--kk-accent);
+}
+.hero-phase-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); padding-top: 4px; }
+.hero-phase-label { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+
+/* ── INTRO ── */
+.intro-section { padding: 72px 0; background: #fff; }
+.intro-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.intro-text h2 { font-family: var(--serif); font-size: clamp(24px, 3vw, 36px); font-weight: 400; color: var(--kk-primary); line-height: 1.25; margin-bottom: 20px; }
+.intro-text h2 em { font-style: italic; color: var(--kk-accent); }
+.intro-text p { font-size: 14px; color: var(--kk-muted); line-height: 1.85; margin-bottom: 16px; }
+.intro-text p strong { color: var(--kk-primary); font-weight: 600; }
+.intro-text p:last-child { margin-bottom: 0; }
+
+.intro-nota {
+  background: var(--kk-cream); border: 1px solid var(--kk-border);
+  border-radius: 10px; padding: 20px 22px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.intro-nota-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.intro-nota p { font-size: 12px; color: var(--kk-muted); line-height: 1.7; }
+.intro-nota p strong { color: var(--kk-primary); }
+
+/* ── FASES ── */
+.fases-section { padding: 80px 0; background: var(--kk-cream); }
+.fases-header { margin-bottom: 56px; }
+.fases-header h2 { font-family: var(--serif); font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: var(--kk-primary); }
+.fases-header h2 em { font-style: italic; color: var(--kk-accent); }
+
+/* Card de fase */
+.fase-card {
+  background: #fff;
+  border: 1px solid var(--kk-border);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: box-shadow 0.25s;
+  position: relative;
+}
+.fase-card:hover { box-shadow: 0 12px 48px rgba(26,43,35,0.09); }
+.fase-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--kk-accent), rgba(77,184,138,0.3));
+  border-radius: 4px 0 0 4px;
+}
+.fase-card.destaque-card::before {
+  background: linear-gradient(to bottom, var(--gold), rgba(200,168,75,0.3));
+}
+
+.fase-card-inner {
+  padding: 32px 32px 32px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: start;
+}
+
+.fase-num-wrap {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+}
+.fase-num {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--kk-primary); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 14px; font-weight: 700; color: var(--kk-accent);
+}
+.fase-num.gold-num { background: rgba(200,168,75,0.1); color: var(--gold); border: 1px solid rgba(200,168,75,0.3); }
+.fase-titulo { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--kk-primary); }
+
+.fase-desc { font-size: 14px; color: var(--kk-muted); line-height: 1.8; margin-bottom: 20px; max-width: 640px; }
+.fase-desc strong { color: var(--kk-primary); font-weight: 600; }
+
+.fase-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.fase-tag {
+  font-size: 11px; font-weight: 500;
+  padding: 4px 12px; border-radius: 4px;
+  background: rgba(29,78,58,0.07); color: var(--kk-secondary);
+  letter-spacing: 0.02em;
+}
+.fase-tag.tag-destaque {
+  background: rgba(77,184,138,0.1); color: var(--kk-secondary);
+  border: 1px solid rgba(77,184,138,0.2);
+}
+.fase-tag.tag-gold {
+  background: rgba(200,168,75,0.08); color: #8B6914;
+  border: 1px solid rgba(200,168,75,0.2);
+}
+
+/* Coluna direita do card — investimento */
+.fase-investimento {
+  flex-shrink: 0; text-align: right;
+  padding-left: 24px;
+  border-left: 1px solid var(--kk-border);
+  min-width: 180px;
+}
+.inv-from { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kk-muted); display: block; margin-bottom: 6px; }
+.inv-val { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--kk-primary); line-height: 1; display: block; margin-bottom: 5px; }
+.inv-val.gold { color: var(--gold); }
+.inv-note { font-size: 11px; color: var(--kk-muted); }
+
+/* Fase 5 — grid de períodos */
+.fase5-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-top: 20px;
+}
+.fase5-card {
+  background: var(--kk-cream); border: 1px solid var(--kk-border);
+  border-radius: 10px; padding: 18px 16px;
+}
+.f5-periodo { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--kk-accent); margin-bottom: 10px; }
+.f5-val { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--kk-primary); }
+.f5-freq { font-size: 11px; color: var(--kk-muted); margin-left: 3px; }
+.f5-detalhe { font-size: 12px; color: var(--kk-muted); margin-top: 6px; line-height: 1.5; }
+.f5-sub { font-size: 10px; color: rgba(107,122,114,0.65); margin-top: 5px; }
+
+/* ── RESUMO FINANCEIRO ── */
+.resumo-section { padding: 80px 0; background: var(--dark); position: relative; overflow: hidden; }
+.resumo-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(77,184,138,0.06) 0%, transparent 100%);
+  pointer-events: none;
+}
+.resumo-inner { position: relative; z-index: 1; }
+.resumo-header { margin-bottom: 48px; }
+.resumo-header h2 { font-family: var(--serif); font-size: clamp(24px, 3.5vw, 38px); font-weight: 400; color: #fff; }
+.resumo-header h2 em { font-style: italic; color: var(--gold); }
+
+.resumo-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,0.06);
+  border-radius: 14px; overflow: hidden;
+  margin-bottom: 20px;
+}
+.resumo-item {
+  background: rgba(14,26,20,0.8);
+  padding: 32px 28px;
+  transition: background 0.2s;
+}
+.resumo-item:hover { background: rgba(255,255,255,0.03); }
+.res-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
+.res-val { font-family: var(--serif); font-size: 32px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 6px; }
+.res-val.accent { color: var(--kk-accent); }
+.res-val.gold   { color: var(--gold); }
+.res-note { font-size: 11px; color: rgba(255,255,255,0.28); }
+
+.resumo-nota {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 18px 22px;
+  font-size: 12px; color: rgba(255,255,255,0.32); line-height: 1.7;
+}
+
+/* ── CONDIÇÕES ── */
+.condicoes-section { padding: 80px 0; background: #fff; }
+.condicoes-header { margin-bottom: 48px; }
+.condicoes-header h2 { font-family: var(--serif); font-size: clamp(24px, 3.5vw, 36px); font-weight: 400; color: var(--kk-primary); }
+.condicoes-header h2 em { font-style: italic; color: var(--kk-accent); }
+
+.condicoes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.cond-card {
+  background: var(--kk-cream); border: 1px solid var(--kk-border);
+  border-radius: 12px; padding: 26px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.cond-card:hover { border-color: rgba(77,184,138,0.35); box-shadow: 0 4px 20px rgba(77,184,138,0.06); }
+.cond-card-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 600; color: var(--kk-primary);
+  margin-bottom: 10px;
+}
+.cond-card-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(77,184,138,0.1); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 15px;
+}
+.cond-card p { font-size: 13px; color: var(--kk-muted); line-height: 1.7; }
+
+/* ── CTA FINAL ── */
+.cta-section {
+  padding: 96px 0;
+  background: linear-gradient(135deg, var(--kk-primary), var(--dark));
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(77,184,138,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta-section h2 { font-family: var(--serif); font-size: clamp(26px, 4vw, 44px); font-weight: 400; color: #fff; line-height: 1.2; margin-bottom: 16px; position: relative; }
+.cta-section h2 em { font-style: italic; color: var(--kk-accent); }
+.cta-section p { font-size: 15px; color: rgba(255,255,255,0.5); max-width: 480px; margin: 0 auto 36px; line-height: 1.75; position: relative; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .site-nav { padding: 0 20px; }
+  .site-nav-links { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .container { padding: 0 20px; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 24px; text-align: center; }
+  .float-icons { display: none; }
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .hero-phases { display: none; }
+  .intro-inner { grid-template-columns: 1fr; gap: 36px; }
+  .fase-card-inner { grid-template-columns: 1fr; }
+  .fase-investimento { border-left: none; border-top: 1px solid var(--kk-border); padding-left: 0; padding-top: 20px; text-align: left; }
+  .fase5-grid { grid-template-columns: 1fr; }
+  .resumo-grid { grid-template-columns: 1fr; }
+  .condicoes-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════
+   IDENTIDADE VISUAL V3.3 — KAKUAAPY
+   ══════════════════════════════════════ */
+:root {
+  --kk-vermelho:     #C8102E;
+  --kk-azul:         #002868;
+  --kk-borda-azul:   #5A8FBF;
+  --kk-borda-branco: #C8C8C8;
+}
+
+/* Logo nav — nova versão */
+.site-logo-name {
+  font-size: 18px;
+  display: flex;
+  align-items: baseline;
+  letter-spacing: 2px;
+}
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+
+
+.kk-tricolor {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.kk-tricolor span:nth-child(3) { background: var(--kk-azul); }
+.kk-tricolor.dark  span:nth-child(2) { background: #FFFFFF; }
+.kk-tricolor.light span:nth-child(2) { background: #D3D1C7; }
+
+/* Tricolor no footer */
+.site-footer .kk-tricolor { height: 3px; }
+
+/* Tricolor no topo do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: var(--kk-azul); }
+
+
+/* Faixa tricolor — borda inferior do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+  position: sticky;
+  top: 60px;
+  z-index: 199;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: #C8102E; }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: #002868; }
+
+/* Faixa tricolor — footer */
+.kk-tricolor { height: 3px; display: flex; width: 100%; }
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: #C8102E; }
+.kk-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.kk-tricolor span:nth-child(3) { background: #002868; }
+
+</style>
+</head>
+<body>
+
+<!-- KakuaaPY — SVG Symbols V3.3 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="kk-sym-light" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90" stroke="#C8C8C8" stroke-width="1" stroke-linejoin="round"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85"/>
+    </symbol>
+    <symbol id="kk-sym-dark" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85" stroke="#5A8FBF" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<!-- ── NAV ── -->
+<nav class="site-nav">
+  <a href="/" class="site-logo">
+    <svg width="22" height="31"><use href="#kk-sym-dark"/></svg>
+    <div style="margin-left:12px;">
+      <div class="site-logo-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <span class="site-logo-tagline">crescer · conectar · prosperar</span>
+    </div>
+  </a>
+  <ul class="site-nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/sobre">Sobre</a></li>
+    <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+    <li><a href="/servicos" class="active">Serviços</a></li>
+    <li><a href="/news">News &amp; Social</a></li>
+    <li><a href="/contato">Contato</a></li>
+    <li><div class="nav-divider"></div></li>
+    <li><a href="/cliente" style="background:rgba(200,168,75,0.15) !important; border:1px solid rgba(200,168,75,0.35) !important; color:#C8A84B !important; padding:6px 14px; border-radius:6px; font-weight:600; font-size:12px;">Área do cliente</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.getElementById('mobile-menu-srv').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="site-nav-tricolor"><span></span><span></span><span></span></div>
+<div class="mobile-menu" id="mobile-menu-srv">
+  <a href="/">Início</a>
+  <a href="/sobre">Sobre</a>
+  <a href="/ferramenta">Ferramenta KakuaaPY</a>
+  <a href="/servicos">Serviços</a>
+  <a href="/news">News &amp; Social</a>
+  <a href="/contato">Contato</a>
+  <a href="/cliente" class="mobile-cta">Área do cliente</a>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO
+     ══════════════════════════════════ -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <div class="hero-overline">Serviços</div>
+        <h1>Do diagnóstico à<br><em>operação consolidada</em></h1>
+        <p class="page-hero-desc">Cinco fases de acompanhamento estruturado para que sua empresa se instale no Paraguai com segurança, legalidade e eficiência — sem atalhos que comprometam o futuro da operação.</p>
+      </div>
+      <div class="hero-phases">
+        <div class="hero-phase-item">
+          <div class="hero-phase-num">1</div>
+          <div>
+            <div class="hero-phase-name">Diagnóstico empresarial</div>
+            <div class="hero-phase-label">Análise comparativa e parecer de viabilidade</div>
+          </div>
+        </div>
+        <div class="hero-phase-item">
+          <div class="hero-phase-num">2</div>
+          <div>
+            <div class="hero-phase-name">Plano estratégico de expansão</div>
+            <div class="hero-phase-label">Estrutura jurídica, tributária e cronograma</div>
+          </div>
+        </div>
+        <div class="hero-phase-item">
+          <div class="hero-phase-num destaque">3</div>
+          <div>
+            <div class="hero-phase-name">Constituição legal e fiscal</div>
+            <div class="hero-phase-label">Abertura, RUC, conta bancária, Maquila</div>
+          </div>
+        </div>
+        <div class="hero-phase-item">
+          <div class="hero-phase-num">4</div>
+          <div>
+            <div class="hero-phase-name">Implantação operacional</div>
+            <div class="hero-phase-label">Espaço, equipe local, fornecedores, financeiro</div>
+          </div>
+        </div>
+        <div class="hero-phase-item">
+          <div class="hero-phase-num">5</div>
+          <div>
+            <div class="hero-phase-name">Acompanhamento estratégico</div>
+            <div class="hero-phase-label">Presença física escalonada por 6 meses</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     INTRO
+     ══════════════════════════════════ -->
+<section class="intro-section">
+  <div class="container">
+    <div class="intro-inner">
+      <div class="reveal">
+        <div class="section-eyebrow">Nossa abordagem</div>
+        <h2>Gestão completa,<br>fase a <em>fase</em></h2>
+        <p>A KakuaaPY atua como gestora do processo completo de expansão — do diagnóstico inicial até a consolidação da operação local. Cada fase é estruturada para que o cliente avance com segurança, <strong>sem comprometer recursos antes de validar cada etapa.</strong></p>
+        <ul style="margin-top:20px; display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--kk-muted); line-height:1.6;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--kk-accent); flex-shrink:0; margin-top:7px;"></span>
+            Atuamos como gestores — não apenas como consultores
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--kk-muted); line-height:1.6;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--kk-accent); flex-shrink:0; margin-top:7px;"></span>
+            Cada fase é contratada separadamente — o cliente avança no seu ritmo
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--kk-muted); line-height:1.6;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--kk-accent); flex-shrink:0; margin-top:7px;"></span>
+            Não é obrigatório contratar todas as fases
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--kk-muted); line-height:1.6;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--kk-accent); flex-shrink:0; margin-top:7px;"></span>
+            Cada etapa respeita a sequência lógica do projeto
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--kk-muted); line-height:1.6;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--kk-accent); flex-shrink:0; margin-top:7px;"></span>
+            Presença física no Brasil e no Paraguai durante todo o processo
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--kk-muted); line-height:1.6;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--kk-accent); flex-shrink:0; margin-top:7px;"></span>
+            Custos de parceiros, advogados e documentação inclusos nas fases 3 e 4 — sem surpresa!
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     5 FASES
+     ══════════════════════════════════ -->
+<section class="fases-section">
+  <div class="container">
+    <div class="fases-header reveal">
+      <div class="section-eyebrow">As cinco fases</div>
+      <h2>Cada etapa com<br>propósito <em>definido</em></h2>
+    </div>
+
+    <!-- FASE 1 -->
+    <div class="fase-card reveal">
+      <div class="fase-card-inner">
+        <div>
+          <div class="fase-num-wrap">
+            <div class="fase-num">1</div>
+            <div class="fase-titulo">Diagnóstico empresarial</div>
+          </div>
+          <p class="fase-desc">
+            Levantamento completo do perfil da empresa, análise tributária comparativa Brasil × Paraguai e parecer de viabilidade. Inclui visitas ao cliente, se necessário, e revisões do relatório. <strong>Nenhuma decisão deveria ser tomada antes desta fase.</strong>
+          </p>
+          <div class="fase-tags">
+            <span class="fase-tag tag-destaque">visitas ao cliente</span>
+            <span class="fase-tag tag-destaque">revisões do relatório inclusas</span>
+            <span class="fase-tag">análise tributária BR × PY</span>
+            <span class="fase-tag">parecer de viabilidade</span>
+          </div>
+        </div>
+        <div class="fase-investimento">
+          <span class="inv-from">Investimento</span>
+          <span class="inv-val" style="font-size:15px; font-weight:600; color:var(--kk-muted);">Sob consulta</span>
+          <span class="inv-note">proposta personalizada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="fase-card reveal">
+      <div class="fase-card-inner">
+        <div>
+          <div class="fase-num-wrap">
+            <div class="fase-num">2</div>
+            <div class="fase-titulo">Plano estratégico de expansão</div>
+          </div>
+          <p class="fase-desc">
+            Elaborado com base nos dados do diagnóstico. Inclui <strong>estrutura jurídica recomendada</strong>, planejamento tributário, cronograma detalhado, mapa de riscos, planejamento logístico e no mínimo 3 opções de localização com custos comparativos dentro da cidade ou região escolhida pelo cliente.
+          </p>
+          <div class="fase-tags">
+            <span class="fase-tag tag-destaque">3 opções de localização</span>
+            <span class="fase-tag tag-destaque">planejamento logístico</span>
+            <span class="fase-tag">estrutura jurídica recomendada</span>
+            <span class="fase-tag">mapa de riscos incluso</span>
+            <span class="fase-tag">cronograma detalhado</span>
+          </div>
+        </div>
+        <div class="fase-investimento">
+          <span class="inv-from">Investimento</span>
+          <span class="inv-val" style="font-size:15px; font-weight:600; color:var(--kk-muted);">Sob consulta</span>
+          <span class="inv-note">proposta personalizada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="fase-card destaque-card reveal">
+      <div class="fase-card-inner">
+        <div>
+          <div class="fase-num-wrap">
+            <div class="fase-num gold-num">3</div>
+            <div class="fase-titulo">Constituição legal e fiscal</div>
+          </div>
+          <p class="fase-desc">
+            Abertura ou aquisição de empresa, RUC, conta bancária PJ, contratos societários, residência paraguaia por sócio e enquadramento no <strong>Regime Maquila (CNIME)</strong> quando aplicável. Todos os custos de parceiros e documentação estão inclusos — sem surpresas.
+          </p>
+          <div class="fase-tags">
+            <span class="fase-tag tag-gold">virada de chave</span>
+            <span class="fase-tag tag-destaque">parceiros e docs inclusos</span>
+            <span class="fase-tag tag-destaque">Maquila / CNIME incluso</span>
+            <span class="fase-tag">prazo estimado 30–60 dias</span>
+          </div>
+        </div>
+        <div class="fase-investimento">
+          <span class="inv-from">Investimento</span>
+          <span class="inv-val" style="font-size:15px; font-weight:600; color:var(--kk-muted);">Sob consulta</span>
+          <span class="inv-note">proposta personalizada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 4 -->
+    <div class="fase-card reveal">
+      <div class="fase-card-inner">
+        <div>
+          <div class="fase-num-wrap">
+            <div class="fase-num">4</div>
+            <div class="fase-titulo">Implantação operacional</div>
+          </div>
+          <p class="fase-desc">
+            Gestão completa da estruturação da operação: espaço físico, alvarás, captação de equipe local, fornecedores, fluxo financeiro e integração com a matriz. <strong>Não inclui</strong> custos de imóvel, custos de construção ou reformas, equipamentos ou mão de obra produtiva — esses são responsabilidade do cliente e estimados na fase 2. Todas as despesas, custos, cronogramas e orçamentos desta fase são <strong>transparentes e controlados pelo cliente</strong>, através de nossa Área do Cliente.
+          </p>
+          <div class="fase-tags">
+            <span class="fase-tag tag-destaque">captação de equipe local</span>
+            <span class="fase-tag tag-destaque">controle pelo cliente</span>
+            <span class="fase-tag">gestão de fornecedores</span>
+            <span class="fase-tag">integração com a matriz</span>
+            <span class="fase-tag">fluxo financeiro estruturado</span>
+          </div>
+        </div>
+        <div class="fase-investimento">
+          <span class="inv-from">Investimento</span>
+          <span class="inv-val" style="font-size:15px; font-weight:600; color:var(--kk-muted);">Sob consulta</span>
+          <span class="inv-note">proposta personalizada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 5 -->
+    <div class="fase-card reveal">
+      <div class="fase-card-inner">
+        <div>
+          <div class="fase-num-wrap">
+            <div class="fase-num">5</div>
+            <div class="fase-titulo">Acompanhamento estratégico</div>
+          </div>
+          <p class="fase-desc">
+            Presença física escalonada ao longo de 3 fases, a serem definidas com o cliente. <strong>Contabilidade, assessoria jurídica e relatórios mensais inclusos</strong> em todos os períodos. A intensidade da presença reduz progressivamente conforme a operação ganha maturidade e independência.
+          </p>
+          <div class="fase5-grid">
+            <div class="fase5-card">
+              <div class="f5-periodo">Fase de início das operações</div>
+              <div class="f5-detalhe">Presença full time na operação</div>
+            </div>
+            <div class="fase5-card">
+              <div class="f5-periodo">Fase de Transição</div>
+              <div class="f5-detalhe">Início de transição da gestão</div>
+            </div>
+            <div class="fase5-card">
+              <div class="f5-periodo">Conclusão de transição</div>
+              <div class="f5-detalhe">Presença apenas como consultoria</div>
+            </div>
+          </div>
+        </div>
+        <div class="fase-investimento">
+          <span class="inv-from">Investimento</span>
+          <span class="inv-val" style="font-size:15px; font-weight:600; color:var(--kk-muted);">Sob consulta</span>
+          <span class="inv-note">proposta personalizada</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     RESUMO FINANCEIRO
+     ══════════════════════════════════ -->
+<section class="resumo-section">
+  <div class="container">
+    <div class="resumo-header reveal">
+      <div class="section-eyebrow" style="color:rgba(77,184,138,0.7);">Investimento</div>
+      <h2>Proposta elaborada<br>para o seu <em>contexto</em></h2>
+    </div>
+    <div class="resumo-nota reveal" style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.8; max-width:680px;">
+      Os investimentos variam conforme o porte da empresa, a complexidade da operação e as fases contratadas. Por isso, cada proposta é elaborada de forma personalizada — após o diagnóstico inicial, apresentamos um orçamento detalhado, transparente e adequado à realidade do seu projeto.<br><br>
+      <strong style="color:rgba(255,255,255,0.75);">Custos de infraestrutura, imóvel, reformas e mão de obra produtiva não estão inclusos</strong> nos honorários de gestão e serão estimados separadamente na fase 2. Nas fases 3 e 4, todos os custos de parceiros, advogados e documentação já estão incluídos — sem cobranças adicionais surpresa.
+    </div>
+    <div style="margin-top:36px;" class="reveal">
+      <a href="/contato" class="btn-primary">Solicitar proposta formal →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CONDIÇÕES COMERCIAIS
+     ══════════════════════════════════ -->
+<section class="condicoes-section">
+  <div class="container">
+    <div class="condicoes-header reveal">
+      <div class="section-eyebrow">Condições comerciais</div>
+      <h2>Como <em>trabalhamos</em></h2>
+    </div>
+    <div class="condicoes-grid">
+      <div class="cond-card reveal">
+        <div class="cond-card-title">
+          <div class="cond-card-icon">💳</div>
+          Forma de pagamento
+        </div>
+        <p>Cada fase é contratada e paga separadamente, mediante assinatura de contrato específico. A fase 5 é faturada mensalmente no início de cada período de acompanhamento.</p>
+      </div>
+      <div class="cond-card reveal reveal-delay-1">
+        <div class="cond-card-title">
+          <div class="cond-card-icon">🔄</div>
+          Flexibilidade
+        </div>
+        <p>O cliente não é obrigado a contratar todas as fases. Cada etapa pode ser contratada de forma independente, respeitando a sequência lógica do projeto e as necessidades reais da operação.</p>
+      </div>
+      <div class="cond-card reveal reveal-delay-2">
+        <div class="cond-card-title">
+          <div class="cond-card-icon">🔍</div>
+          Transparência total
+        </div>
+        <p>Todos os custos de parceiros, advogados, contadores e documentação estão inclusos nos honorários das fases 3 e 4. Não há cobranças adicionais ou surpresas após o início do projeto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA FINAL
+     ══════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container reveal">
+    <div class="section-eyebrow" style="justify-content:center; color:rgba(77,184,138,0.6);">Próximo passo</div>
+    <h2>Comece com o<br><em>diagnóstico.</em><br>O resto vem no ritmo certo.</h2>
+    <p>Use nossa ferramenta gratuita para uma análise inicial, ou fale diretamente com nossa equipe para dar o primeiro passo com segurança.</p>
+    <div class="cta-actions">
+      <a href="/ferramenta" class="btn-primary">Acessar a ferramenta →</a>
+      <a href="/contato" class="btn-ghost-light">Solicitar proposta formal</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+
+<div class="kk-tricolor dark" style="margin-top:0;"><span></span><span></span><span></span></div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <div class="brand-tag">crescer · conectar · prosperar</div>
+      <p>Plataforma de serviços empresariais focada em conectar empresas do mundo ao Paraguai, com raízes na cultura Guarani e visão internacional.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Ferramentas</div>
+        <ul>
+          <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+          <li><a href="/ferramenta">Simulador Tributário</a></li>
+          <li><a href="/ferramenta">Guia Bancário</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <ul>
+          <li><a href="/sobre">Sobre a KakuaaPY</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/news">News &amp; Social</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Acesso interno</div>
+        <ul>
+          <li><a href="/colaborador" style="color:rgba(255,255,255,0.25); font-size:12px;">Área do colaborador</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KakuaaPY · Todos os direitos reservados · Dados: Maio/2026</span>
+    <span class="footer-bottom-accent">crescer · conectar · prosperar</span>
+  </div>
+</footer>
+
+<!-- Ícones flutuantes -->
+<div class="float-icons">
+  <a href="/ferramenta" class="float-icon float-icon-tool" title="Acessar a ferramenta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/>
+      <line x1="16" y1="17" x2="8" y2="17"/>
+    </svg>
+    <span class="float-icon-label">Nossa ferramenta</span>
+  </a>
+  <a href="https://wa.me/5511972414707?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="float-icon float-icon-wa" title="Fale com especialista">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="float-icon-label">Fale com especialista</span>
+  </a>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

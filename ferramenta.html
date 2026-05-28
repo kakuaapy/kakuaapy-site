@@ -1,0 +1,2410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KakuaaPY — crescer · conectar · prosperar</title>
+<meta name="description" content="Plataforma de serviços empresariais Brasil-Paraguai. Análise estratégica, comparativo tributário, Regime Maquila e logística para empresas brasileiras.">
+<link rel="stylesheet" href="shared.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════
+   SITE SHELL — KAKUAAPY
+   ══════════════════════════════════ */
+:root {
+  --kk-primary:   #1A2B23;
+  --kk-secondary: #1D4E3A;
+  --kk-accent:    #4DB88A;
+  --kk-cream:     #F5F4F0;
+  --kk-graphite:  #2C2C2A;
+  --kk-accent-dim: rgba(77,184,138,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--kk-cream);
+  color: var(--kk-graphite);
+  min-height: 100vh;
+}
+
+/* ── SITE NAV ── */
+.site-nav {
+  background: var(--kk-primary);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid rgba(77,184,138,0.15);
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.site-logo-triangles svg { display: block; }
+
+.site-logo-name {
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+}
+
+.site-logo-name .kakuaa {
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: 0.3px;
+}
+
+.site-logo-name .py {
+  font-weight: 600;
+  color: var(--kk-accent);
+}
+
+.site-logo-tagline {
+  font-size: 9px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.30);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 2px;
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+
+.site-nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.site-nav-links a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+
+.site-nav-links a.active {
+  color: var(--kk-accent);
+  font-weight: 500;
+}
+
+.site-nav-links .nav-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+  margin: 0 6px;
+}
+
+.site-nav-cta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--kk-primary) !important;
+  background: var(--kk-accent) !important;
+  padding: 7px 16px !important;
+  border-radius: 6px !important;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s !important;
+}
+
+.site-nav-cta:hover {
+  opacity: 0.88;
+  background: var(--kk-accent) !important;
+  color: var(--kk-primary) !important;
+}
+
+/* ── SITE FOOTER ── */
+.site-footer {
+  background: var(--kk-primary);
+  color: rgba(255,255,255,0.4);
+  padding: 0;
+}
+
+.site-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 40px 32px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.footer-brand .brand-name {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.footer-brand .brand-name .kakuaa {
+  font-weight: 300;
+  color: #fff;
+}
+
+.footer-brand .brand-name .py {
+  font-weight: 600;
+  color: var(--kk-accent);
+}
+
+.footer-brand .brand-tag {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 14px;
+}
+
+.footer-brand p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.35);
+  max-width: 260px;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 14px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col ul li a:hover {
+  color: var(--kk-accent);
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+}
+
+.footer-bottom-accent {
+  color: rgba(77,184,138,0.4);
+  letter-spacing: 0.12em;
+  font-size: 11px;
+}
+
+/* ── MOBILE NAV ── */
+@media (max-width: 768px) {
+  .site-nav { padding: 0 16px; height: 52px; }
+  .site-nav-links { display: none; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 28px; padding: 28px 20px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 20px; text-align: center; }
+}
+
+/* ══════════════════════════════════
+   FERRAMENTA — ESTILOS ORIGINAIS
+   (mantidos 100% intactos)
+   ══════════════════════════════════ */
+
+/* Sobrepõe apenas o header da ferramenta (que agora é o site-nav acima) */
+body > .site-nav + div > header {
+  display: none;
+}
+
+/* Ajuste: o footer original da ferramenta será substituído pelo site-footer */
+body > .site-footer ~ footer {
+  display: none;
+}
+
+/* Remove o header interno da ferramenta — usamos o site-nav */
+#tool-wrapper header {
+  display: none !important;
+}
+
+/* Remove o footer interno da ferramenta — usamos o site-footer */
+#tool-wrapper > footer {
+  display: none !important;
+}
+
+/* ── VARIÁVEIS DA FERRAMENTA ── */
+#tool-wrapper {
+  --verde-br:       #2E7D32;
+  --verde-br-light: #E8F5E9;
+  --azul-py:        #1A2B23;
+  --azul-py-light:  #E8F6EF;
+  --ouro:           #C8A84B;
+  --maquila:        #5B4FCF;
+  --maquila-light:  #EEECFB;
+  --logistica:      #C45000;
+  --logistica-light:#FDF0E8;
+  --bg:             #F5F4F0;
+  --bg-card:        #FFFFFF;
+  --texto:          #2C2C2A;
+  --texto-muted:    #6B7A72;
+  --borda:          #D8DDD9;
+  --sombra:         0 2px 20px rgba(26,43,35,0.08);
+  --sombra-hover:   0 8px 40px rgba(26,43,35,0.15);
+  --radius:         12px;
+}
+
+/* ── HERO DA FERRAMENTA ── */
+#tool-wrapper .hero {
+  background: linear-gradient(135deg, var(--kk-primary) 0%, var(--kk-secondary) 60%, #0F2A1C 100%);
+  color: white;
+  padding: 72px 40px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#tool-wrapper .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234DB88A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+#tool-wrapper .hero-tag {
+  display: inline-block;
+  background: rgba(212,160,23,0.2);
+  border: 1px solid var(--kk-accent);
+  color: var(--kk-accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+#tool-wrapper .hero h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(26px, 4.5vw, 48px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  letter-spacing: -1px;
+}
+#tool-wrapper .hero h1 span { color: var(--kk-accent); }
+#tool-wrapper .hero p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  max-width: 580px;
+  margin: 0 auto 20px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+#tool-wrapper .flags { font-size: 34px; margin-bottom: 8px; }
+#tool-wrapper .hero-chips {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+#tool-wrapper .hero-chip {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+#tool-wrapper .hero-chip.new {
+  background: rgba(77,184,138,0.15);
+  border-color: rgba(77,184,138,0.4);
+  color: var(--kk-accent);
+}
+
+/* ── CONTAINER ── */
+#tool-wrapper .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+#tool-wrapper section { padding: 44px 0; }
+#tool-wrapper .section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--azul-py);
+}
+#tool-wrapper .section-sub {
+  font-size: 13px;
+  color: var(--texto-muted);
+  margin-bottom: 24px;
+}
+
+/* ── STEPS ── */
+#tool-wrapper .steps {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+  border-bottom: 2px solid var(--borda);
+}
+#tool-wrapper .step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--texto-muted);
+  padding: 10px 24px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+#tool-wrapper .step.active { color: var(--azul-py); border-bottom-color: var(--azul-py); font-weight: 600; }
+#tool-wrapper .step-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--borda);
+  color: var(--texto-muted);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+#tool-wrapper .step.active .step-num { background: var(--kk-primary); color: white; }
+#tool-wrapper .step.done .step-num { background: var(--verde-br); color: white; }
+#tool-wrapper .step.done { color: var(--verde-br); }
+
+/* ── CARDS DE SEÇÃO ── */
+#tool-wrapper .form-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  padding: 32px;
+  border: 1px solid var(--borda);
+  margin-bottom: 20px;
+}
+#tool-wrapper .form-card-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--azul-py);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#tool-wrapper .form-card-title .badge-novo {
+  background: var(--maquila); color: white;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px; letter-spacing: 1px;
+}
+#tool-wrapper .form-card-title .badge-logistica {
+  background: var(--logistica); color: white;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px; letter-spacing: 1px;
+}
+
+#tool-wrapper .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+#tool-wrapper .form-group { display: flex; flex-direction: column; gap: 6px; }
+#tool-wrapper .form-group.full { grid-column: 1 / -1; }
+
+#tool-wrapper label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--texto-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+#tool-wrapper input, #tool-wrapper select {
+  padding: 11px 14px;
+  border: 1.5px solid var(--borda);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--texto);
+  background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+#tool-wrapper input:focus, #tool-wrapper select:focus {
+  border-color: var(--azul-py);
+  box-shadow: 0 0 0 3px rgba(26,43,35,0.08);
+  background: white;
+}
+#tool-wrapper input::placeholder { color: #B8B5B0; }
+#tool-wrapper input[type="range"] {
+  padding: 6px 0; background: none; border: none; box-shadow: none;
+  cursor: pointer; accent-color: var(--logistica);
+}
+#tool-wrapper input[type="range"]:focus { box-shadow: none; }
+
+/* ── TOGGLE MAQUILA ── */
+#tool-wrapper .maquila-toggle-wrap {
+  background: var(--maquila-light);
+  border: 2px solid var(--maquila);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+#tool-wrapper .maquila-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 16px;
+}
+#tool-wrapper .maquila-info h3 {
+  font-family: 'Inter', sans-serif; font-size: 15px;
+  font-weight: 700; color: var(--maquila); margin-bottom: 4px;
+}
+#tool-wrapper .maquila-info p {
+  font-size: 12px; color: #5A2060; line-height: 1.5; max-width: 600px;
+}
+
+/* Toggle Switch */
+#tool-wrapper .switch-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+#tool-wrapper .switch-label { font-size: 12px; font-weight: 600; color: var(--maquila); white-space: nowrap; }
+#tool-wrapper .switch { position: relative; width: 52px; height: 28px; flex-shrink: 0; }
+#tool-wrapper .switch input { opacity: 0; width: 0; height: 0; }
+#tool-wrapper .slider {
+  position: absolute; inset: 0;
+  background: #C8B8CC; border-radius: 28px;
+  cursor: pointer; transition: background 0.3s;
+}
+#tool-wrapper .slider:before {
+  content: ''; position: absolute;
+  height: 22px; width: 22px; left: 3px; top: 3px;
+  background: white; border-radius: 50%;
+  transition: transform 0.3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+#tool-wrapper input:checked + .slider { background: var(--maquila); }
+#tool-wrapper input:checked + .slider:before { transform: translateX(24px); }
+#tool-wrapper .maquila-detalhes {
+  display: none; margin-top: 20px; padding-top: 20px;
+  border-top: 1px solid rgba(123,45,139,0.2);
+}
+#tool-wrapper .maquila-detalhes.visivel { display: block; }
+#tool-wrapper .info-box {
+  background: white; border-radius: 8px;
+  padding: 14px 18px; font-size: 12px; line-height: 1.6;
+  color: #3A1040; border: 1px solid rgba(123,45,139,0.15); margin-bottom: 16px;
+}
+#tool-wrapper .info-box strong { color: var(--maquila); }
+#tool-wrapper .info-box ul { margin-left: 16px; margin-top: 6px; }
+#tool-wrapper .info-box ul li { margin-bottom: 3px; }
+
+/* ── LOGÍSTICA ── */
+#tool-wrapper .logistica-wrap {
+  background: var(--logistica-light);
+  border: 2px solid var(--logistica);
+  border-radius: var(--radius); padding: 24px;
+}
+#tool-wrapper .logistica-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+#tool-wrapper .modal-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+#tool-wrapper .modal-card {
+  border: 2px solid var(--borda); border-radius: 10px;
+  padding: 14px 10px; text-align: center;
+  cursor: pointer; transition: all 0.2s; background: white;
+}
+#tool-wrapper .modal-card:hover { border-color: var(--logistica); transform: translateY(-2px); }
+#tool-wrapper .modal-card.selected {
+  border-color: var(--logistica);
+  background: var(--logistica-light);
+  box-shadow: 0 0 0 3px rgba(196,80,0,0.1);
+}
+#tool-wrapper .modal-icon { font-size: 26px; margin-bottom: 6px; }
+#tool-wrapper .modal-nome { font-size: 11px; font-weight: 600; color: var(--texto); }
+#tool-wrapper .modal-desc { font-size: 10px; color: var(--texto-muted); margin-top: 2px; }
+#tool-wrapper .slider-wrap { margin-top: 8px; }
+#tool-wrapper .slider-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--texto-muted); margin-top: 4px; }
+#tool-wrapper .distancia-display {
+  font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 700;
+  color: var(--logistica); text-align: center; margin: 6px 0 2px;
+}
+
+/* ── BOTÃO CALCULAR ── */
+#tool-wrapper .btn-calcular {
+  margin-top: 28px; width: 100%; padding: 16px;
+  background: var(--kk-primary); color: white;
+  border: none; border-radius: 10px;
+  font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+#tool-wrapper .btn-calcular:hover {
+  background: var(--kk-secondary);
+  box-shadow: 0 4px 20px rgba(26,43,35,0.35);
+  transform: translateY(-1px);
+}
+#tool-wrapper .btn-calcular:active { transform: translateY(0); }
+
+/* ── LOADER ── */
+#tool-wrapper .loader { display: none; text-align: center; padding: 48px; }
+#tool-wrapper .spinner {
+  width: 40px; height: 40px;
+  border: 4px solid var(--borda);
+  border-top-color: var(--azul-py);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── RESULTADO ── */
+#tool-wrapper #resultado { display: none; }
+#tool-wrapper .resultado-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 28px;
+  flex-wrap: wrap; gap: 12px;
+}
+#tool-wrapper .btn-pdf {
+  padding: 10px 22px; background: var(--verde-br); color: white;
+  border: none; border-radius: 8px;
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+#tool-wrapper .btn-pdf:hover { background: #006830; box-shadow: 0 4px 12px rgba(0,100,60,0.3); }
+
+/* ── CARDS RESUMO ── */
+#tool-wrapper .cards-resumo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+#tool-wrapper .card-resumo {
+  background: var(--bg-card); border-radius: var(--radius);
+  padding: 22px; box-shadow: var(--sombra);
+  border: 1px solid var(--borda); text-align: center; transition: box-shadow 0.2s;
+}
+#tool-wrapper .card-resumo:hover { box-shadow: var(--sombra-hover); }
+#tool-wrapper .card-resumo .label {
+  font-size: 11px; font-weight: 600; color: var(--texto-muted);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;
+}
+#tool-wrapper .card-resumo .valor {
+  font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 800;
+  line-height: 1; margin-bottom: 4px;
+}
+#tool-wrapper .card-resumo .sub { font-size: 11px; color: var(--texto-muted); }
+#tool-wrapper .card-resumo.brasil .valor { color: var(--verde-br); }
+#tool-wrapper .card-resumo.paraguai .valor { color: var(--azul-py); }
+#tool-wrapper .card-resumo.economia .valor { color: var(--ouro); }
+#tool-wrapper .card-resumo.economia { border: 2px solid var(--ouro); background: #FFFBF0; }
+
+/* ── BADGE MAQUILA RESULTADO ── */
+#tool-wrapper .maquila-badge-resultado {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--maquila-light); border: 1px solid var(--maquila);
+  color: var(--maquila); font-size: 12px; font-weight: 600;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+
+/* ── TABELA ── */
+#tool-wrapper .tabela-wrap {
+  background: var(--bg-card); border-radius: var(--radius);
+  box-shadow: var(--sombra); overflow: hidden;
+  border: 1px solid var(--borda); margin-bottom: 28px;
+}
+#tool-wrapper table { width: 100%; border-collapse: collapse; }
+#tool-wrapper thead tr { background: var(--kk-primary); color: white; }
+#tool-wrapper thead th { padding: 13px 16px; text-align: left; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+#tool-wrapper thead th.br { background: var(--verde-br); text-align: center; }
+#tool-wrapper thead th.py { background: #003a8c; text-align: center; }
+#tool-wrapper thead th.diff { background: #444; text-align: center; }
+#tool-wrapper tbody tr { border-bottom: 1px solid var(--borda); transition: background 0.15s; }
+#tool-wrapper tbody tr:last-child { border-bottom: none; }
+#tool-wrapper tbody tr:hover { background: #F9F8F5; }
+#tool-wrapper tbody tr.categoria td {
+  background: var(--bg); font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 700; color: var(--azul-py);
+  letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px;
+  border-top: 2px solid var(--borda);
+}
+#tool-wrapper tbody tr.cat-maquila td { color: var(--maquila); }
+#tool-wrapper tbody tr.cat-logistica td { color: var(--logistica); }
+#tool-wrapper td { padding: 12px 16px; font-size: 13px; vertical-align: middle; }
+#tool-wrapper td.br-val { text-align: center; color: var(--verde-br); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 14px; }
+#tool-wrapper td.py-val { text-align: center; color: var(--azul-py); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 14px; }
+#tool-wrapper td.diff-val { text-align: center; }
+#tool-wrapper .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+#tool-wrapper .badge-py { background: var(--azul-py-light); color: var(--azul-py); }
+#tool-wrapper .badge-br { background: var(--verde-br-light); color: var(--verde-br); }
+#tool-wrapper .badge-neutro { background: #F0F0F0; color: #666; }
+#tool-wrapper .badge-maquila { background: var(--maquila-light); color: var(--maquila); }
+
+/* ── GRÁFICO ── */
+#tool-wrapper .grafico-section {
+  background: var(--bg-card); border-radius: var(--radius);
+  box-shadow: var(--sombra); padding: 28px;
+  border: 1px solid var(--borda); margin-bottom: 28px;
+}
+#tool-wrapper .grafico-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: var(--azul-py); margin-bottom: 20px; }
+#tool-wrapper .barra-item { margin-bottom: 18px; }
+#tool-wrapper .barra-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 13px; }
+#tool-wrapper .barra-label .poupanca { color: var(--ouro); font-weight: 700; font-size: 12px; }
+#tool-wrapper .barra-track { height: 9px; background: #F0EEE9; border-radius: 99px; flex: 1; }
+#tool-wrapper .barra-fill { height: 100%; border-radius: 99px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+#tool-wrapper .barra-fill.br { background: var(--verde-br); }
+#tool-wrapper .barra-fill.py { background: var(--kk-primary); }
+#tool-wrapper .barra-fill.py-maquila { background: var(--maquila); }
+#tool-wrapper .barra-fill.logistica { background: var(--logistica); }
+#tool-wrapper .barra-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+#tool-wrapper .barra-country { width: 60px; font-size: 11px; font-weight: 600; }
+#tool-wrapper .barra-val { width: 80px; font-size: 11px; text-align: right; font-weight: 600; }
+#tool-wrapper .barra-legend { display: flex; gap: 18px; margin-bottom: 18px; font-size: 12px; flex-wrap: wrap; }
+#tool-wrapper .leg-item { display: flex; align-items: center; gap: 6px; }
+#tool-wrapper .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── DISCLAIMER ── */
+#tool-wrapper .disclaimer {
+  background: #FFF8E1; border: 1px solid #F0D080;
+  border-radius: var(--radius); padding: 14px 18px;
+  font-size: 12px; color: #8B6914;
+  display: flex; gap: 10px; align-items: flex-start; margin-bottom: 28px;
+}
+
+/* ── FONTES ── */
+#tool-wrapper .fontes-card {
+  background: var(--bg-card); border-radius: var(--radius);
+  padding: 22px; border: 1px solid var(--borda); box-shadow: var(--sombra);
+}
+#tool-wrapper .fontes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; color: var(--texto-muted); }
+
+/* ── CAMPO MONETÁRIO ── */
+#tool-wrapper .input-currency { position: relative; display: flex; align-items: center; }
+#tool-wrapper .input-currency .prefix {
+  position: absolute; left: 13px;
+  font-size: 13px; font-weight: 600; color: var(--texto-muted);
+  pointer-events: none; user-select: none; z-index: 1;
+}
+#tool-wrapper .input-currency input { padding-left: 36px; width: 100%; }
+#tool-wrapper .field-note {
+  font-size: 10px; color: var(--texto-muted);
+  margin-top: 4px; line-height: 1.4;
+  display: flex; align-items: flex-start; gap: 4px;
+}
+#tool-wrapper .field-note span { color: #C08000; font-weight: 600; }
+
+/* ── MÓDULO INVESTIMENTO ── */
+#tool-wrapper .investimento-wrap {
+  background: linear-gradient(135deg, #0D1F0D, #162016);
+  border: 2px solid #2D6A2D; border-radius: var(--radius); padding: 24px;
+}
+#tool-wrapper .investimento-wrap .form-card-title { color: #4CAF50; margin-bottom: 4px; }
+#tool-wrapper .badge-invest { background: #4CAF50; color: white; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 1px; }
+#tool-wrapper .switch-invest input:checked + .slider { background: #4CAF50; }
+#tool-wrapper .switch-invest .slider { background: #2D4A2D; }
+#tool-wrapper .invest-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(76,175,80,0.2); }
+#tool-wrapper .invest-section-title {
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
+  color: #4CAF50; letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+#tool-wrapper .invest-section-title::after { content: ''; flex: 1; height: 1px; background: rgba(76,175,80,0.2); }
+#tool-wrapper .opcao-cards { display: grid; gap: 10px; margin-bottom: 16px; }
+#tool-wrapper .opcao-cards.cols-2 { grid-template-columns: 1fr 1fr; }
+#tool-wrapper .opcao-cards.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+#tool-wrapper .opcao-cards.cols-4 { grid-template-columns: repeat(4,1fr); }
+#tool-wrapper .opcao-card {
+  border: 2px solid rgba(76,175,80,0.2); border-radius: 10px;
+  padding: 14px 12px; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: rgba(255,255,255,0.02);
+}
+#tool-wrapper .opcao-card:hover { border-color: #4CAF50; transform: translateY(-2px); }
+#tool-wrapper .opcao-card.selected {
+  border-color: #4CAF50; background: rgba(76,175,80,0.1);
+  box-shadow: 0 0 0 3px rgba(76,175,80,0.08);
+}
+#tool-wrapper .opcao-icon { font-size: 24px; margin-bottom: 5px; }
+#tool-wrapper .opcao-nome { font-size: 11px; font-weight: 700; color: var(--texto); }
+#tool-wrapper .opcao-desc { font-size: 10px; color: var(--texto-muted); margin-top: 2px; line-height: 1.3; }
+#tool-wrapper .card-resumo.investimento .valor { color: #4CAF50; }
+#tool-wrapper .card-resumo.investimento { border: 2px solid #4CAF50; background: #0D1F0D; }
+#tool-wrapper .card-resumo.investimento .label { color: rgba(76,175,80,0.7); }
+#tool-wrapper .card-resumo.investimento .sub { color: rgba(76,175,80,0.5); }
+
+/* ── ESTIMATIVA AUTOMÁTICA DE IMÓVEL ── */
+#tool-wrapper .estimativa-result {
+  background: rgba(76,175,80,0.06); border: 1px solid rgba(76,175,80,0.25);
+  border-radius: 10px; padding: 18px; margin-top: 20px;
+}
+#tool-wrapper .estimativa-result-title {
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
+  color: #4CAF50; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;
+}
+#tool-wrapper .estimativa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+#tool-wrapper .estimativa-item { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 12px; text-align: center; }
+#tool-wrapper .estimativa-item .ei-label { font-size: 10px; color: rgba(76,175,80,0.6); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+#tool-wrapper .estimativa-item .ei-valor { font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 800; color: #4CAF50; line-height: 1.1; }
+#tool-wrapper .estimativa-item .ei-sub { font-size: 10px; color: rgba(76,175,80,0.5); margin-top: 3px; }
+#tool-wrapper .estimativa-total {
+  margin-top: 14px; padding: 14px 18px;
+  background: rgba(76,175,80,0.1); border-radius: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+#tool-wrapper .estimativa-total .et-label { font-size: 12px; font-weight: 600; color: rgba(76,175,80,0.7); text-transform: uppercase; letter-spacing: 0.5px; }
+#tool-wrapper .estimativa-total .et-valor { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 800; color: #4CAF50; }
+#tool-wrapper .estimativa-nota { font-size: 10px; color: rgba(76,175,80,0.45); margin-top: 10px; line-height: 1.5; font-style: italic; }
+#tool-wrapper .cidade-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+#tool-wrapper .cidade-card {
+  border: 2px solid rgba(76,175,80,0.2); border-radius: 10px;
+  padding: 12px 8px; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: rgba(255,255,255,0.02);
+}
+#tool-wrapper .cidade-card:hover { border-color: #4CAF50; transform: translateY(-2px); }
+#tool-wrapper .cidade-card.selected { border-color: #4CAF50; background: rgba(76,175,80,0.1); box-shadow: 0 0 0 3px rgba(76,175,80,0.08); }
+#tool-wrapper .cidade-icon { font-size: 22px; margin-bottom: 4px; }
+#tool-wrapper .cidade-nome { font-size: 11px; font-weight: 700; color: var(--texto); }
+#tool-wrapper .cidade-desc { font-size: 9px; color: var(--texto-muted); margin-top: 2px; }
+
+/* ── TEXTO BRANCO NEGRITO — APENAS SEÇÃO INVESTIMENTO ── */
+#tool-wrapper .investimento-wrap label,
+#tool-wrapper .investimento-wrap .opcao-nome,
+#tool-wrapper .investimento-wrap .opcao-desc,
+#tool-wrapper .investimento-wrap .cidade-nome,
+#tool-wrapper .investimento-wrap .cidade-desc,
+#tool-wrapper .investimento-wrap .invest-section-title,
+#tool-wrapper .investimento-wrap .form-card-title,
+#tool-wrapper .investimento-wrap p,
+#tool-wrapper .investimento-wrap .field-note,
+#tool-wrapper .investimento-wrap .switch-label {
+  color: white !important; font-weight: 700;
+}
+#tool-wrapper .investimento-wrap .field-note { color: rgba(255,255,255,0.75) !important; font-weight: 400; }
+#tool-wrapper .investimento-wrap .field-note span { color: #A8E6B0 !important; font-weight: 700; }
+#tool-wrapper .investimento-wrap .opcao-desc,
+#tool-wrapper .investimento-wrap .cidade-desc { color: rgba(255,255,255,0.7) !important; font-weight: 400; }
+#tool-wrapper .investimento-wrap .opcao-card .opcao-nome,
+#tool-wrapper .investimento-wrap .cidade-card .cidade-nome { color: white !important; font-weight: 700; }
+#tool-wrapper .investimento-wrap input:not([readonly]),
+#tool-wrapper .investimento-wrap select {
+  color: white !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(76,175,80,0.4) !important;
+}
+#tool-wrapper .investimento-wrap input:not([readonly])::placeholder { color: rgba(255,255,255,0.4) !important; }
+#tool-wrapper .investimento-wrap .badge-invest { color: var(--azul-py) !important; }
+
+/* ── TIPOGRAFIA PROFISSIONAL — NÚMEROS ── */
+:root {
+  --font-num: 'Barlow Condensed', 'Inter', sans-serif;
+  --font-ui:  'Inter', sans-serif;
+}
+#tool-wrapper #resultado .ei-valor,
+#tool-wrapper #resultado [id$="-total"] .et-valor {
+  font-family: var(--font-num) !important;
+  font-weight: 800; letter-spacing: -0.5px;
+}
+
+/* ── ANÁLISE IA ── */
+#tool-wrapper .ia-card {
+  background: linear-gradient(135deg, #0F1E17, #162B1F);
+  border: 1px solid rgba(77,184,138,0.25);
+  border-radius: var(--radius); padding: 24px 28px;
+  margin-bottom: 28px; position: relative; overflow: hidden;
+}
+#tool-wrapper .ia-card::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(77,184,138,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+#tool-wrapper .ia-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+#tool-wrapper .ia-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(77,184,138,0.12); border: 1px solid rgba(77,184,138,0.3);
+  color: #4DB88A; font-size: 11px; font-weight: 600;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px;
+}
+#tool-wrapper .ia-title { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
+#tool-wrapper .ia-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+#tool-wrapper .ia-col-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+#tool-wrapper .ia-col-title.pos { color: #4DB88A; }
+#tool-wrapper .ia-col-title.neg { color: #F59E0B; }
+#tool-wrapper .ia-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.72); }
+#tool-wrapper .ia-item:last-child { margin-bottom: 0; }
+#tool-wrapper .ia-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+#tool-wrapper .ia-dot.pos { background: #4DB88A; }
+#tool-wrapper .ia-dot.neg { background: #F59E0B; }
+#tool-wrapper .ia-loading { display: flex; align-items: center; gap: 10px; color: rgba(77,184,138,0.6); font-size: 13px; }
+#tool-wrapper .ia-spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(77,184,138,0.2);
+  border-top-color: #4DB88A; border-radius: 50%;
+  animation: spin 0.8s linear infinite; flex-shrink: 0;
+}
+#tool-wrapper .ia-disclaimer { font-size: 10px; color: rgba(255,255,255,0.2); margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); font-style: italic; }
+
+/* ── DASHBOARD REPORT ── */
+#tool-wrapper #rpt-topbar {
+  background:#1A1D27; border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:10px 16px; display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:8px;
+  position:sticky; top:60px; z-index:50;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  #tool-wrapper .hero { padding: 36px 16px 32px; }
+  #tool-wrapper .hero h1 { font-size: 22px; }
+  #tool-wrapper .hero p { font-size: 13px; }
+  #tool-wrapper .container { padding: 0 12px; }
+  #tool-wrapper section { padding: 28px 0; }
+  #tool-wrapper .form-card { padding: 16px; }
+  #tool-wrapper .form-grid,
+  #tool-wrapper .logistica-grid { grid-template-columns: 1fr !important; }
+  #tool-wrapper input, #tool-wrapper select { font-size: 16px; }
+  #tool-wrapper .maquila-toggle-wrap,
+  #tool-wrapper .logistica-wrap,
+  #tool-wrapper .investimento-wrap { padding: 16px; }
+  #tool-wrapper .maquila-header { flex-direction: column; }
+  #tool-wrapper .modal-cards { grid-template-columns: repeat(2, 1fr) !important; }
+  #tool-wrapper .cards-resumo { grid-template-columns: 1fr !important; }
+  #tool-wrapper .ia-cols { grid-template-columns: 1fr; }
+  #tool-wrapper .tabela-wrap { overflow-x: auto; }
+  #tool-wrapper table { min-width: 480px; }
+  #tool-wrapper .opcao-cards.cols-2,
+  #tool-wrapper .opcao-cards.cols-3,
+  #tool-wrapper .opcao-cards.cols-4 { grid-template-columns: 1fr 1fr !important; }
+  #tool-wrapper .estimativa-grid { grid-template-columns: 1fr 1fr !important; }
+  #tool-wrapper .cidade-cards { grid-template-columns: 1fr 1fr 1fr; }
+  #tool-wrapper #rpt-kpis { grid-template-columns: 1fr 1fr !important; }
+  #tool-wrapper #rpt-destaques { grid-template-columns: 1fr !important; }
+  #tool-wrapper #rpt-payback-content { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* ══════════════════════════════════════
+   IDENTIDADE VISUAL V3.3
+   ══════════════════════════════════════ */
+:root {
+  --kk-vermelho:     #C8102E;
+  --kk-azul:         #002868;
+  --kk-borda-azul:   #5A8FBF;
+  --kk-borda-branco: #C8C8C8;
+}
+.site-nav-tricolor {
+  height: 3px; display: flex; width: 100%;
+  position: sticky; top: 60px; z-index: 199;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: #C8102E; }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: #002868; }
+.kk-tricolor { height: 3px; display: flex; width: 100%; }
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: #C8102E; }
+.kk-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.kk-tricolor span:nth-child(3) { background: #002868; }
+
+</style>
+</head>
+<body>
+
+<!-- KakuaaPY — SVG Symbols V3.3 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="kk-sym-light" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90" stroke="#C8C8C8" stroke-width="1" stroke-linejoin="round"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85"/>
+    </symbol>
+    <symbol id="kk-sym-dark" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85" stroke="#5A8FBF" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<!-- ══════════════════════════════════
+     SITE NAV — KAKUAAPY
+     ══════════════════════════════════ -->
+<nav class="site-nav">
+  <a href="/" class="site-logo">
+    <div class="site-logo-triangles"><svg width="22" height="31"><use href="#kk-sym-dark"/></svg></div>
+    <div>
+      <div class="site-logo-name">
+        <span class="kakuaa">Kakuaa</span><span class="py">PY</span>
+      </div>
+      <span class="site-logo-tagline">crescer · conectar · prosperar</span>
+    </div>
+  </a>
+
+  <ul class="site-nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/sobre">Sobre</a></li>
+    <li><a href="#formulario" class="active">Projeto Paraguai</a></li>
+    <li><a href="/servicos">Serviços</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/contato">Contato</a></li>
+    <li><div class="nav-divider"></div></li>
+    <li><a href="/cliente" class="site-nav-cta">Área do cliente</a></li>
+  </ul>
+</nav>
+<div class="site-nav-tricolor"><span></span><span></span><span></span></div>
+
+<!-- ══════════════════════════════════
+     FERRAMENTA — 100% ORIGINAL
+     ══════════════════════════════════ -->
+<div id="tool-wrapper">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Análise Estratégica de Migração Empresarial · Brasil ↔ Paraguai</div>
+  <div style="display:flex;justify-content:center;margin-bottom:18px;">
+    <svg width="54" height="77"><use href="#kk-sym-dark"/></svg>
+  </div>
+  <h1>Decisões estratégicas baseadas<br>em <span>dados reais</span></h1>
+  <p>Comparativo detalhado de impostos, encargos trabalhistas, logística e Regime Maquila entre Brasil e Paraguai — com dados de fontes oficiais.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">✅ Impostos e encargos</span>
+    <span class="hero-chip new">🏭 Regime Maquila</span>
+    <span class="hero-chip new">🚛 Módulo de Logística</span>
+    <span class="hero-chip">📊 Relatório comparativo</span>
+  </div>
+</div>
+
+<!-- FORMULÁRIO -->
+<section id="formulario">
+  <div class="container">
+
+    <div class="steps">
+      <div class="step active" id="step1"><span class="step-num">1</span> Dados da Empresa</div>
+      <div class="step" id="step2"><span class="step-num">2</span> Comparativo</div>
+      <div class="step" id="step3"><span class="step-num">3</span> Relatório</div>
+    </div>
+
+    <div class="section-title">Dados da sua empresa</div>
+    <div class="section-sub">Preencha as informações para gerar o comparativo personalizado com Maquila e logística.</div>
+
+    <div class="form-card">
+      <div class="form-card-title">🏢 Informações Gerais</div>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Nome da Empresa <span style="color:#F43F5E;">*</span></label>
+          <input type="text" id="nome_empresa" placeholder="Ex: Grupo Exemplo Ltda." required />
+        </div>
+        <div class="form-group full">
+          <label>Nome do Responsável <span style="color:#F43F5E;">*</span></label>
+          <input type="text" id="nome_responsavel" placeholder="Ex: João Silva" required />
+        </div>
+        <div class="form-group">
+          <label>E-mail Corporativo <span style="color:#F43F5E;">*</span></label>
+          <input type="email" id="email_corporativo" placeholder="Ex: joao@empresa.com.br" required />
+        </div>
+        <div class="form-group">
+          <label>Telefone / WhatsApp <span style="color:#F43F5E;">*</span></label>
+          <input type="tel" id="telefone" placeholder="Ex: +55 11 99999-9999" required />
+        </div>
+        <div class="form-group">
+          <label>Setor de Atuação</label>
+          <select id="setor">
+            <option value="">Selecione...</option>
+            <option value="industria">Indústria / Manufatura</option>
+            <option value="comercio">Comércio / Varejo</option>
+            <option value="servicos">Serviços</option>
+            <option value="tecnologia">Tecnologia / TI</option>
+            <option value="agro">Agronegócio</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="logistica_setor">Logística / Transportes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Regime Tributário Atual (Brasil)</label>
+          <select id="regime">
+            <option value="lucro_real">Lucro Real</option>
+            <option value="lucro_presumido">Lucro Presumido</option>
+            <option value="simples">Simples Nacional</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Faturamento Anual</label>
+          <div class="input-currency">
+            <span class="prefix">R$</span>
+            <input type="text" id="faturamento" placeholder="0,00" oninput="mascaraMoeda(this)" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Lucro Anual Estimado</label>
+          <div class="input-currency">
+            <span class="prefix">R$</span>
+            <input type="text" id="lucro" placeholder="0,00" oninput="mascaraMoeda(this)" />
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Número de Funcionários</label>
+          <input type="number" id="funcionarios" placeholder="Ex: 25" oninput="calcularFolhaPreview()" />
+          <div class="field-note"><span>ℹ️</span> Total de colaboradores na operação.</div>
+        </div>
+        <div class="form-group full">
+          <label>Folha de Pagamento Mensal — Brasil (R$) <span style="color:#F43F5E;">*</span></label>
+          <div class="input-currency">
+            <span class="prefix">R$</span>
+            <input type="text" id="folha" placeholder="0,00" oninput="mascaraMoeda(this); calcularFolhaPreview()" />
+          </div>
+          <div class="field-note"><span>⚠️</span> Informe o total da folha bruta mensal no Brasil.</div>
+        </div>
+
+        <!-- PREVIEW AUTOMÁTICO DA FOLHA -->
+        <div class="form-group full" id="folha-preview-wrap" style="display:none;">
+          <div style="background:var(--bg); border:1px solid var(--borda); border-radius:10px; padding:16px 18px;">
+            <div style="font-family:'Inter',sans-serif; font-size:12px; font-weight:700; color:var(--azul-py); margin-bottom:12px;">
+              📊 Comparativo de Folha — Calculado Automaticamente
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
+              <div style="background:var(--verde-br-light); border-radius:8px; padding:12px;">
+                <div style="font-size:10px; color:var(--verde-br); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; margin-bottom:6px;">🇧🇷 Brasil</div>
+                <div style="font-size:11px; color:var(--texto-muted); margin-bottom:3px;">Salário médio por func.</div>
+                <div id="preview_salario_br" style="font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:800; color:var(--verde-br);">—</div>
+                <div style="font-size:11px; color:var(--texto-muted); margin-top:6px; margin-bottom:3px;">Custo total c/ encargos</div>
+                <div id="preview_custo_br" style="font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; color:var(--verde-br);">—</div>
+              </div>
+              <div style="background:var(--azul-py-light); border-radius:8px; padding:12px;">
+                <div style="font-size:10px; color:var(--azul-py); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; margin-bottom:6px;">🇵🇾 Paraguai</div>
+                <div style="font-size:11px; color:var(--texto-muted); margin-bottom:3px;">Base: salário mínimo PY</div>
+                <div id="preview_salario_py" style="font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:800; color:var(--azul-py);">—</div>
+                <div style="font-size:11px; color:var(--texto-muted); margin-top:6px; margin-bottom:3px;">Custo total c/ encargos</div>
+                <div id="preview_custo_py" style="font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; color:var(--azul-py);">—</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,#FFF8E8,#FFFBF0); border:1px solid rgba(212,160,23,0.3); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div style="font-size:10px; color:var(--texto-muted);">💰 Economia anual estimada em encargos trabalhistas</div>
+                <div style="font-size:9px; color:rgba(212,160,23,0.7); margin-top:2px;">Baseado em <span id="preview_nfunc">—</span> funcionários · Sal. mín. PY: Gs. 2.550.307 ≈ <span id="preview_salmin">R$ 1.768</span>/mês · Câmbio: USD 1 = R$ 5,20</div>
+              </div>
+              <div id="preview_economia_folha" style="font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800; color:var(--ouro);">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Custo Mensal — Imóvel Comercial</label>
+          <div class="input-currency">
+            <span class="prefix">R$</span>
+            <input type="text" id="imovel" placeholder="0,00" oninput="mascaraMoeda(this)" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Custo Mensal — Energia Elétrica</label>
+          <div class="input-currency">
+            <span class="prefix">R$</span>
+            <input type="text" id="energia" placeholder="0,00" oninput="mascaraMoeda(this)" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAQUILA TOGGLE -->
+    <div class="form-card" style="padding:0; overflow:hidden; border:none; box-shadow:none; background:transparent;">
+      <div class="maquila-toggle-wrap">
+        <div class="maquila-header">
+          <div class="maquila-info">
+            <h3>🏭 Regime Maquila (Paraguai)</h3>
+            <p>A operação no Paraguai será enquadrada no Regime de Maquila? Este regime permite industrialização com suspensão de tributos e tributação de apenas <strong>1% sobre o valor agregado</strong> — ideal para indústrias exportadoras.</p>
+          </div>
+          <div class="switch-wrap">
+            <span class="switch-label">Ativar Maquila</span>
+            <label class="switch">
+              <input type="checkbox" id="maquila_toggle" onchange="toggleMaquila(this)">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="maquila-detalhes" id="maquila_detalhes">
+          <div class="info-box">
+            <strong>📋 O que é o Regime de Maquila?</strong><br>
+            Regido pela Lei 1.064/97, permite que empresas estrangeiras industrializem produtos no Paraguai com insumos importados, reexportando a produção com:
+            <ul>
+              <li>Suspensão total de IVA, IRACIS e tributos aduaneiros sobre insumos importados</li>
+              <li>Tributação de apenas <strong>1% sobre o valor agregado</strong> local</li>
+              <li>Liberdade total para remessa de lucros ao exterior</li>
+              <li>Prazo de instalação flexível e burocracia reduzida</li>
+            </ul>
+            <strong>⚠️ Exige:</strong> Contrato de Maquila aprovado pelo CIND e mínimo de 25% de valor agregado local.
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>% do Faturamento Destinado à Exportação via Maquila</label>
+              <input type="number" id="maquila_pct_export" placeholder="Ex: 90" min="0" max="100" value="90" />
+            </div>
+            <div class="form-group">
+              <label>% de Valor Agregado Local</label>
+              <input type="number" id="maquila_valor_agregado" placeholder="Ex: 10" min="0" max="100" value="10" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGÍSTICA -->
+    <div class="form-card" style="padding:0; overflow:hidden; border:none; box-shadow:none; background:transparent; margin-top:20px;">
+      <div class="logistica-wrap">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+          <div>
+            <div class="form-card-title" style="color:var(--logistica); margin-bottom:4px;">
+              🚛 Estimativa de Custos de Logística
+              <span class="badge-logistica">OPCIONAL</span>
+            </div>
+            <p style="font-size:12px; color:#7A3800; line-height:1.5; max-width:580px;">
+              Inclua os custos de transporte entre a <strong>Planta no Paraguai</strong> e o <strong>Centro de Distribuição no Brasil</strong>.
+            </p>
+          </div>
+          <div class="switch-wrap" style="flex-shrink:0;">
+            <span class="switch-label" style="color:var(--logistica);">Incluir Logística</span>
+            <label class="switch">
+              <input type="checkbox" id="logistica_toggle" onchange="toggleLogistica(this)">
+              <span class="slider" style="background:#D4A88A;"></span>
+            </label>
+          </div>
+        </div>
+        <div id="logistica_detalhes" style="display:none; margin-top:20px; padding-top:20px; border-top:1px solid rgba(196,80,0,0.2);">
+          <label style="margin-bottom:10px; display:block; font-size:11px; font-weight:600; color:var(--texto-muted); text-transform:uppercase; letter-spacing:0.5px;">Modal de Transporte Principal</label>
+          <div class="modal-cards">
+            <div class="modal-card selected" id="modal_rodoviario" onclick="selecionarModal('rodoviario')">
+              <div class="modal-icon">🚛</div>
+              <div class="modal-nome">Rodoviário</div>
+              <div class="modal-desc">R$0,25–0,55/tkm</div>
+            </div>
+            <div class="modal-card" id="modal_ferroviario" onclick="selecionarModal('ferroviario')">
+              <div class="modal-icon">🚂</div>
+              <div class="modal-nome">Ferroviário</div>
+              <div class="modal-desc">R$0,08–0,15/tkm</div>
+            </div>
+            <div class="modal-card" id="modal_hidroviario" onclick="selecionarModal('hidroviario')">
+              <div class="modal-icon">⛴️</div>
+              <div class="modal-nome">Hidroviário</div>
+              <div class="modal-desc">R$0,06–0,12/tkm</div>
+            </div>
+            <div class="modal-card" id="modal_aereo" onclick="selecionarModal('aereo')">
+              <div class="modal-icon">✈️</div>
+              <div class="modal-nome">Aéreo</div>
+              <div class="modal-desc">R$2,50–8,00/kg</div>
+            </div>
+          </div>
+          <div class="logistica-grid">
+            <div class="form-group">
+              <label>Distância: Planta (PY) → Fronteira BR/PY (km)</label>
+              <div class="slider-wrap">
+                <input type="range" id="dist_planta_fronteira" min="10" max="600" value="150" step="10" oninput="atualizarSlider('dist_planta_fronteira','display_planta_fronteira')" />
+                <div class="distancia-display" id="display_planta_fronteira">150 km</div>
+                <div class="slider-labels"><span>10 km</span><span>600 km</span></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Distância: Fronteira → Centro de Distribuição (BR) (km)</label>
+              <div class="slider-wrap">
+                <input type="range" id="dist_fronteira_destino" min="50" max="2500" value="500" step="50" oninput="atualizarSlider('dist_fronteira_destino','display_fronteira_destino')" />
+                <div class="distancia-display" id="display_fronteira_destino">500 km</div>
+                <div class="slider-labels"><span>50 km</span><span>2.500 km</span></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Volume Médio Mensal Transportado (toneladas)</label>
+              <input type="number" id="volume_ton" placeholder="Ex: 50" value="50" />
+            </div>
+            <div class="form-group">
+              <label>Localidade da Planta (Paraguai)</label>
+              <select id="localidade_py">
+                <option value="asuncion">Assunção</option>
+                <option value="ciudad_del_este">Ciudad del Este</option>
+                <option value="encarnacion">Encarnación</option>
+                <option value="pedro_juan">Pedro Juan Caballero</option>
+                <option value="concepcion">Concepción</option>
+                <option value="otro_py">Outra cidade</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Localidade do Centro de Distribuição (Brasil)</label>
+              <select id="localidade_br">
+                <option value="sp">São Paulo / SP</option>
+                <option value="pr">Paraná (Curitiba/Cascavel)</option>
+                <option value="sc">Santa Catarina</option>
+                <option value="rs">Rio Grande do Sul</option>
+                <option value="ms">Mato Grosso do Sul</option>
+                <option value="go">Goiás / DF</option>
+                <option value="mg">Minas Gerais</option>
+                <option value="rj">Rio de Janeiro</option>
+                <option value="outro_br">Outro estado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Custo Estimado de Desembaraço Aduaneiro (mensal)</label>
+              <div class="input-currency">
+                <span class="prefix">R$</span>
+                <input type="text" id="custo_despacho" placeholder="0,00" oninput="mascaraMoeda(this)" value="3.000,00" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTIMENTO -->
+    <div class="form-card" style="padding:0; overflow:hidden; border:none; box-shadow:none; background:transparent; margin-top:20px;">
+      <div class="investimento-wrap">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+          <div>
+            <div class="form-card-title" style="margin-bottom:4px;">
+              🏗️ Estimativa de Investimento Inicial
+              <span class="badge-invest">OPCIONAL</span>
+            </div>
+            <p style="font-size:12px; color:rgba(76,175,80,0.6); line-height:1.5; max-width:580px;">
+              Estime o investimento necessário para instalar a operação no Paraguai — imóvel, documentação, transporte e integração de equipamentos.
+            </p>
+          </div>
+          <div class="switch-wrap switch-invest" style="flex-shrink:0;">
+            <span class="switch-label" style="color:#4CAF50;">Incluir Investimento</span>
+            <label class="switch">
+              <input type="checkbox" id="invest_toggle" onchange="toggleInvestimento(this)">
+              <span class="slider" style="background:#2D4A2D;"></span>
+            </label>
+          </div>
+        </div>
+        <div id="invest_detalhes" style="display:none;">
+          <div class="invest-section">
+            <div class="invest-section-title">🏢 Imóvel — Estimativa Automática</div>
+            <label style="font-size:11px; font-weight:600; color:var(--texto-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:block;">Tipo de Imóvel</label>
+            <div class="opcao-cards cols-3" style="margin-bottom:16px;">
+              <div class="opcao-card selected" id="tipo_galpao" onclick="selecionarOpcao('tipo_imovel','galpao')">
+                <div class="opcao-icon">🏭</div>
+                <div class="opcao-nome">Galpão Industrial</div>
+                <div class="opcao-desc">Produção / Maquila</div>
+              </div>
+              <div class="opcao-card" id="tipo_escritorio" onclick="selecionarOpcao('tipo_imovel','escritorio')">
+                <div class="opcao-icon">🏢</div>
+                <div class="opcao-nome">Escritório Comercial</div>
+                <div class="opcao-desc">Serviços / Holding</div>
+              </div>
+              <div class="opcao-card" id="tipo_misto" onclick="selecionarOpcao('tipo_imovel','misto')">
+                <div class="opcao-icon">🏗️</div>
+                <div class="opcao-nome">Misto</div>
+                <div class="opcao-desc">Escritório + Galpão</div>
+              </div>
+            </div>
+            <label style="font-size:11px; font-weight:600; color:var(--texto-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:block;">Modalidade</label>
+            <div class="opcao-cards cols-2" style="margin-bottom:16px;">
+              <div class="opcao-card selected" id="mod_locar" onclick="selecionarOpcao('mod_imovel','locar')">
+                <div class="opcao-icon">🔑</div>
+                <div class="opcao-nome">Locar</div>
+                <div class="opcao-desc">Menor investimento inicial · Flexibilidade</div>
+              </div>
+              <div class="opcao-card" id="mod_construir" onclick="selecionarOpcao('mod_imovel','construir')">
+                <div class="opcao-icon">🧱</div>
+                <div class="opcao-nome">Construir / Comprar</div>
+                <div class="opcao-desc">Maior controle · Patrimônio próprio</div>
+              </div>
+            </div>
+            <label style="font-size:11px; font-weight:600; color:var(--texto-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:block;">Cidade</label>
+            <div class="cidade-cards" style="margin-bottom:16px;">
+              <div class="cidade-card selected" id="cid_asuncion" onclick="selecionarCidade('asuncion')">
+                <div class="cidade-icon">🏙️</div>
+                <div class="cidade-nome">Assunção</div>
+                <div class="cidade-desc">Capital · Mercado prime</div>
+              </div>
+              <div class="cidade-card" id="cid_ciudad" onclick="selecionarCidade('ciudad')">
+                <div class="cidade-icon">🛒</div>
+                <div class="cidade-nome">Ciudad del Este</div>
+                <div class="cidade-desc">Comércio · Fronteira BR</div>
+              </div>
+              <div class="cidade-card" id="cid_encarnacion" onclick="selecionarCidade('encarnacion')">
+                <div class="cidade-icon">🌿</div>
+                <div class="cidade-nome">Encarnación</div>
+                <div class="cidade-desc">Sul · Fronteira ARG</div>
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="form-group">
+                <label>Área do Imóvel (m²)</label>
+                <input type="number" id="area_imovel" placeholder="Ex: 500" value="500" oninput="calcularEstimativaImovel()" />
+              </div>
+              <div class="form-group" id="wrap_caucao">
+                <label>Meses de Caução / Garantia</label>
+                <input type="number" id="meses_caucao" placeholder="Ex: 3" value="3" min="1" max="12" oninput="calcularEstimativaImovel()" />
+              </div>
+            </div>
+            <div class="estimativa-result" id="estimativa_imovel_result" style="display:none;">
+              <div class="estimativa-result-title">📊 Estimativa Calculada — Mercado Paraguaio</div>
+              <div class="estimativa-grid">
+                <div class="estimativa-item">
+                  <div class="ei-label">Custo/m² (USD)</div>
+                  <div class="ei-valor" id="ei_custo_m2">—</div>
+                  <div class="ei-sub" id="ei_custo_m2_tipo">por m²</div>
+                </div>
+                <div class="estimativa-item">
+                  <div class="ei-label" id="ei_label_principal">Investimento Principal</div>
+                  <div class="ei-valor" id="ei_principal">—</div>
+                  <div class="ei-sub" id="ei_principal_sub">USD</div>
+                </div>
+                <div class="estimativa-item">
+                  <div class="ei-label">Reforma / Adaptação</div>
+                  <div class="ei-valor" id="ei_reforma">—</div>
+                  <div class="ei-sub">USD (estimado)</div>
+                </div>
+              </div>
+              <div class="estimativa-total">
+                <div class="et-label">💰 Total Estimado Imóvel</div>
+                <div class="et-valor" id="ei_total">USD 0</div>
+              </div>
+              <div class="estimativa-nota" id="ei_nota"></div>
+            </div>
+          </div>
+
+          <div class="invest-section">
+            <div class="invest-section-title">📋 Documentação e Abertura de Empresa — Estimativa Automática</div>
+            <label style="font-size:11px; font-weight:600; color:var(--texto-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:block;">Tipo de Sociedade</label>
+            <div class="opcao-cards cols-3" style="margin-bottom:16px;">
+              <div class="opcao-card selected" id="soc_srl" onclick="selecionarOpcao('tipo_sociedade','srl')">
+                <div class="opcao-icon">🏛️</div>
+                <div class="opcao-nome">SRL / Ltda</div>
+                <div class="opcao-desc">Simples · PME · Recomendado</div>
+              </div>
+              <div class="opcao-card" id="soc_sa" onclick="selecionarOpcao('tipo_sociedade','sa')">
+                <div class="opcao-icon">📈</div>
+                <div class="opcao-nome">S.A.</div>
+                <div class="opcao-desc">Capital mín. USD 5.000</div>
+              </div>
+              <div class="opcao-card" id="soc_maquila" onclick="selecionarOpcao('tipo_sociedade','maquila')">
+                <div class="opcao-icon">🏭</div>
+                <div class="opcao-nome">Maquiladora</div>
+                <div class="opcao-desc">Contrato CIND · Exportação</div>
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:4px;">
+              <div class="form-group">
+                <label>Número de Sócios / Diretores Estrangeiros</label>
+                <input type="number" id="num_socios" placeholder="Ex: 2" value="2" min="1" max="20" oninput="calcularEstimativaDoc()" />
+                <div class="field-note"><span>ℹ️</span> Impacta no custo de vistos, apostilas e cédulas.</div>
+              </div>
+              <div class="form-group" id="wrap_capital_sa" style="display:none;">
+                <label>Capital Social (S.A.) — mínimo USD 5.000</label>
+                <input type="number" id="capital_sa_usd" placeholder="Ex: 5000" value="5000" min="5000" oninput="calcularEstimativaDoc()" />
+              </div>
+              <div class="form-group" id="wrap_capital_maquila" style="display:none;">
+                <label>Capital Social (Maquila) — mínimo USD 50.000</label>
+                <input type="number" id="capital_maquila_usd" placeholder="Ex: 50000" value="50000" min="50000" oninput="calcularEstimativaDoc()" />
+              </div>
+            </div>
+            <div class="estimativa-result" id="estimativa_doc_result">
+              <div class="estimativa-result-title">📊 Estimativa Calculada — Custos de Abertura no Paraguai</div>
+              <div class="estimativa-grid" style="grid-template-columns: repeat(3,1fr);">
+                <div class="estimativa-item"><div class="ei-label">Honorários Advocatícios</div><div class="ei-valor" id="ed_honorarios">—</div><div class="ei-sub">Advogado + Cartório</div></div>
+                <div class="estimativa-item"><div class="ei-label">Taxas Governamentais</div><div class="ei-valor" id="ed_taxas">—</div><div class="ei-sub">SUNAT · MIC · Município</div></div>
+                <div class="estimativa-item"><div class="ei-label">Apostila + Tradução</div><div class="ei-valor" id="ed_apostila">—</div><div class="ei-sub">Por sócio estrangeiro</div></div>
+                <div class="estimativa-item"><div class="ei-label">Vistos / Cédulas</div><div class="ei-valor" id="ed_vistos">—</div><div class="ei-sub">Por sócio residente</div></div>
+                <div class="estimativa-item"><div class="ei-label">Consultor Local</div><div class="ei-valor" id="ed_consultor">—</div><div class="ei-sub">Acompanhamento processo</div></div>
+                <div class="estimativa-item"><div class="ei-label">Capital Social</div><div class="ei-valor" id="ed_capital">—</div><div class="ei-sub" id="ed_capital_sub">a integralizar</div></div>
+              </div>
+              <div class="estimativa-total">
+                <div class="et-label">💰 Total Estimado — Documentação</div>
+                <div class="et-valor" id="ed_total">USD 0</div>
+              </div>
+              <div class="estimativa-nota" id="ed_nota"></div>
+            </div>
+          </div>
+
+          <div class="invest-section">
+            <div class="invest-section-title">⚙️ Transporte e Integração de Equipamentos</div>
+            <label style="font-size:11px; font-weight:600; color:var(--texto-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:block;">Modal de Transporte dos Equipamentos</label>
+            <div class="opcao-cards cols-4" style="margin-bottom:16px;">
+              <div class="opcao-card selected" id="eq_rodoviario" onclick="selecionarOpcao('modal_equip','rodoviario')"><div class="opcao-icon">🚛</div><div class="opcao-nome">Rodoviário</div><div class="opcao-desc">R$ 1,20–2,50/kg</div></div>
+              <div class="opcao-card" id="eq_hidroviario" onclick="selecionarOpcao('modal_equip','hidroviario')"><div class="opcao-icon">⛴️</div><div class="opcao-nome">Hidroviário</div><div class="opcao-desc">R$ 0,40–0,80/kg</div></div>
+              <div class="opcao-card" id="eq_aereo" onclick="selecionarOpcao('modal_equip','aereo')"><div class="opcao-icon">✈️</div><div class="opcao-nome">Aéreo</div><div class="opcao-desc">R$ 8,00–18,00/kg</div></div>
+              <div class="opcao-card" id="eq_misto" onclick="selecionarOpcao('modal_equip','misto')"><div class="opcao-icon">🔀</div><div class="opcao-nome">Misto</div><div class="opcao-desc">Combinado (média)</div></div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Peso Total dos Equipamentos (kg)</label>
+                <input type="number" id="peso_equipamentos" placeholder="Ex: 5000" oninput="calcularFreteEquip()" />
+                <div class="field-note"><span>ℹ️</span> Peso bruto total incluindo embalagens.</div>
+              </div>
+              <div class="form-group">
+                <label>Estimativa de Frete dos Equipamentos</label>
+                <div class="input-currency"><span class="prefix">R$</span>
+                  <input type="text" id="frete_equip_calc" placeholder="calculado automaticamente" readonly style="background:#1A2A1A; color:#4CAF50; font-weight:700; cursor:default;" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Valor Total dos Equipamentos (R$)</label>
+                <div class="input-currency"><span class="prefix">R$</span>
+                  <input type="text" id="valor_equip" placeholder="0,00" oninput="mascaraMoeda(this); calcularSeguroAuto()" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Seguro de Transporte — calculado automaticamente</label>
+                <div class="input-currency"><span class="prefix">R$</span>
+                  <input type="text" id="seguro_transp" placeholder="calculado automaticamente" readonly style="background:#1A2A1A; color:#4CAF50; font-weight:700; cursor:default;" />
+                </div>
+                <div class="field-note"><span>ℹ️</span> 0,6% do valor dos equipamentos.</div>
+              </div>
+              <div class="form-group">
+                <label>Desembaraço Aduaneiro dos Equipamentos (R$)</label>
+                <div class="input-currency"><span class="prefix">R$</span>
+                  <input type="text" id="despacho_equip" placeholder="0,00" oninput="mascaraMoeda(this); atualizarTotalInvest()" value="4.000,00" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Instalação e Integração no Paraguai (R$)</label>
+                <div class="input-currency"><span class="prefix">R$</span>
+                  <input type="text" id="custo_instalacao" placeholder="0,00" oninput="mascaraMoeda(this); atualizarTotalInvest()" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; padding:18px; background:rgba(76,175,80,0.07); border:1px solid rgba(76,175,80,0.2); border-radius:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <div style="font-size:11px; font-weight:600; color:rgba(76,175,80,0.6); letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;">Estimativa Total de Investimento Inicial</div>
+                <div id="invest_total_display" style="font-family:'Inter',sans-serif; font-size:28px; font-weight:800; color:#4CAF50;">R$ 0,00</div>
+              </div>
+              <div style="font-size:11px; color:rgba(76,175,80,0.5); max-width:280px; line-height:1.5;">
+                Valor estimado para instalação completa da operação no Paraguai.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMOS DE USO -->
+    <div style="background:var(--bg-card); border:1px solid var(--borda); border-radius:var(--radius); padding:20px 24px; margin-top:20px;">
+      <div style="font-family:'Inter',sans-serif; font-size:14px; font-weight:700; color:var(--azul-py); margin-bottom:12px;">
+        📄 Termos de Uso e Política de Dados
+      </div>
+      <div style="font-size:12px; color:var(--texto-muted); line-height:1.7; margin-bottom:16px; max-height:120px; overflow-y:auto; padding-right:8px; border:1px solid var(--borda); border-radius:8px; padding:12px;">
+        Ao utilizar a plataforma <strong>KakuaaPY</strong>, você concorda com os seguintes termos:<br><br>
+        <strong>1. Uso dos dados:</strong> As informações fornecidas serão utilizadas pela KakuaaPY para geração do relatório comparativo e contato comercial.<br><br>
+        <strong>2. Confidencialidade:</strong> Seus dados não serão compartilhados com terceiros sem seu consentimento, exceto quando exigido por lei.<br><br>
+        <strong>3. Precisão:</strong> Os resultados são estimativas baseadas em médias de mercado e fontes oficiais (mai/2026). Não substituem consultoria especializada.<br><br>
+        <strong>4. LGPD:</strong> Em conformidade com a Lei nº 13.709/2018, você pode solicitar exclusão ou correção de dados pelo e-mail <strong>privacidade@kakuaapy.com</strong>.
+      </div>
+      <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer; font-size:13px; color:var(--texto); font-weight:500; text-transform:none; letter-spacing:0;">
+        <input type="checkbox" id="aceite_termos" style="width:18px; height:18px; margin-top:1px; flex-shrink:0; accent-color:var(--azul-py); cursor:pointer;" />
+        <span>
+          Li e concordo com os <strong>Termos de Uso</strong> e autorizo o tratamento dos meus dados conforme a <strong>LGPD</strong>.
+          <span style="color:#F43F5E; font-weight:700;"> *</span>
+        </span>
+      </label>
+    </div>
+
+    <button class="btn-calcular" onclick="calcular()">
+      ⚡ Gerar Comparativo Completo
+    </button>
+
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <p style="color:var(--texto-muted); font-size:14px; margin-top:8px;">Calculando comparativo...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     DASHBOARD RELATÓRIO
+     ══════════════════════════════════ -->
+<section id="resultado" style="display:none; background:#0F1117; min-height:100vh; padding:0;">
+  <div id="rpt-topbar" style="background:#1A1D27; border-bottom:1px solid rgba(255,255,255,0.07); padding:10px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; position:sticky; top:60px; z-index:50;">
+    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+      <span style="font-family:'Inter',sans-serif; font-weight:800; font-size:15px; color:#D4A017;">KakuaaPY</span>
+      <span id="rpt-titulo" style="font-size:11px; color:rgba(255,255,255,0.6); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+    </div>
+    <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+      <select id="rpt-idioma" onchange="mudarIdioma(this.value)" style="background:#252836; border:1px solid rgba(255,255,255,0.1); color:white; font-size:11px; padding:5px 8px; border-radius:6px; cursor:pointer;">
+        <option value="pt">🇧🇷 PT</option>
+        <option value="en">🇺🇸 EN</option>
+        <option value="es">🇵🇾 ES</option>
+      </select>
+      <button onclick="window.print()" style="background:#252836; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); font-size:11px; padding:5px 12px; border-radius:6px; cursor:pointer;">🖨️ Imprimir</button>
+      <button onclick="document.getElementById('resultado').style.display='none'; document.getElementById('formulario').scrollIntoView({behavior:'smooth'})" style="background:#252836; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); font-size:11px; padding:5px 12px; border-radius:6px; cursor:pointer;">← Voltar</button>
+    </div>
+  </div>
+
+  <div style="padding:20px 24px; max-width:1280px; margin:0 auto;">
+    <div style="background:linear-gradient(135deg,#1A1D27,#252836); border:1px solid rgba(212,160,23,0.2); border-radius:12px; padding:18px 24px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div style="font-family:'Inter',sans-serif; font-size:20px; font-weight:800; color:white;" id="rpt-empresa-nome">—</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:4px;" id="rpt-empresa-meta">—</div>
+      </div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-size:10px; color:rgba(212,160,23,0.6); text-transform:uppercase; letter-spacing:1px;">Data Referência</div>
+          <div style="font-size:13px; font-weight:700; color:#D4A017;" id="rpt-data">—</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px; color:rgba(212,160,23,0.6); text-transform:uppercase; letter-spacing:1px;">Setor</div>
+          <div style="font-size:13px; font-weight:700; color:#D4A017;" id="rpt-setor">—</div>
+        </div>
+        <div id="rpt-maquila-flag" style="display:none; text-align:center;">
+          <div style="font-size:10px; color:rgba(168,85,247,0.7); text-transform:uppercase; letter-spacing:1px;">Regime</div>
+          <div style="font-size:13px; font-weight:700; color:#A855F7;">🏭 Maquila</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px;" id="rpt-kpis"></div>
+
+    <div class="ia-card" id="ia-card" style="margin-bottom:16px;">
+      <div class="ia-header">
+        <span class="ia-badge">✦ Análise IA</span>
+        <span class="ia-title">Pontos-chave da sua migração</span>
+      </div>
+      <div id="ia-conteudo">
+        <div class="ia-loading">
+          <div class="ia-spinner"></div>
+          <span style="font-size:12px; color:rgba(77,184,138,0.6);">Analisando os dados do seu relatório…</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:2fr 1fr; gap:14px; margin-bottom:14px;">
+      <div style="background:#1A1D27; border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:20px;">
+        <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.8); margin-bottom:4px;">Comparativo de Custos por Categoria</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.3); margin-bottom:16px;">Valores anuais em R$</div>
+        <div id="rpt-bar-chart"></div>
+        <div style="display:flex; gap:16px; margin-top:14px;">
+          <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:rgba(255,255,255,0.5);">
+            <div style="width:10px;height:10px;border-radius:50%;background:#00843D;flex-shrink:0;"></div> Brasil
+          </div>
+          <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:rgba(255,255,255,0.5);" id="rpt-leg-py">
+            <div style="width:10px;height:10px;border-radius:50%;background:#4A9EFF;flex-shrink:0;"></div> Paraguai
+          </div>
+        </div>
+      </div>
+      <div style="background:#1A1D27; border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:20px;">
+        <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.8); margin-bottom:4px;">Distribuição — Brasil</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.3); margin-bottom:12px;">% do custo total</div>
+        <div id="rpt-donut" style="display:flex; justify-content:center;"></div>
+        <div id="rpt-donut-legend" style="margin-top:12px; display:flex; flex-direction:column; gap:5px;"></div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:14px;" id="rpt-destaques"></div>
+
+    <div style="background:#1A1D27; border:1px solid rgba(255,255,255,0.07); border-radius:12px; overflow:hidden; margin-bottom:14px;">
+      <div style="padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.07); display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.8);">Tabela Detalhada de Custos</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.3);">Valores anuais em R$</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table id="rpt-tabela" style="width:100%; border-collapse:collapse; min-width:500px;">
+          <thead>
+            <tr style="background:rgba(255,255,255,0.04);">
+              <th style="padding:11px 16px; text-align:left; font-size:11px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:1px; text-transform:uppercase;">Componente</th>
+              <th style="padding:11px 16px; text-align:right; font-size:11px; font-weight:700; color:#00843D; letter-spacing:1px; text-transform:uppercase;">🇧🇷 Brasil</th>
+              <th style="padding:11px 16px; text-align:right; font-size:11px; font-weight:700; color:#4A9EFF; letter-spacing:1px; text-transform:uppercase;" id="rpt-th-py">🇵🇾 Paraguai</th>
+              <th style="padding:11px 16px; text-align:center; font-size:11px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:1px; text-transform:uppercase;">Economia</th>
+            </tr>
+          </thead>
+          <tbody id="rpt-tabela-corpo"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+      <div id="rpt-payback-card" style="display:none; background:#1A1D27; border:1px solid rgba(76,175,80,0.2); border-radius:12px; padding:20px;">
+        <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:700; color:#4CAF50; margin-bottom:14px;">⏱ Payback do Investimento</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;" id="rpt-payback-content"></div>
+      </div>
+      <div style="background:#1A1D27; border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:20px;">
+        <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.6); margin-bottom:12px;">📚 Fontes e Aviso</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.35); line-height:1.7;">
+          Receita Federal BR · SET Paraguay · BCP · MTSS PY · ANEEL · ANDE PY · Lei Maquila 1.064/97 · CIND<br><br>
+          <span style="color:rgba(255,200,50,0.5);">⚠️</span> Estimativas baseadas em médias de mercado (mai/2026). Não substituem consultoria especializada.
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding:16px; font-size:10px; color:rgba(255,255,255,0.2);">
+      KakuaaPY · <span id="rpt-rodape-empresa"></span> · Gerado em <span id="rpt-rodape-data"></span>
+    </div>
+  </div>
+</section>
+
+</div><!-- fim #tool-wrapper -->
+
+<!-- ══════════════════════════════════
+     SITE FOOTER — KAKUAAPY
+     ══════════════════════════════════ -->
+<div class="kk-tricolor"><span></span><span></span><span></span></div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name">
+        <span class="kakuaa">Kakuaa</span><span class="py">PY</span>
+      </div>
+      <div class="brand-tag">crescer · conectar · prosperar</div>
+      <p>Plataforma de serviços empresariais focada em conectar Brasil e Paraguai, com raízes na cultura Guarani e visão internacional.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Ferramentas</div>
+        <ul>
+          <li><a href="#formulario">Projeto Paraguai</a></li>
+          <li><a href="#">Simulador Tributário</a></li>
+          <li><a href="#">Guia Bancário</a></li>
+          <li><a href="#">Checklist de Constituição</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <ul>
+          <li><a href="/sobre">Sobre a KakuaaPY</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KakuaaPY · Todos os direitos reservados · Versão 8.1 · Dados: Maio/2026</span>
+    <span class="footer-bottom-accent">crescer · conectar · prosperar</span>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════
+// TODA A LÓGICA DA FERRAMENTA — ORIGINAL
+// ══════════════════════════════════════
+
+const USD_BRL = 5.20;
+function fmt(v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+function fmtM(v) {
+  if (v >= 1000000) return 'R$ ' + (v/1000000).toFixed(2) + 'M';
+  if (v >= 1000) return 'R$ ' + Math.round(v/1000) + 'k';
+  return fmt(v);
+}
+
+function alertaCampo(id, msg) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.borderColor = '#F43F5E';
+    el.style.boxShadow   = '0 0 0 3px rgba(244,63,94,0.2)';
+    el.focus();
+    setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; }, 3000);
+  }
+  alert('⚠️ ' + msg);
+}
+
+function mascaraMoeda(el) {
+  let v = el.value.replace(/\D/g, '');
+  if (!v) { el.value = ''; return; }
+  v = (parseInt(v, 10) / 100).toFixed(2);
+  el.value = v.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function parseMoeda(id) {
+  const val = document.getElementById(id)?.value || '0';
+  return parseFloat(val.replace(/\./g, '').replace(',', '.')) || 0;
+}
+
+const SAL_MIN_PY_GS = 2550307;
+const USD_PYG       = 7500;
+const USD_BRL_REF   = 5.20;
+const SAL_MIN_PY    = Math.round((SAL_MIN_PY_GS / USD_PYG) * USD_BRL_REF);
+
+function calcularFolhaPreview() {
+  const nFunc = parseFloat(document.getElementById('funcionarios')?.value) || 0;
+  const folha = parseMoeda('folha');
+  const wrap  = document.getElementById('folha-preview-wrap');
+  if (!wrap) return;
+  if (nFunc <= 0 || folha <= 0) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  const salBR   = folha / nFunc;
+  const folhaPY = SAL_MIN_PY * nFunc;
+  const custoBRmes = folha  * (1 + 0.278 + 0.08 + 0.2167);
+  const custoPYmes = folhaPY * (1 + 0.165 + 0.0833);
+  const economiaAnual = (custoBRmes - custoPYmes) * 12;
+  const reducao = custoBRmes > 0 ? ((custoBRmes - custoPYmes) / custoBRmes * 100).toFixed(0) : 0;
+  const f = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+  document.getElementById('preview_salario_br').textContent  = f(salBR) + '/func.';
+  document.getElementById('preview_custo_br').textContent    = f(custoBRmes) + '/mês';
+  document.getElementById('preview_salario_py').textContent  = f(SAL_MIN_PY) + '/func.';
+  document.getElementById('preview_custo_py').textContent    = f(custoPYmes) + '/mês';
+  document.getElementById('preview_nfunc').textContent       = nFunc;
+  document.getElementById('preview_salmin').textContent      = 'R$ ' + SAL_MIN_PY.toLocaleString('pt-BR');
+  document.getElementById('preview_economia_folha').textContent = f(economiaAnual) + '/ano  (−' + reducao + '%)';
+}
+
+const MERCADO_PY = {
+  galpao: {
+    asuncion:    { locar: { m2: 6.5,  reforma_pct: 0.10 }, construir: { m2: 380, reforma_pct: 0.05 } },
+    ciudad:      { locar: { m2: 5.0,  reforma_pct: 0.12 }, construir: { m2: 320, reforma_pct: 0.05 } },
+    encarnacion: { locar: { m2: 4.0,  reforma_pct: 0.12 }, construir: { m2: 280, reforma_pct: 0.05 } },
+  },
+  escritorio: {
+    asuncion:    { locar: { m2: 14.0, reforma_pct: 0.15 }, construir: { m2: 650, reforma_pct: 0.08 } },
+    ciudad:      { locar: { m2: 10.0, reforma_pct: 0.15 }, construir: { m2: 520, reforma_pct: 0.08 } },
+    encarnacion: { locar: { m2: 8.0,  reforma_pct: 0.15 }, construir: { m2: 450, reforma_pct: 0.08 } },
+  },
+  misto: {
+    asuncion:    { locar: { m2: 9.5,  reforma_pct: 0.12 }, construir: { m2: 500, reforma_pct: 0.07 } },
+    ciudad:      { locar: { m2: 7.0,  reforma_pct: 0.13 }, construir: { m2: 410, reforma_pct: 0.07 } },
+    encarnacion: { locar: { m2: 5.5,  reforma_pct: 0.13 }, construir: { m2: 360, reforma_pct: 0.06 } },
+  },
+};
+
+let cidadeSelecionada = 'asuncion';
+
+function selecionarCidade(cidade) {
+  cidadeSelecionada = cidade;
+  ['asuncion','ciudad','encarnacion'].forEach(c => document.getElementById('cid_' + c)?.classList.remove('selected'));
+  document.getElementById('cid_' + cidade)?.classList.add('selected');
+  calcularEstimativaImovel();
+}
+
+function fmtUSD(v) { return 'USD ' + Math.round(v).toLocaleString('pt-BR'); }
+
+function calcularEstimativaImovel() {
+  const area   = parseFloat(document.getElementById('area_imovel')?.value) || 0;
+  const caucao = parseFloat(document.getElementById('meses_caucao')?.value) || 3;
+  const tipo   = opcaoValores.tipo_imovel  || 'galpao';
+  const mod    = opcaoValores.mod_imovel   || 'locar';
+  const cidade = cidadeSelecionada         || 'asuncion';
+  const result = document.getElementById('estimativa_imovel_result');
+  if (!result) return;
+  if (area <= 0) { result.style.display = 'none'; atualizarTotalInvest(); return; }
+  const tabela = MERCADO_PY[tipo]?.[cidade]?.[mod];
+  if (!tabela) { result.style.display = 'none'; return; }
+  const { m2, reforma_pct } = tabela;
+  let principal = 0, labelPrincipal = '', subPrincipal = '';
+  if (mod === 'locar') {
+    const aluguelMensal = area * m2;
+    principal = aluguelMensal * caucao;
+    labelPrincipal = `Caução (${caucao} meses)`;
+    subPrincipal   = `Aluguel: ${fmtUSD(aluguelMensal)}/mês`;
+    window._aluguelMensalUSD = aluguelMensal;
+    window._caucaoUSD = principal;
+  } else {
+    principal = area * m2;
+    labelPrincipal = 'Compra / Construção';
+    subPrincipal   = `${fmtUSD(m2)}/m²`;
+    window._aluguelMensalUSD = 0;
+    window._caucaoUSD = principal;
+  }
+  const reforma = principal * reforma_pct;
+  const total   = principal + reforma;
+  window._imovelTotalUSD = total;
+  document.getElementById('ei_custo_m2').textContent       = fmtUSD(m2);
+  document.getElementById('ei_custo_m2_tipo').textContent  = mod === 'locar' ? 'por m²/mês' : 'por m² (construção)';
+  document.getElementById('ei_label_principal').textContent = labelPrincipal;
+  document.getElementById('ei_principal').textContent      = fmtUSD(principal);
+  document.getElementById('ei_principal_sub').textContent  = subPrincipal;
+  document.getElementById('ei_reforma').textContent        = fmtUSD(reforma);
+  document.getElementById('ei_total').textContent          = fmtUSD(total);
+  const nomeCidade = { asuncion:'Assunção', ciudad:'Ciudad del Este', encarnacion:'Encarnación' }[cidade];
+  const nomeTipo   = { galpao:'Galpão Industrial', escritorio:'Escritório', misto:'Imóvel Misto' }[tipo];
+  const nomeMod    = mod === 'locar' ? 'Locação' : 'Compra/Construção';
+  document.getElementById('ei_nota').textContent =
+    `${nomeTipo} · ${nomeMod} · ${nomeCidade} · Área: ${area.toLocaleString('pt-BR')} m² · ` +
+    `Reforma estimada em ${(reforma_pct*100).toFixed(0)}%. Valores em USD, referência mai/2026.`;
+  result.style.display = 'block';
+  atualizarTotalInvest();
+}
+
+const DOCS_PY = {
+  srl:    { honorarios: 800,  taxas: 400,  apostila: 600, visto: 500, consultor: 700,  capital_min: 0,     prazo: '7–15 dias' },
+  sa:     { honorarios: 2200, taxas: 900,  apostila: 700, visto: 600, consultor: 1200, capital_min: 5000,  prazo: '15–30 dias' },
+  maquila:{ honorarios: 5500, taxas: 1500, apostila: 700, visto: 600, consultor: 3000, capital_min: 50000, prazo: '30–90 dias' },
+};
+
+function calcularEstimativaDoc() {
+  const tipo   = opcaoValores.tipo_sociedade || 'srl';
+  const socios = parseInt(document.getElementById('num_socios')?.value) || 1;
+  const tabela = DOCS_PY[tipo];
+  if (!tabela) return;
+  let capital = tabela.capital_min;
+  if (tipo === 'sa') capital = Math.max(parseFloat(document.getElementById('capital_sa_usd')?.value) || 5000, 5000);
+  if (tipo === 'maquila') capital = Math.max(parseFloat(document.getElementById('capital_maquila_usd')?.value) || 50000, 50000);
+  const honorarios = tabela.honorarios;
+  const taxas      = tabela.taxas;
+  const apostila   = tabela.apostila * socios;
+  const visto      = tabela.visto    * socios;
+  const consultor  = tabela.consultor;
+  const total      = honorarios + taxas + apostila + visto + consultor + capital;
+  window._docTotalUSD = total;
+  document.getElementById('ed_honorarios').textContent = fmtUSD(honorarios);
+  document.getElementById('ed_taxas').textContent      = fmtUSD(taxas);
+  document.getElementById('ed_apostila').textContent   = fmtUSD(apostila);
+  document.getElementById('ed_vistos').textContent     = fmtUSD(visto);
+  document.getElementById('ed_consultor').textContent  = fmtUSD(consultor);
+  document.getElementById('ed_capital').textContent    = capital > 0 ? fmtUSD(capital) : 'Livre';
+  document.getElementById('ed_capital_sub').textContent = tipo === 'srl' ? 'sem mínimo legal' : tipo === 'sa' ? 'mínimo USD 5.000' : 'mínimo USD 50.000';
+  document.getElementById('ed_total').textContent      = fmtUSD(total);
+  const nomes = { srl:'SRL / Ltda', sa:'S.A.', maquila:'Maquiladora' };
+  document.getElementById('ed_nota').textContent =
+    `${nomes[tipo]} · ${socios} sócio(s) · Prazo estimado: ${tabela.prazo}. Capital ${capital > 0 ? 'mínimo: ' + fmtUSD(capital) : 'livre (sem mínimo)'}.`;
+  atualizarTotalInvest();
+}
+
+function toggleInvestimento(el) {
+  document.getElementById('invest_detalhes').style.display = el.checked ? 'block' : 'none';
+  el.nextElementSibling.style.background = el.checked ? '#4CAF50' : '#2D4A2D';
+}
+
+const opcaoGrupos = {
+  tipo_imovel:    ['tipo_galpao','tipo_escritorio','tipo_misto'],
+  mod_imovel:     ['mod_locar','mod_construir'],
+  tipo_sociedade: ['soc_srl','soc_sa','soc_maquila'],
+  modal_equip:    ['eq_rodoviario','eq_hidroviario','eq_aereo','eq_misto'],
+};
+const opcaoValores = { tipo_imovel: 'galpao', mod_imovel: 'locar', tipo_sociedade: 'srl', modal_equip: 'rodoviario' };
+
+function selecionarOpcao(grupo, valor) {
+  opcaoValores[grupo] = valor;
+  opcaoGrupos[grupo].forEach(id => document.getElementById(id)?.classList.remove('selected'));
+  const idMap = {
+    'tipo_imovel:galpao':'tipo_galpao','tipo_imovel:escritorio':'tipo_escritorio','tipo_imovel:misto':'tipo_misto',
+    'mod_imovel:locar':'mod_locar','mod_imovel:construir':'mod_construir',
+    'tipo_sociedade:srl':'soc_srl','tipo_sociedade:sa':'soc_sa','tipo_sociedade:maquila':'soc_maquila',
+    'modal_equip:rodoviario':'eq_rodoviario','modal_equip:hidroviario':'eq_hidroviario','modal_equip:aereo':'eq_aereo','modal_equip:misto':'eq_misto',
+  };
+  const elId = idMap[grupo + ':' + valor];
+  if (elId) document.getElementById(elId)?.classList.add('selected');
+  if (grupo === 'tipo_imovel' || grupo === 'mod_imovel') {
+    const wrapCaucao = document.getElementById('wrap_caucao');
+    if (wrapCaucao && grupo === 'mod_imovel') wrapCaucao.style.display = valor === 'locar' ? 'block' : 'none';
+    calcularEstimativaImovel();
+  }
+  if (grupo === 'tipo_sociedade') {
+    const wrapSA = document.getElementById('wrap_capital_sa');
+    const wrapMaquila = document.getElementById('wrap_capital_maquila');
+    if (wrapSA) wrapSA.style.display = valor === 'sa' ? 'block' : 'none';
+    if (wrapMaquila) wrapMaquila.style.display = valor === 'maquila' ? 'block' : 'none';
+    const toggleMaq = document.getElementById('maquila_toggle');
+    if (toggleMaq) {
+      if (valor === 'maquila' && !toggleMaq.checked) { toggleMaq.checked = true; toggleMaquila(toggleMaq); }
+      else if (valor !== 'maquila' && toggleMaq.checked) { toggleMaq.checked = false; document.getElementById('maquila_detalhes')?.classList.remove('visivel'); }
+    }
+    calcularEstimativaDoc();
+  }
+  if (grupo === 'modal_equip') calcularFreteEquip();
+  atualizarTotalInvest();
+}
+
+const tarifasEquip = { rodoviario: 1.85, hidroviario: 0.60, aereo: 13.00, misto: 2.80 };
+
+function calcularFreteEquip() {
+  const peso   = parseFloat(document.getElementById('peso_equipamentos').value) || 0;
+  const tarifa = tarifasEquip[opcaoValores.modal_equip] || 1.85;
+  const frete  = peso * tarifa;
+  const el = document.getElementById('frete_equip_calc');
+  if (frete > 0) el.value = frete.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  else el.value = '';
+  atualizarTotalInvest();
+}
+
+function calcularSeguroAuto() {
+  const valorEquip = parseMoeda('valor_equip');
+  const seguro = valorEquip * 0.006;
+  const el = document.getElementById('seguro_transp');
+  if (el) el.value = seguro > 0 ? seguro.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+  atualizarTotalInvest();
+}
+
+const USD_BRL_INVEST = 5.20;
+
+function atualizarTotalInvest() {
+  if (!document.getElementById('invest_toggle')?.checked) return;
+  const imovelBRL = (window._imovelTotalUSD || 0) * USD_BRL_INVEST;
+  const docBRL    = (window._docTotalUSD    || 0) * USD_BRL_INVEST;
+  const equip = parseMoeda('frete_equip_calc') + parseMoeda('seguro_transp') + parseMoeda('despacho_equip') + parseMoeda('custo_instalacao');
+  const total = imovelBRL + docBRL + equip;
+  const display = document.getElementById('invest_total_display');
+  if (display) display.textContent = 'R$ ' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function toggleLogistica(el) {
+  document.getElementById('logistica_detalhes').style.display = el.checked ? 'block' : 'none';
+  el.nextElementSibling.style.background = el.checked ? 'var(--logistica)' : '#D4A88A';
+}
+
+function toggleMaquila(el) {
+  document.getElementById('maquila_detalhes').classList.toggle('visivel', el.checked);
+  if (el.checked) {
+    selecionarOpcao('tipo_sociedade', 'maquila');
+    const wrapMaquila = document.getElementById('wrap_capital_maquila');
+    const wrapSA = document.getElementById('wrap_capital_sa');
+    if (wrapMaquila) wrapMaquila.style.display = 'block';
+    if (wrapSA) wrapSA.style.display = 'none';
+  }
+}
+
+let modalSelecionado = 'rodoviario';
+const tarifasModal = {
+  rodoviario: { br: 0.45, py: 0.32 },
+  ferroviario: { br: 0.11, py: 0.11 },
+  hidroviario:  { br: 0.09, py: 0.08 },
+  aereo:        { br: 5.50, py: 4.00 },
+};
+
+function selecionarModal(modal) {
+  modalSelecionado = modal;
+  document.querySelectorAll('.modal-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('modal_' + modal).classList.add('selected');
+}
+
+function atualizarSlider(id, displayId) {
+  const val = document.getElementById(id).value;
+  document.getElementById(displayId).textContent = Number(val).toLocaleString('pt-BR') + ' km';
+}
+
+function calcular() {
+  const nome        = document.getElementById('nome_empresa').value.trim();
+  const responsavel = document.getElementById('nome_responsavel').value.trim();
+  const email       = document.getElementById('email_corporativo').value.trim();
+  const telefone    = document.getElementById('telefone').value.trim();
+  const termos      = document.getElementById('aceite_termos').checked;
+  if (!nome)        { alertaCampo('nome_empresa', 'Por favor, informe o nome da empresa.'); return; }
+  if (!responsavel) { alertaCampo('nome_responsavel', 'Por favor, informe o nome do responsável.'); return; }
+  if (!email || !email.includes('@')) { alertaCampo('email_corporativo', 'Por favor, informe um e-mail válido.'); return; }
+  if (!telefone)    { alertaCampo('telefone', 'Por favor, informe um telefone.'); return; }
+  if (!termos) {
+    const cb = document.getElementById('aceite_termos');
+    cb.style.outline = '3px solid #F43F5E';
+    cb.style.borderRadius = '3px';
+    setTimeout(() => cb.style.outline = '', 3000);
+    alert('⚠️ É necessário aceitar os Termos de Uso.');
+    return;
+  }
+  const setor  = document.getElementById('setor').value;
+  const regime = document.getElementById('regime').value;
+  const fat    = parseMoeda('faturamento');
+  const lucro  = parseMoeda('lucro');
+  const folha  = parseMoeda('folha');
+  const nFunc  = parseFloat(document.getElementById('funcionarios').value) || 1;
+  const folhaPY = SAL_MIN_PY * nFunc;
+  const imovel  = parseMoeda('imovel');
+  const energia = parseMoeda('energia');
+  const usaMaquila   = document.getElementById('maquila_toggle').checked;
+  const usaLogistica = document.getElementById('logistica_toggle').checked;
+  const distPF  = usaLogistica ? (parseFloat(document.getElementById('dist_planta_fronteira').value) || 150) : 0;
+  const distFD  = usaLogistica ? (parseFloat(document.getElementById('dist_fronteira_destino').value) || 500) : 0;
+  const volTon  = usaLogistica ? (parseFloat(document.getElementById('volume_ton').value) || 50) : 0;
+  const despacho = usaLogistica ? parseMoeda('custo_despacho') : 0;
+  const locBR  = usaLogistica ? document.getElementById('localidade_br').value : 'sp';
+  const locPY  = usaLogistica ? document.getElementById('localidade_py').value : 'asuncion';
+  if (!fat && !lucro && !folha) { alert('Por favor, preencha ao menos Faturamento, Lucro e Salários.'); return; }
+  document.getElementById('loader').style.display = 'block';
+  document.getElementById('resultado').style.display = 'none';
+  window.scrollTo({ top: document.getElementById('loader').offsetTop - 80, behavior: 'smooth' });
+  setTimeout(() => {
+    document.getElementById('loader').style.display = 'none';
+    gerarResultado(nome, setor, regime, fat, lucro, folha, folhaPY, nFunc, imovel, energia,
+                   usaMaquila, usaLogistica, distPF, distFD, volTon, despacho, locBR, locPY);
+  }, 1400);
+}
+
+function gerarResultado(nome, setor, regime, fat, lucro, folha, folhaPY, nFunc, imovel, energia,
+                         usaMaquila, usaLogistica, distPF, distFD, volTon, despacho, locBR, locPY) {
+  const folha_anual    = folha  * 12;
+  const folha_anual_py = (folhaPY > 0 ? folhaPY : folha) * 12;
+  const isServico = (setor === 'servicos' || setor === 'tecnologia');
+  let br_ir = 0;
+  if (regime === 'lucro_real') br_ir = lucro * 0.15 + Math.max(0, lucro - 240000) * 0.10;
+  else if (regime === 'lucro_presumido') { const base = fat * (isServico ? 0.32 : 0.08); br_ir = base * 0.15 + Math.max(0, base - 240000) * 0.10; }
+  else br_ir = fat * 0.06;
+  const br_csll       = regime === 'simples' ? 0 : lucro * 0.09;
+  const br_pis_cofins = regime === 'lucro_real' ? fat * 0.0925 : (regime === 'lucro_presumido' ? fat * 0.0365 : 0);
+  const br_icms_iss   = fat * (isServico ? 0.03 : 0.12);
+  const br_inss_total = folha_anual * (0.20 + 0.02 + 0.058);
+  const br_fgts       = folha_anual * 0.08;
+  const br_ferias_13  = folha_anual * 0.2167;
+  const br_imovel_anual  = imovel * 12;
+  const br_energia_anual = energia * 12;
+  const br_contab        = Math.max(6000, folha * 0.035) * 12;
+  const py_iracis_normal = lucro * 0.10;
+  const py_iva_normal    = fat * 0.10 * 0.50;
+  const py_ips           = folha_anual_py * 0.165;
+  const py_aguinaldo     = folha_anual_py / 12;
+  const py_imovel_anual  = br_imovel_anual * 0.50;
+  const py_energia_anual = br_energia_anual * 0.65;
+  const py_contab        = br_contab * 0.45;
+  let py_iracis_maq = 0, py_iva_maq = 0, py_maquila_taxa = 0;
+  if (usaMaquila) {
+    const pctExport   = (parseFloat(document.getElementById('maquila_pct_export').value) || 90) / 100;
+    const pctAgregado = (parseFloat(document.getElementById('maquila_valor_agregado').value) || 10) / 100;
+    const fatMaquila  = fat * pctExport;
+    const valorAgregado = fatMaquila * pctAgregado;
+    py_maquila_taxa = valorAgregado * 0.01;
+    const fatNormal  = fat * (1 - pctExport);
+    py_iracis_maq   = (lucro * (1 - pctExport)) * 0.10;
+    py_iva_maq      = fatNormal * 0.10 * 0.50;
+  }
+  const py_imposto_final = usaMaquila ? py_iracis_maq + py_iva_maq + py_maquila_taxa : py_iracis_normal + py_iva_normal;
+  const tarifa = tarifasModal[modalSelecionado];
+  let br_frete_mensal, py_frete_mensal;
+  if (modalSelecionado === 'aereo') {
+    py_frete_mensal = tarifa.py * volTon * 1000 * (distPF / 1000);
+    br_frete_mensal = tarifa.br * volTon * 1000 * (distFD / 1000);
+  } else {
+    py_frete_mensal = tarifa.py * volTon * distPF;
+    br_frete_mensal = tarifa.br * volTon * distFD;
+  }
+  const fatorLocPY = { asuncion: 1.10, ciudad_del_este: 0.95, encarnacion: 1.00, pedro_juan: 1.05, concepcion: 1.08, otro_py: 1.00 };
+  const fatorLocBR = { sp: 1.15, pr: 1.05, sc: 1.08, rs: 1.10, ms: 0.95, go: 1.00, mg: 1.05, rj: 1.12, outro_br: 1.00 };
+  py_frete_mensal *= (fatorLocPY[locPY] || 1.0);
+  br_frete_mensal *= (fatorLocBR[locBR] || 1.0);
+  const py_log_anual = (py_frete_mensal + despacho * 0.4) * 12;
+  const br_log_anual = (br_frete_mensal + despacho * 0.6) * 12;
+  const total_br = br_ir + br_csll + br_pis_cofins + br_icms_iss + br_inss_total + br_fgts + br_ferias_13 + br_imovel_anual + br_energia_anual + br_contab + br_log_anual;
+  const total_py = py_imposto_final + py_ips + py_aguinaldo + py_imovel_anual + py_energia_anual + py_contab + py_log_anual;
+  const economia = total_br - total_py;
+  const pct_val  = ((economia / total_br) * 100).toFixed(1);
+  const usaInvest = document.getElementById('invest_toggle').checked;
+  let total_invest = 0;
+  if (usaInvest) {
+    const imovelBRL = (window._imovelTotalUSD || 0) * USD_BRL_INVEST;
+    const docBRL    = (window._docTotalUSD    || 0) * USD_BRL_INVEST;
+    const equip = parseMoeda('frete_equip_calc') + parseMoeda('seguro_transp') + parseMoeda('despacho_equip') + parseMoeda('custo_instalacao');
+    total_invest = imovelBRL + docBRL + equip;
+  }
+  const setorLabel  = document.getElementById('setor').selectedOptions[0]?.text || '';
+  const responsavel = document.getElementById('nome_responsavel').value.trim();
+  const email       = document.getElementById('email_corporativo').value.trim();
+  const telefone    = document.getElementById('telefone').value.trim();
+  const dashData = {
+    nome, setor: setorLabel, responsavel, email, telefone,
+    usaMaquila, usaLogistica, usaInvest,
+    total_br, total_py, total_invest,
+    nFunc,
+    salario_medio_br: folha / Math.max(nFunc, 1),
+    salario_medio_py: SAL_MIN_PY,
+    folha_bruta_br: folha_anual, folha_bruta_py: folha_anual_py,
+    impostos_br: br_ir + br_csll, impostos_py: usaMaquila ? py_iracis_maq + py_maquila_taxa : py_iracis_normal,
+    ir_br: br_ir + br_csll, ir_py: usaMaquila ? py_iracis_maq + py_maquila_taxa : py_iracis_normal,
+    tributos_br: br_pis_cofins + br_icms_iss, tributos_py: usaMaquila ? py_iva_maq : py_iva_normal,
+    piscofins_br: br_pis_cofins, iva_py: usaMaquila ? py_iva_maq : py_iva_normal, icms_br: br_icms_iss,
+    encargos_br: br_inss_total + br_fgts + br_ferias_13, encargos_py: py_ips + py_aguinaldo,
+    inss_br: br_inss_total, ips_py: py_ips, fgts_br: br_fgts, ferias_br: br_ferias_13, aguinaldo_py: py_aguinaldo,
+    operacional_br: br_imovel_anual + br_energia_anual + br_contab, operacional_py: py_imovel_anual + py_energia_anual + py_contab,
+    imovel_br: br_imovel_anual, imovel_py: py_imovel_anual,
+    energia_br: br_energia_anual, energia_py: py_energia_anual,
+    contab_br: br_contab, contab_py: py_contab,
+    log_br: br_log_anual, log_py: py_log_anual,
+    frete_br: br_frete_mensal * 12, frete_py: py_frete_mensal * 12,
+    desp_br: despacho * 0.6 * 12, desp_py: despacho * 0.4 * 12,
+  };
+  window._rptData = dashData;
+  renderDashboard(dashData);
+}
+
+async function gerarAnaliseIA(d) {
+  const el = document.getElementById('ia-conteudo');
+  if (!el) return;
+  const economia = d.total_br - d.total_py;
+  const reducao  = d.total_br > 0 ? ((economia / d.total_br) * 100).toFixed(1) : 0;
+  const paybackMes = d.usaInvest && d.total_invest > 0 && economia > 0 ? (d.total_invest / (economia / 12)).toFixed(1) : null;
+  const prompt = `Você é um consultor especialista em migração empresarial Brasil-Paraguai.
+Analise os dados abaixo e responda SOMENTE em JSON válido, sem texto extra.
+
+Dados:
+- Empresa: ${d.nome} | Setor: ${d.setor}
+- Custo anual Brasil: R$ ${Math.round(d.total_br).toLocaleString('pt-BR')}
+- Custo anual Paraguai: R$ ${Math.round(d.total_py).toLocaleString('pt-BR')}
+- Economia anual: R$ ${Math.round(economia).toLocaleString('pt-BR')} (${reducao}% de redução)
+- Regime Maquila: ${d.usaMaquila ? 'Sim' : 'Não'}
+- Logística incluída: ${d.usaLogistica ? 'Sim' : 'Não'}
+- Investimento inicial: ${d.usaInvest && d.total_invest > 0 ? 'R$ ' + Math.round(d.total_invest).toLocaleString('pt-BR') : 'Não calculado'}
+- Payback estimado: ${paybackMes ? paybackMes + ' meses' : 'N/A'}
+- Encargos BR: R$ ${Math.round(d.encargos_br).toLocaleString('pt-BR')}/ano
+- Encargos PY: R$ ${Math.round(d.encargos_py).toLocaleString('pt-BR')}/ano
+
+Responda APENAS com este JSON:
+{
+  "pontos_fortes": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)", "frase 3 (máx 15 palavras)"],
+  "pontos_atencao": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)"]
+}`;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 400, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await res.json();
+    const text = data.content?.map(i => i.text || '').join('').trim();
+    const json = JSON.parse(text.replace(/```json|```/g, '').trim());
+    el.innerHTML = `
+      <div class="ia-cols">
+        <div>
+          <div class="ia-col-title pos">✦ Pontos Fortes</div>
+          ${json.pontos_fortes.map(p => `<div class="ia-item"><div class="ia-dot pos"></div><span>${p}</span></div>`).join('')}
+        </div>
+        <div>
+          <div class="ia-col-title neg">⚠ Atenção</div>
+          ${json.pontos_atencao.map(p => `<div class="ia-item"><div class="ia-dot neg"></div><span>${p}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="ia-disclaimer">Análise gerada por IA. Não substitui consultoria especializada.</div>`;
+  } catch (e) {
+    el.innerHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.3);font-style:italic;">Análise IA indisponível no momento.</div>`;
+  }
+}
+
+const I18N = {
+  pt: { categories: ['Impostos s/ Lucro','Tributos s/ Faturamento','Encargos Trabalhistas','Custos Operacionais','Logística'], kpi_br:'Custo Total Brasil', kpi_py:'Custo Total Paraguai', kpi_eco:'Economia Potencial', kpi_pct:'Redução de Custos', per_year:'por ano', highlight_tax:'💰 Impostos sobre Lucro', highlight_energy:'⚡ Energia Elétrica', highlight_labor:'👷 Encargos Trabalhistas', economy_label:'Economia:', payback_invest:'Investimento Total', payback_eco:'Economia Anual', payback_months:'Payback', payback_roi:'ROI 5 anos' },
+  en: { categories: ['Income Tax','Revenue Taxes','Labor Costs','Operating Costs','Logistics'], kpi_br:'Total Cost Brazil', kpi_py:'Total Cost Paraguay', kpi_eco:'Potential Savings', kpi_pct:'Cost Reduction', per_year:'per year', highlight_tax:'💰 Income Tax', highlight_energy:'⚡ Electricity', highlight_labor:'👷 Labor Costs', economy_label:'Savings:', payback_invest:'Total Investment', payback_eco:'Annual Savings', payback_months:'Payback', payback_roi:'5-yr ROI' },
+  es: { categories: ['Impuesto a la Renta','Tributos s/ Facturación','Cargas Laborales','Costos Operativos','Logística'], kpi_br:'Costo Total Brasil', kpi_py:'Costo Total Paraguay', kpi_eco:'Ahorro Potencial', kpi_pct:'Reducción de Costos', per_year:'por año', highlight_tax:'💰 Impuesto a la Renta', highlight_energy:'⚡ Energía Eléctrica', highlight_labor:'👷 Cargas Laborales', economy_label:'Ahorro:', payback_invest:'Inversión Total', payback_eco:'Ahorro Anual', payback_months:'Payback', payback_roi:'ROI 5 años' }
+};
+let LANG = 'pt';
+
+function mudarIdioma(lang) {
+  LANG = lang;
+  if (window._rptData) renderDashboard(window._rptData);
+}
+
+function fmtR(v) {
+  if (Math.abs(v) >= 1e6) return 'R$ ' + (v/1e6).toFixed(2) + 'M';
+  if (Math.abs(v) >= 1e3) return 'R$ ' + (v/1e3).toFixed(0) + 'k';
+  return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+}
+function pct(a, b) { return b > 0 ? ((a-b)/a*100).toFixed(1) : '0'; }
+
+function kpiCard(label, value, sub, color, icon) {
+  return `<div style="background:#1A1D27;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px 18px;">
+    <div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">${icon} ${label}</div>
+    <div style="font-family:'Barlow Condensed','Inter',sans-serif;font-size:26px;font-weight:800;color:${color};line-height:1;letter-spacing:-0.5px;">${value}</div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:5px;">${sub}</div>
+  </div>`;
+}
+
+function renderBarChart(categorias, pyColor) {
+  const maxVal = Math.max(...categorias.map(c => Math.max(c.br, c.py)));
+  const W = 520, ROW = 44, PAD = 8, LABEL = 130, BAR_MAX = W - LABEL - 80;
+  const H = categorias.length * ROW + PAD * 2;
+  let svg = `<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">`;
+  categorias.forEach((cat, i) => {
+    const y = PAD + i * ROW;
+    const wBR = maxVal > 0 ? (cat.br / maxVal * BAR_MAX) : 0;
+    const wPY = maxVal > 0 ? (cat.py / maxVal * BAR_MAX) : 0;
+    svg += `<text x="${LABEL - 8}" y="${y + 13}" text-anchor="end" fill="rgba(255,255,255,0.55)" font-size="10" font-family="Inter,sans-serif">${cat.label}</text>`;
+    svg += `<rect x="${LABEL}" y="${y}" width="${wBR}" height="14" rx="3" fill="#00843D" opacity="0.85"/>`;
+    svg += `<text x="${LABEL + wBR + 5}" y="${y + 11}" fill="#00843D" font-size="9" font-weight="700" font-family="Barlow Condensed,Inter,sans-serif">${fmtR(cat.br)}</text>`;
+    svg += `<rect x="${LABEL}" y="${y + 18}" width="${wPY}" height="14" rx="3" fill="${pyColor}" opacity="0.85"/>`;
+    svg += `<text x="${LABEL + wPY + 5}" y="${y + 29}" fill="${pyColor}" font-size="9" font-weight="700" font-family="Barlow Condensed,Inter,sans-serif">${fmtR(cat.py)}</text>`;
+  });
+  svg += '</svg>';
+  return svg;
+}
+
+function renderDonut(slices) {
+  const R = 60, CX = 80, CY = 80, W = 160, H = 160;
+  const total = slices.reduce((s, c) => s + c.value, 0);
+  if (total === 0) return '<p style="color:rgba(255,255,255,0.3);font-size:11px;">Sem dados</p>';
+  let startAngle = -Math.PI / 2;
+  let paths = '';
+  slices.forEach(s => {
+    const angle = (s.value / total) * Math.PI * 2;
+    const endAngle = startAngle + angle;
+    const x1 = CX + R * Math.cos(startAngle), y1 = CY + R * Math.sin(startAngle);
+    const x2 = CX + R * Math.cos(endAngle),   y2 = CY + R * Math.sin(endAngle);
+    const large = angle > Math.PI ? 1 : 0;
+    paths += `<path d="M${CX},${CY} L${x1},${y1} A${R},${R} 0 ${large} 1 ${x2},${y2} Z" fill="${s.color}" opacity="0.9"/>`;
+    startAngle = endAngle;
+  });
+  paths += `<circle cx="${CX}" cy="${CY}" r="${R*0.55}" fill="#1A1D27"/>`;
+  paths += `<text x="${CX}" y="${CY - 4}" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter,sans-serif">Total</text>`;
+  paths += `<text x="${CX}" y="${CY + 10}" text-anchor="middle" fill="white" font-size="11" font-weight="800" font-family="Barlow Condensed,Inter,sans-serif">${fmtR(total)}</text>`;
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${paths}</svg>`;
+}
+
+function highlightCard(titulo, brVal, pyVal, aliqBR, aliqPY, cor) {
+  const T = I18N[LANG];
+  const economia = brVal - pyVal;
+  const reducao  = pct(brVal, pyVal);
+  const numFont  = `font-family:'Barlow Condensed','Inter',sans-serif;font-weight:800;letter-spacing:-0.5px;`;
+  return `
+  <div style="background:#1A1D27;border:1px solid ${cor}33;border-radius:12px;padding:18px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:${cor};opacity:0.05;border-radius:0 0 0 80px;"></div>
+    <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:${cor};margin-bottom:14px;">${titulo}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(0,132,61,0.08);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">🇧🇷 Brasil</div>
+        <div style="${numFont}font-size:20px;color:#00843D;">${fmtR(brVal)}</div>
+        <div style="font-size:9px;color:rgba(0,132,61,0.6);margin-top:3px;">${aliqBR}</div>
+      </div>
+      <div style="background:rgba(74,158,255,0.08);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">🇵🇾 Paraguai</div>
+        <div style="${numFont}font-size:20px;color:#4A9EFF;">${fmtR(pyVal)}</div>
+        <div style="font-size:9px;color:rgba(74,158,255,0.6);margin-top:3px;">${aliqPY}</div>
+      </div>
+    </div>
+    <div style="background:rgba(212,160,23,0.08);border:1px solid rgba(212,160,23,0.2);border-radius:8px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:11px;color:rgba(255,255,255,0.5);">${T.economy_label}</span>
+      <span style="${numFont}font-size:16px;color:#D4A017;">${fmtR(economia)}<span style="font-size:10px;font-weight:600;color:rgba(212,160,23,0.6);margin-left:4px;">−${reducao}%</span></span>
+    </div>
+  </div>`;
+}
+
+function renderDashboard(d) {
+  const T = I18N[LANG];
+  const pyColor = d.usaMaquila ? '#A855F7' : '#4A9EFF';
+  document.getElementById('rpt-titulo').textContent    = d.nome + ' · ' + d.setor;
+  document.getElementById('rpt-empresa-nome').textContent = d.nome;
+  document.getElementById('rpt-empresa-meta').innerHTML =
+    `👤 ${d.responsavel} &nbsp;·&nbsp; ✉️ ${d.email} &nbsp;·&nbsp; 📱 ${d.telefone}` +
+    (d.nFunc > 0 ? `<br>👷 ${d.nFunc} funcionários &nbsp;·&nbsp; 🇧🇷 Sal. médio BR: ${fmtR(d.salario_medio_br)}/mês &nbsp;·&nbsp; 🇵🇾 Sal. mín. PY: ${fmtR(d.salario_medio_py)}/mês` : '');
+  document.getElementById('rpt-data').textContent     = new Date().toLocaleDateString('pt-BR');
+  document.getElementById('rpt-setor').textContent    = d.setor;
+  document.getElementById('rpt-maquila-flag').style.display = d.usaMaquila ? 'block' : 'none';
+  document.getElementById('rpt-rodape-empresa').textContent = d.nome;
+  document.getElementById('rpt-rodape-data').textContent    = new Date().toLocaleDateString('pt-BR');
+  document.getElementById('rpt-th-py').textContent = d.usaMaquila ? '🇵🇾 Paraguai (Maquila)' : '🇵🇾 Paraguai';
+  const kpiEco = d.total_br - d.total_py;
+  const kpiPct = pct(d.total_br, d.total_py);
+  document.getElementById('rpt-kpis').innerHTML =
+    kpiCard(T.kpi_br,  fmtR(d.total_br), T.per_year, '#00843D', '🇧🇷') +
+    kpiCard(T.kpi_py,  fmtR(d.total_py), d.usaMaquila ? 'Maquila' : T.per_year, '#4A9EFF', '🇵🇾') +
+    kpiCard(T.kpi_eco, fmtR(kpiEco),     T.per_year, '#D4A017', '💰') +
+    kpiCard(T.kpi_pct, kpiPct + '%',     T.per_year, '#F43F5E', '📉');
+  const cats = [
+    { label: T.categories[0], br: d.impostos_br,    py: d.impostos_py    },
+    { label: T.categories[1], br: d.tributos_br,    py: d.tributos_py    },
+    { label: T.categories[2], br: d.encargos_br,    py: d.encargos_py    },
+    { label: T.categories[3], br: d.operacional_br, py: d.operacional_py },
+    ...(d.usaLogistica ? [{ label: T.categories[4], br: d.log_br, py: d.log_py }] : []),
+  ];
+  document.getElementById('rpt-bar-chart').innerHTML = renderBarChart(cats, pyColor);
+  document.getElementById('rpt-leg-py').querySelector('div').style.background = pyColor;
+  document.getElementById('rpt-leg-py').lastChild.textContent = d.usaMaquila ? ' Paraguai (Maquila)' : ' Paraguai';
+  const DONUT_COLORS = ['#F59E0B','#3B82F6','#10B981','#8B5CF6','#F43F5E'];
+  const donutSlices = cats.map((c,i) => ({ value: c.br, color: DONUT_COLORS[i] }));
+  document.getElementById('rpt-donut').innerHTML = renderDonut(donutSlices);
+  document.getElementById('rpt-donut-legend').innerHTML = cats.map((c,i) =>
+    `<div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;">
+       <span style="display:flex;align-items:center;gap:5px;color:rgba(255,255,255,0.5);"><span style="width:8px;height:8px;border-radius:50%;background:${DONUT_COLORS[i]};flex-shrink:0;display:inline-block;"></span>${c.label}</span>
+       <span style="color:rgba(255,255,255,0.6);font-weight:600;">${pct(d.total_br > 0 ? d.total_br : 1, d.total_br - c.br)}%</span>
+     </div>`
+  ).join('');
+  const regime = document.getElementById('regime').value;
+  const aliqIR_BR = regime === 'lucro_real' ? '34% (IRPJ+CSLL)' : regime === 'simples' ? '~6% (Simples)' : '~28% (Presumido)';
+  const aliqIR_PY = d.usaMaquila ? '~1% (Maquila)' : '10% (IRACIS)';
+  document.getElementById('rpt-destaques').innerHTML =
+    highlightCard(T.highlight_tax,    d.impostos_br,  d.impostos_py,  aliqIR_BR, aliqIR_PY,          '#F59E0B') +
+    highlightCard(T.highlight_energy, d.energia_br,   d.energia_py,   'R$0,08–0,15/kWh', 'R$0,05–0,09/kWh', '#3B82F6') +
+    highlightCard(T.highlight_labor,  d.encargos_br,  d.encargos_py,  '~70% s/ folha', '~20% s/ folha', '#10B981');
+  const tbody = document.getElementById('rpt-tabela-corpo');
+  tbody.innerHTML = '';
+  const linhas = [
+    { cat: T.categories[0], items: [
+      { label: 'IRPJ / CSLL (BR) — IRACIS / Maquila (PY)', br: d.ir_br, py: d.ir_py },
+      { label: 'PIS/COFINS (BR) — IVA (PY)', br: d.piscofins_br, py: d.iva_py },
+      { label: 'ICMS / ISS (BR)', br: d.icms_br, py: 0 },
+    ]},
+    { cat: T.categories[2], items: [
+      { label: 'INSS Patronal + RAT + Terceiros (BR) / IPS (PY)', br: d.inss_br, py: d.ips_py },
+      { label: 'FGTS (BR)', br: d.fgts_br, py: 0 },
+      { label: '13º + Férias + 1/3 (BR) / Aguinaldo (PY)', br: d.ferias_br, py: d.aguinaldo_py },
+    ]},
+    { cat: T.categories[3], items: [
+      { label: 'Imóvel Comercial', br: d.imovel_br, py: d.imovel_py },
+      { label: 'Energia Elétrica', br: d.energia_br, py: d.energia_py },
+      { label: 'Contabilidade / Obrigações', br: d.contab_br, py: d.contab_py },
+    ]},
+    ...(d.usaLogistica ? [{ cat: T.categories[4], items: [
+      { label: 'Frete — Planta PY → Fronteira', br: 0, py: d.frete_py },
+      { label: 'Frete — Fronteira → CD Brasil', br: d.frete_br, py: 0 },
+      { label: 'Desembaraço Aduaneiro', br: d.desp_br, py: d.desp_py },
+    ]}] : []),
+  ];
+  const CAT_COLORS = ['#F59E0B','#10B981','#8B5CF6','#3B82F6','#F43F5E'];
+  linhas.forEach((grupo, gi) => {
+    const trCat = document.createElement('tr');
+    trCat.innerHTML = `<td colspan="4" style="padding:8px 16px;background:rgba(255,255,255,0.03);font-size:10px;font-weight:700;color:${CAT_COLORS[gi]};letter-spacing:1px;text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.06);">${grupo.cat}</td>`;
+    tbody.appendChild(trCat);
+    grupo.items.forEach((item, ii) => {
+      const eco = item.br - item.py;
+      const epct = Math.max(item.br, item.py) > 0 ? Math.abs(eco / Math.max(item.br, item.py) * 100).toFixed(0) : 0;
+      const vant = eco > 0 ? `<span style="background:rgba(74,158,255,0.15);color:#4A9EFF;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">🇵🇾 −${epct}%</span>` :
+                   eco < 0 ? `<span style="background:rgba(0,132,61,0.15);color:#00C98D;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;">🇧🇷 −${epct}%</span>` :
+                   `<span style="color:rgba(255,255,255,0.3);font-size:10px;">—</span>`;
+      const bg = ii % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent';
+      const tr = document.createElement('tr');
+      tr.style.background = bg;
+      tr.innerHTML = `
+        <td style="padding:9px 16px;font-size:12px;color:rgba(255,255,255,0.6);border-bottom:1px solid rgba(255,255,255,0.04);">${item.label}</td>
+        <td style="padding:9px 16px;text-align:right;font-size:12px;font-weight:700;color:#00843D;border-bottom:1px solid rgba(255,255,255,0.04);">${item.br > 0 ? fmtR(item.br) : '—'}</td>
+        <td style="padding:9px 16px;text-align:right;font-size:12px;font-weight:700;color:${pyColor};border-bottom:1px solid rgba(255,255,255,0.04);">${item.py > 0 ? fmtR(item.py) : '—'}</td>
+        <td style="padding:9px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">${vant}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+  const trTotal = document.createElement('tr');
+  trTotal.style.cssText = 'background:rgba(212,160,23,0.06);border-top:2px solid rgba(212,160,23,0.3);';
+  trTotal.innerHTML = `
+    <td style="padding:12px 16px;font-weight:700;font-size:13px;color:rgba(255,255,255,0.8);">TOTAL GERAL</td>
+    <td style="padding:12px 16px;text-align:right;font-size:16px;font-weight:800;color:#00843D;">${fmtR(d.total_br)}</td>
+    <td style="padding:12px 16px;text-align:right;font-size:16px;font-weight:800;color:${pyColor};">${fmtR(d.total_py)}</td>
+    <td style="padding:12px 16px;text-align:center;"><span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:800;">−${kpiPct}%</span></td>`;
+  tbody.appendChild(trTotal);
+  const paybackCard = document.getElementById('rpt-payback-card');
+  if (d.usaInvest && d.total_invest > 0) {
+    paybackCard.style.display = 'block';
+    const meses = kpiEco > 0 ? (d.total_invest / (kpiEco / 12)).toFixed(1) : '—';
+    const roi5  = kpiEco > 0 ? (((kpiEco * 5 - d.total_invest) / d.total_invest) * 100).toFixed(0) + '%' : '—';
+    document.getElementById('rpt-payback-content').innerHTML =
+      kpiCard(T.payback_invest, fmtR(d.total_invest), 'investimento único', '#4CAF50', '🏗️') +
+      kpiCard(T.payback_eco, fmtR(kpiEco), T.per_year, '#D4A017', '💰') +
+      kpiCard(T.payback_months, meses + ' meses', 'para recuperar', '#4A9EFF', '⏱') +
+      kpiCard(T.payback_roi, roi5, 'retorno sobre investimento', '#F43F5E', '📈');
+  } else {
+    paybackCard.style.display = 'none';
+  }
+  document.getElementById('resultado').style.display = 'block';
+  document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.step').forEach((s,i) => {
+    s.classList.remove('active','done');
+    if (i < 2) s.classList.add('done');
+    if (i === 2) s.classList.add('active');
+  });
+  gerarAnaliseIA(d);
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  calcularEstimativaDoc();
+});
+</script>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/5511972414707?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="wa-float" title="Fale conosco no WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-label">Fale conosco</span>
+</a>
+
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre — KakuaaPY</title>
+<meta name="description" content="Conheça a KakuaaPY — missão, visão, valores e a história por trás da plataforma que conecta empresas do mundo ao Paraguai.">
+<style>
+/* ══════════════════════════════════════
+   KAKUAAPY — ESTILOS COMPARTILHADOS
+   ══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@500;600;700;800&display=swap');
+
+:root {
+  --kk-primary:    #1A2B23;
+  --kk-secondary:  #1D4E3A;
+  --kk-accent:     #4DB88A;
+  --kk-cream:      #F5F4F0;
+  --kk-graphite:   #2C2C2A;
+  --kk-muted:      #6B7A72;
+  --kk-border:     #D8DDD9;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--kk-cream); color: var(--kk-graphite); }
+
+/* ── NAV ── */
+.site-nav {
+  background: var(--kk-primary);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid rgba(77,184,138,0.15);
+}
+
+.site-logo {
+  display: flex; align-items: center; gap: 12px; text-decoration: none;
+}
+.site-logo-name { font-size: 18px; display: flex; align-items: baseline; }
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; letter-spacing: 0.3px; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+.site-logo-tagline { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.28); letter-spacing: 2.5px; text-transform: uppercase; display: block; margin-top: 2px; }
+
+.site-nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.site-nav-links a {
+  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 6px 12px; border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.site-nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.site-nav-links a.active { color: var(--kk-accent); font-weight: 500; }
+.nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 6px; }
+.site-nav-cta {
+  font-size: 12px !important; font-weight: 600 !important;
+  color: var(--kk-primary) !important; background: var(--kk-accent) !important;
+  padding: 7px 16px !important; border-radius: 6px !important; letter-spacing: 0.04em;
+}
+.site-nav-cta:hover { opacity: 0.88; }
+
+/* Mobile nav */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.mobile-menu-btn span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--kk-primary); z-index: 190; padding: 16px 24px 24px; border-bottom: 1px solid rgba(77,184,138,0.15); flex-direction: column; gap: 4px; }
+.mobile-menu a { font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--kk-accent); }
+.mobile-menu .mobile-cta { color: var(--kk-accent) !important; font-weight: 600; border: none !important; }
+.mobile-menu.open { display: flex; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--kk-primary); color: rgba(255,255,255,0.4); }
+.site-footer-inner { max-width: 1100px; margin: 0 auto; padding: 48px 40px 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 56px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand .brand-name { font-size: 17px; margin-bottom: 4px; }
+.footer-brand .brand-name .kakuaa { font-weight: 300; color: #fff; }
+.footer-brand .brand-name .py     { font-weight: 600; color: var(--kk-accent); }
+.footer-brand .brand-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 16px; }
+.footer-brand p { font-size: 12px; line-height: 1.75; color: rgba(255,255,255,0.32); max-width: 260px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a { color: rgba(255,255,255,0.35); transition: color 0.2s; display: flex; align-items: center; }
+.footer-social a:hover { color: var(--kk-accent); }
+.footer-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 9px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.42); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--kk-accent); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-bottom-accent { color: rgba(77,184,138,0.38); letter-spacing: 0.12em; }
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  background: #25D366;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px 14px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.35), 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: wa-pulse 3s ease-in-out infinite;
+}
+.wa-float:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.45), 0 4px 12px rgba(0,0,0,0.2);
+  animation: none;
+}
+.wa-float svg { flex-shrink: 0; }
+.wa-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.35), 0 2px 8px rgba(0,0,0,0.15); }
+  50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.55), 0 2px 8px rgba(0,0,0,0.15); }
+}
+
+/* ── UTILITÁRIOS GLOBAIS ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  color: var(--kk-accent); text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--kk-accent); }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--kk-accent); color: var(--kk-primary);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+  padding: 12px 24px; border-radius: 7px; border: none; cursor: pointer;
+  text-decoration: none; letter-spacing: 0.03em;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--kk-primary);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 11px 22px; border-radius: 7px;
+  border: 1px solid var(--kk-border); cursor: pointer;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--kk-accent); color: var(--kk-secondary); }
+
+.btn-ghost-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: rgba(255,255,255,0.8);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 11px 22px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost-light:hover { border-color: var(--kk-accent); color: var(--kk-accent); }
+
+@media (max-width: 768px) {
+  .site-nav { padding: 0 20px; }
+  .site-nav-links { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .container { padding: 0 20px; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 24px; text-align: center; }
+  .wa-float { bottom: 20px; right: 20px; padding: 13px 18px 13px 14px; }
+  .wa-label { font-size: 12px; }
+}
+
+
+/* ══════════════════════════════════════
+   IDENTIDADE VISUAL V3.3 — KAKUAAPY
+   ══════════════════════════════════════ */
+:root {
+  --kk-vermelho:     #C8102E;
+  --kk-azul:         #002868;
+  --kk-borda-azul:   #5A8FBF;
+  --kk-borda-branco: #C8C8C8;
+}
+
+/* Logo nav — nova versão */
+.site-logo-name {
+  font-size: 18px;
+  display: flex;
+  align-items: baseline;
+  letter-spacing: 2px;
+}
+.site-logo-name .kakuaa { font-weight: 300; color: #fff; }
+.site-logo-name .py     { font-weight: 600; color: var(--kk-accent); }
+
+
+.kk-tricolor {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.kk-tricolor span:nth-child(3) { background: var(--kk-azul); }
+.kk-tricolor.dark  span:nth-child(2) { background: #FFFFFF; }
+.kk-tricolor.light span:nth-child(2) { background: #D3D1C7; }
+
+/* Tricolor no footer */
+.site-footer .kk-tricolor { height: 3px; }
+
+/* Tricolor no topo do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: var(--kk-vermelho); }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: var(--kk-azul); }
+
+
+/* Faixa tricolor — borda inferior do nav */
+.site-nav-tricolor {
+  height: 3px;
+  display: flex;
+  width: 100%;
+  position: sticky;
+  top: 60px;
+  z-index: 199;
+}
+.site-nav-tricolor span { flex: 1; }
+.site-nav-tricolor span:nth-child(1) { background: #C8102E; }
+.site-nav-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.site-nav-tricolor span:nth-child(3) { background: #002868; }
+
+/* Faixa tricolor — footer */
+.kk-tricolor { height: 3px; display: flex; width: 100%; }
+.kk-tricolor span { flex: 1; }
+.kk-tricolor span:nth-child(1) { background: #C8102E; }
+.kk-tricolor span:nth-child(2) { background: rgba(255,255,255,0.25); }
+.kk-tricolor span:nth-child(3) { background: #002868; }
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════
+   SOBRE — DESIGN CORPORATIVO REFINADO
+   ══════════════════════════════════ */
+
+:root {
+  --gold:       #C8A84B;
+  --gold-light: rgba(200,168,75,0.12);
+  --gold-line:  rgba(200,168,75,0.3);
+  --dark:       #0E1A14;
+  --serif:      'Playfair Display', Georgia, serif;
+  --sans:       'DM Sans', 'Inter', sans-serif;
+}
+
+body { font-family: var(--sans); }
+
+/* ── HERO ── */
+.sobre-hero {
+  background: var(--dark);
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sobre-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px 80px 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Linha vertical decorativa */
+.sobre-hero-left::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 15%; bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-line), transparent);
+}
+
+.hero-overline {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-overline::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+
+.sobre-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+
+.sobre-hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.sobre-hero-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 440px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+
+/* Hero Right — símbolo */
+.sobre-hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 80px 40px;
+}
+
+.hero-symbol-wrap {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1.2s 0.6s forwards;
+}
+
+.hero-symbol-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(200,168,75,0.15);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: breathe 6s ease-in-out infinite;
+}
+.hero-symbol-ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+.hero-symbol-ring:nth-child(2) { width: 300px; height: 300px; animation-delay: 0.5s; }
+.hero-symbol-ring:nth-child(3) { width: 400px; height: 400px; animation-delay: 1s; border-color: rgba(200,168,75,0.07); }
+
+@keyframes breathe {
+  0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  50%      { transform: translate(-50%,-50%) scale(1.04); opacity: 0.7; }
+}
+
+.hero-symbol-svg {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 40px rgba(77,184,138,0.2));
+  animation: floatSlow 8s ease-in-out infinite;
+}
+@keyframes floatSlow {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* Stats band */
+.sobre-stats {
+  background: #fff;
+  border-bottom: 1px solid var(--kk-border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.sobre-stat {
+  padding: 32px 36px;
+  border-right: 1px solid var(--kk-border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+}
+.sobre-stat:last-child { border-right: none; }
+.sobre-stat:hover { background: rgba(77,184,138,0.03); }
+.sobre-stat::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 36px; right: 36px;
+  height: 2px;
+  background: var(--kk-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s;
+}
+.sobre-stat:hover::after { transform: scaleX(1); }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--kk-primary);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.stat-num span { color: var(--kk-accent); }
+.stat-label { font-size: 12px; color: var(--kk-muted); line-height: 1.5; }
+
+/* ── ORIGEM DO NOME ── */
+.nome-section {
+  padding: 100px 0;
+  background: var(--kk-cream);
+  position: relative;
+  overflow: hidden;
+}
+.nome-section::before {
+  content: 'KakuaaPY';
+  position: absolute;
+  font-family: var(--serif);
+  font-size: 200px;
+  font-weight: 700;
+  color: rgba(26,43,35,0.03);
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: -8px;
+}
+.nome-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.nome-text-side h2 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--kk-primary);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.nome-text-side h2 em { font-style: italic; color: var(--kk-accent); }
+.nome-text-side p {
+  font-size: 14px;
+  color: var(--kk-muted);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.guarani-note {
+  background: var(--kk-primary);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 28px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.guarani-note-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.guarani-note p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0; }
+.guarani-note strong { color: var(--kk-accent); }
+
+.nome-cards-side { display: flex; flex-direction: column; gap: 16px; }
+.nome-card {
+  background: #fff;
+  border: 1px solid var(--kk-border);
+  border-radius: 14px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.nome-card:hover { box-shadow: 0 12px 40px rgba(26,43,35,0.09); transform: translateY(-3px); }
+.nome-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--kk-accent);
+}
+.nome-word {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--kk-primary);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.nome-word span { color: var(--kk-accent); }
+.nome-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kk-accent);
+  margin-bottom: 10px;
+  display: block;
+}
+.nome-card p { font-size: 13px; color: var(--kk-muted); line-height: 1.7; }
+
+/* ══════════════════════════════════
+   MISSÃO · VISÃO · VALORES — CARDS
+   ══════════════════════════════════ */
+.mvv-section {
+  background: var(--dark);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.mvv-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 60%, rgba(77,184,138,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 60% at 85% 20%, rgba(200,168,75,0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Header da seção */
+.mvv-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.mvv-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.mvv-header h2 em { font-style: italic; color: var(--gold); }
+.mvv-header p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.04em;
+}
+
+/* Grid de 3 cards lado a lado */
+.mvv-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Card base */
+.mvv-card {
+  border-radius: 16px;
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.3s;
+  cursor: default;
+}
+.mvv-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Borda luminosa no topo */
+.mvv-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+
+/* ── Card Missão ── */
+.mvv-card-missao {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.mvv-card-missao::before {
+  background: linear-gradient(90deg, var(--kk-accent), var(--gold));
+}
+.mvv-card-missao:hover {
+  box-shadow: 0 20px 60px rgba(77,184,138,0.12), 0 8px 24px rgba(0,0,0,0.25);
+  border-color: rgba(77,184,138,0.2);
+}
+
+/* ── Card Visão ── */
+.mvv-card-visao {
+  background: rgba(200,168,75,0.05);
+  border: 1px solid rgba(200,168,75,0.14);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.mvv-card-visao::before {
+  background: linear-gradient(90deg, var(--gold), rgba(200,168,75,0.5));
+}
+.mvv-card-visao:hover {
+  box-shadow: 0 20px 60px rgba(200,168,75,0.10), 0 8px 24px rgba(0,0,0,0.25);
+  border-color: rgba(200,168,75,0.3);
+}
+
+/* ── Card Valores ── */
+.mvv-card-valores {
+  background: rgba(77,184,138,0.05);
+  border: 1px solid rgba(77,184,138,0.12);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.mvv-card-valores::before {
+  background: linear-gradient(90deg, rgba(77,184,138,0.6), var(--kk-accent));
+}
+.mvv-card-valores:hover {
+  box-shadow: 0 20px 60px rgba(77,184,138,0.10), 0 8px 24px rgba(0,0,0,0.25);
+  border-color: rgba(77,184,138,0.25);
+}
+
+/* Card label — tipo */
+.mvv-card-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mvv-card-missao .mvv-card-label { color: var(--kk-accent); }
+.mvv-card-visao  .mvv-card-label { color: var(--gold); }
+.mvv-card-valores .mvv-card-label { color: rgba(77,184,138,0.8); }
+
+.mvv-card-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  opacity: 0.25;
+}
+.mvv-card-missao .mvv-card-label::after { background: var(--kk-accent); }
+.mvv-card-visao  .mvv-card-label::after { background: var(--gold); }
+.mvv-card-valores .mvv-card-label::after { background: var(--kk-accent); }
+
+/* Ícone decorativo */
+.mvv-card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+.mvv-card-missao .mvv-card-icon  { background: rgba(77,184,138,0.1); }
+.mvv-card-visao  .mvv-card-icon  { background: rgba(200,168,75,0.1); }
+.mvv-card-valores .mvv-card-icon { background: rgba(77,184,138,0.08); }
+
+/* Texto principal do card */
+.mvv-card-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+.mvv-card-missao  .mvv-card-text { color: rgba(255,255,255,0.88); }
+.mvv-card-visao   .mvv-card-text { color: rgba(255,255,255,0.82); }
+.mvv-card-valores .mvv-card-text { color: rgba(255,255,255,0.85); }
+
+.mvv-card-text em { font-style: italic; }
+.mvv-card-missao  .mvv-card-text em { color: var(--kk-accent); }
+.mvv-card-visao   .mvv-card-text em { color: var(--gold); }
+.mvv-card-valores .mvv-card-text em { color: var(--kk-accent); }
+
+/* Lista de valores dentro do card */
+.mvv-valores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+.mvv-valor-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mvv-valor-row:last-child { border-bottom: none; padding-bottom: 0; }
+.mvv-valor-num {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(77,184,138,0.5);
+  flex-shrink: 0;
+  width: 20px;
+  padding-top: 1px;
+}
+.mvv-valor-content {}
+.mvv-valor-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.mvv-valor-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.6;
+}
+
+/* ── ONDE ESTAMOS ── */
+.onde-estamos-section {
+  padding: 80px 0;
+  background: var(--kk-cream);
+  border-top: 1px solid var(--kk-border);
+}
+.onde-estamos-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--kk-primary);
+  margin-bottom: 36px;
+}
+.onde-estamos-title em { font-style: italic; color: var(--kk-accent); }
+.onde-estamos-section .presenca-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 640px;
+}
+
+@media (max-width: 600px) {
+  .onde-estamos-section .presenca-col { grid-template-columns: 1fr; }
+}
+
+/* ── ORIGEM / HISTÓRIA ── */
+.historia-section {
+  padding: 100px 0;
+  background: #fff;
+}
+.historia-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.historia-text h2 {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--kk-primary);
+  line-height: 1.25;
+  margin-bottom: 28px;
+}
+.historia-text h2 em { font-style: italic; color: var(--kk-accent); }
+.historia-text p {
+  font-size: 14px;
+  color: var(--kk-muted);
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+
+.presenca-col { display: flex; flex-direction: column; gap: 14px; }
+.presenca-item {
+  background: var(--kk-cream);
+  border: 1px solid var(--kk-border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.presenca-item:hover { border-color: var(--kk-accent); box-shadow: 0 4px 20px rgba(77,184,138,0.08); }
+.presenca-flag { font-size: 24px; flex-shrink: 0; }
+.presenca-info h4 { font-size: 13px; font-weight: 600; color: var(--kk-primary); margin-bottom: 3px; }
+.presenca-info p  { font-size: 12px; color: var(--kk-muted); line-height: 1.5; }
+
+.presenca-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+.presenca-stat-mini {
+  background: var(--kk-primary);
+  border-radius: 10px;
+  padding: 20px 18px;
+  text-align: center;
+}
+.psm-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--kk-accent);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.psm-label { font-size: 10px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+/* ── CTA ── */
+.sobre-cta {
+  background: var(--kk-cream);
+  border-top: 1px solid var(--kk-border);
+  padding: 80px 0;
+  text-align: center;
+}
+.sobre-cta h2 {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--kk-primary);
+  margin-bottom: 14px;
+}
+.sobre-cta h2 em { font-style: italic; color: var(--kk-accent); }
+.sobre-cta p { font-size: 15px; color: var(--kk-muted); max-width: 460px; margin: 0 auto 36px; line-height: 1.7; }
+.sobre-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ANIMAÇÕES */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ── ÍCONES FLUTUANTES ── */
+.float-icons {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.float-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.34,1.2,0.64,1);
+  overflow: visible;
+}
+.float-icon-tool {
+  background: rgba(26,43,35,0.82);
+  border: 1px solid rgba(77,184,138,0.25);
+  color: rgba(77,184,138,0.85);
+  backdrop-filter: blur(8px);
+}
+.float-icon-wa {
+  background: rgba(37,211,102,0.15);
+  border: 1px solid rgba(37,211,102,0.3);
+  color: #25D366;
+  backdrop-filter: blur(8px);
+}
+.float-icon:hover { transform: scale(1.12); }
+.float-icon-tool:hover {
+  background: rgba(26,43,35,0.95);
+  border-color: rgba(77,184,138,0.5);
+  box-shadow: 0 4px 20px rgba(77,184,138,0.15);
+}
+.float-icon-wa:hover {
+  background: rgba(37,211,102,0.22);
+  border-color: rgba(37,211,102,0.5);
+  box-shadow: 0 4px 20px rgba(37,211,102,0.2);
+}
+.float-icon-label {
+  position: absolute;
+  right: 52px;
+  background: rgba(15,26,20,0.95);
+  color: rgba(255,255,255,0.85);
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 500;
+  white-space: nowrap;
+  padding: 6px 12px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  opacity: 0; pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity 0.2s, transform 0.2s;
+  backdrop-filter: blur(8px);
+}
+.float-icon-label::after {
+  content: '';
+  position: absolute; right: -5px; top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right: none;
+  border-left-color: rgba(15,26,20,0.95);
+}
+.float-icon:hover .float-icon-label { opacity: 1; transform: translateX(0); }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .sobre-hero { grid-template-columns: 1fr; min-height: auto; }
+  .sobre-hero-right { display: none; }
+  .sobre-hero-left { padding: 64px 24px; }
+  .sobre-hero-left::after { display: none; }
+  .sobre-stats { grid-template-columns: 1fr 1fr; }
+  .nome-inner { grid-template-columns: 1fr; gap: 40px; }
+  .mvv-cards { grid-template-columns: 1fr; gap: 16px; }
+  .mvv-card { padding: 28px 24px; }
+  .historia-inner { grid-template-columns: 1fr; gap: 40px; }
+  .presenca-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .float-icons { display: none; }
+  .sobre-stats { grid-template-columns: 1fr 1fr; }
+  .valores-grid { grid-template-columns: 1fr; }
+  .presenca-stats-grid { grid-template-columns: 1fr 1fr; }
+  .nome-section::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- KakuaaPY — SVG Symbols V3.3 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="kk-sym-light" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90" stroke="#C8C8C8" stroke-width="1" stroke-linejoin="round"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85"/>
+    </symbol>
+    <symbol id="kk-sym-dark" viewBox="0 0 48 68">
+      <polygon points="16,62 30,35 44,62" fill="#C8102E" opacity="0.80"/>
+      <polygon points="8,62 22,20 36,62"  fill="#FFFFFF"  opacity="0.90"/>
+      <polygon points="0,62 14,0 28,62"   fill="#002868" opacity="0.85" stroke="#5A8FBF" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+
+<nav class="site-nav">
+  <a href="/ferramenta" class="site-logo">
+    <div class="site-logo-triangles">
+      <svg width="22" height="31"><use href="#kk-sym-dark"/></svg>
+    </div>
+    <div>
+      <div class="site-logo-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <span class="site-logo-tagline">crescer · conectar · prosperar</span>
+    </div>
+  </a>
+  <ul class="site-nav-links">
+    <li><a href="/">Início</a></li>
+    <li><a href="/sobre" class="active">Sobre</a></li>
+    <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+    <li><a href="/servicos">Serviços</a></li>
+    <li><a href="/news">News &amp; Social</a></li>
+    <li><a href="/contato">Contato</a></li>
+    <li><div class="nav-divider"></div></li>
+    <li><a href="/cliente" class="site-nav-cta" style="background:rgba(200,168,75,0.15) !important; border:1px solid rgba(200,168,75,0.35) !important; color:#C8A84B !important;">Área do cliente</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.getElementById('mobile-menu-sobre').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="site-nav-tricolor"><span></span><span></span><span></span></div>
+<div class="mobile-menu" id="mobile-menu-sobre">
+  <a href="/">Início</a>
+  <a href="/sobre">Sobre</a>
+  <a href="/ferramenta">Ferramenta KakuaaPY</a>
+  <a href="/servicos">Serviços</a>
+  <a href="/news">News &amp; Social</a>
+  <a href="/contato">Contato</a>
+  <a href="/cliente" class="mobile-cta">Área do cliente</a>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO
+     ══════════════════════════════════ -->
+<section class="sobre-hero">
+  <div class="sobre-hero-left">
+    <div class="hero-overline">Sobre a KakuaaPY</div>
+    <h1>Nascemos<br>de um <em>objetivo.</em><br>Crescemos com<br>um Propósito.</h1>
+    <p class="sobre-hero-desc">Uma plataforma que conecta empresas do mundo ao Paraguai — com inteligência, responsabilidade e compromisso com o desenvolvimento humano.</p>
+  </div>
+  <div class="sobre-hero-right">
+    <div class="hero-symbol-wrap" style="display:flex; align-items:center; justify-content:center;">
+      <div class="hero-symbol-ring"></div>
+      <div class="hero-symbol-ring"></div>
+      <div class="hero-symbol-ring"></div>
+      <svg class="hero-symbol-svg" width="110" height="156"><use href="#kk-sym-dark"/></svg>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════
+     MISSÃO · VISÃO · VALORES — CARDS
+     ══════════════════════════════════ -->
+<section class="mvv-section">
+  <div class="container">
+
+    <div class="mvv-header reveal">
+      <h2>Missão, Visão &amp; <em>Valores</em></h2>
+      <p>Os princípios que orientam cada decisão da KakuaaPY</p>
+    </div>
+
+    <div class="mvv-cards">
+
+      <!-- MISSÃO -->
+      <div class="mvv-card mvv-card-missao reveal">
+        <div class="mvv-card-label">Missão</div>
+        <div class="mvv-card-icon">🎯</div>
+        <p class="mvv-card-text">
+          Conectar empresas do Brasil e do Mundo ao Paraguai com inteligência, dados e expertise — estruturando operações que gerem <em>resultado sustentável,</em> contribuindo para o desenvolvimento econômico e social do ambiente onde atuamos.
+        </p>
+      </div>
+
+      <!-- VISÃO -->
+      <div class="mvv-card mvv-card-visao reveal reveal-delay-2">
+        <div class="mvv-card-label">Visão</div>
+        <div class="mvv-card-icon">🌎</div>
+        <p class="mvv-card-text">
+          Ser a principal ponte empresarial entre o Mundo e o Paraguai, reconhecida não apenas pelos resultados que entrega aos seus clientes, mas pelas <em>regiões que transforma</em> — onde cada empresa bem estruturada representa mais direitos e perspectiva de futuro para a comunidade.
+        </p>
+      </div>
+
+      <!-- VALORES -->
+      <div class="mvv-card mvv-card-valores reveal reveal-delay-4">
+        <div class="mvv-card-label">Valores</div>
+        <div class="mvv-card-icon">⚖️</div>
+        <div class="mvv-valores-list">
+          <div class="mvv-valor-row">
+            <span class="mvv-valor-num">01</span>
+            <div class="mvv-valor-content">
+              <div class="mvv-valor-title">Propósito antes do lucro</div>
+              <div class="mvv-valor-desc">Crescer no Paraguai é uma oportunidade de negócio. Fazê-lo bem é uma responsabilidade.</div>
+            </div>
+          </div>
+          <div class="mvv-valor-row">
+            <span class="mvv-valor-num">02</span>
+            <div class="mvv-valor-content">
+              <div class="mvv-valor-title">Emprego com dignidade</div>
+              <div class="mvv-valor-desc">Incentivamos clientes que empregam com formalidade, garantindo direitos e segurança social.</div>
+            </div>
+          </div>
+          <div class="mvv-valor-row">
+            <span class="mvv-valor-num">03</span>
+            <div class="mvv-valor-content">
+              <div class="mvv-valor-title">Presença ativa</div>
+              <div class="mvv-valor-desc">Somos parceiros de longo prazo no desenvolvimento dos territórios onde atuamos.</div>
+            </div>
+          </div>
+          <div class="mvv-valor-row">
+            <span class="mvv-valor-num">04</span>
+            <div class="mvv-valor-content">
+              <div class="mvv-valor-title">Precisão e transparência</div>
+              <div class="mvv-valor-desc">Dados reais, premissas claras e transparência sobre riscos e limitações.</div>
+            </div>
+          </div>
+          <div class="mvv-valor-row">
+            <span class="mvv-valor-num">05</span>
+            <div class="mvv-valor-content">
+              <div class="mvv-valor-title">Respeito ao território</div>
+              <div class="mvv-valor-desc">Reconhecemos a cultura, o idioma e a identidade paraguaia como essenciais.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ORIGEM DO NOME
+     ══════════════════════════════════ -->
+<section class="nome-section">
+  <div class="container">
+    <div class="nome-inner">
+      <div class="nome-text-side reveal">
+        <div class="section-eyebrow">A origem do nome</div>
+        <h2>Por que<br><span style="font-family:'Inter',sans-serif; font-style:normal; font-weight:300; color:var(--kk-primary); letter-spacing:0.3px;">Kakuaa</span><span style="font-family:'Inter',sans-serif; font-style:normal; font-weight:600; color:var(--kk-accent); letter-spacing:0.3px;">PY</span><span style="font-family:var(--serif); font-style:italic;">?</span></h2>
+        <p>O nome não foi escolhido ao acaso. Cada sílaba carrega intenção — uma declaração de onde viemos e para onde queremos ir.</p>
+        <p>"KakuaaPY" é uma palavra contínua: sem espaço, sem separação. Assim como a conexão que construímos entre dois países, dois mercados, duas culturas.</p>
+        <div class="guarani-note">
+          <span class="guarani-note-icon">🌿</span>
+          <p>A escolha pelo Guarani não é decorativa. É um posicionamento: reconhecemos a cultura do território em que atuamos. O Guarani é co-oficial no Paraguai e faz parte da identidade de milhões de pessoas — integrá-lo ao nosso nome é um ato de <strong>respeito e pertencimento.</strong></p>
+        </div>
+      </div>
+      <div class="nome-cards-side reveal reveal-delay-2">
+        <div class="nome-card">
+          <div class="nome-word">Kakuaa<span>·</span></div>
+          <span class="nome-tag">Do Guarani — Crescer · Amadurecer</span>
+          <p>Em Guarani, "kakuaa" evoca o processo de crescimento e amadurecimento. Representa a jornada de uma empresa que evolui, expande e se consolida em novo território — e a transformação que isso gera nas comunidades.</p>
+        </div>
+        <div class="nome-card">
+          <div class="nome-word"><span>·</span>PY</div>
+          <span class="nome-tag">Paraguay + Tech identifier</span>
+          <p>"PY" é o sufixo internacional do Paraguai e também a extensão universalmente reconhecida no universo tech — sinalizando inovação, plataforma e presença digital com raízes locais.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     HISTÓRIA E PRESENÇA
+     ══════════════════════════════════ -->
+<section class="historia-section">
+  <div class="container">
+    <div class="historia-inner">
+      <div class="historia-text reveal">
+        <div class="section-eyebrow">Nossa história</div>
+        <h2>Uma ideia que<br>nasceu de <em>dentro</em><br>da fronteira</h2>
+        <p>A KakuaaPY nasceu da observação direta de um problema: empresas brasileiras com real potencial de expansão tomando decisões baseadas em informação incompleta, opaca ou desatualizada sobre o Paraguai.</p>
+        <p>Vimos operações bem-intencionadas fracassarem por falta de estrutura. E vimos o Paraguai — um país em pleno desenvolvimento — perder oportunidades de geração de emprego formal e renda porque a ponte entre os dois lados não estava sendo construída da forma certa.</p>
+        <p>Nossa resposta foi criar uma plataforma que une rigor analítico, expertise jurídica e tributária, e um compromisso genuíno com o desenvolvimento das regiões onde nossos clientes se instalam.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ONDE ESTAMOS ── -->
+<section class="onde-estamos-section">
+  <div class="container">
+    <div class="section-eyebrow reveal">Onde estamos</div>
+    <h2 class="onde-estamos-title reveal">Nossas <em>regiões</em> de atendimento</h2>
+    <div class="presenca-col reveal reveal-delay-2">
+      <div class="presenca-item">
+        <div class="presenca-flag">🇧🇷</div>
+        <div class="presenca-info">
+          <h4>São Paulo, Brasil</h4>
+          <p>Centro de operações comerciais e financeiras</p>
+        </div>
+      </div>
+      <div class="presenca-item">
+        <div class="presenca-flag">🇵🇾</div>
+        <div class="presenca-info">
+          <h4>Assunção, Paraguai</h4>
+          <p>Sede jurídica e operacional no Paraguai</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="sobre-cta">
+  <div class="container reveal">
+    <div class="section-eyebrow" style="justify-content:center;">Próximo passo</div>
+    <h2>Pronto para construir<br>algo <em>duradouro</em>?</h2>
+    <p>Use nossa ferramenta gratuitamente ou fale com nossos especialistas para dar o primeiro passo com segurança.</p>
+    <div class="sobre-cta-actions">
+      <a href="/ferramenta" class="btn-primary">Acessar nossa ferramenta →</a>
+      <a href="/contato" class="btn-ghost">Fale com especialista</a>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="kk-tricolor dark" style="margin-top:0;"><span></span><span></span><span></span></div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><span class="kakuaa">Kakuaa</span><span class="py">PY</span></div>
+      <div class="brand-tag">crescer · conectar · prosperar</div>
+      <p>Plataforma de serviços empresariais focada em conectar empresas do mundo ao Paraguai, com raízes na cultura Guarani e visão internacional.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Ferramentas</div>
+        <ul>
+          <li><a href="/ferramenta">Ferramenta KakuaaPY</a></li>
+          <li><a href="/ferramenta">Simulador Tributário</a></li>
+          <li><a href="/ferramenta">Guia Bancário</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <ul>
+          <li><a href="/sobre">Sobre a KakuaaPY</a></li>
+          <li><a href="/servicos">Serviços</a></li>
+          <li><a href="/news">News &amp; Social</a></li>
+          <li><a href="/contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Acesso interno</div>
+        <ul>
+          <li><a href="/colaborador" style="color:rgba(255,255,255,0.25); font-size:12px;">Área do colaborador</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KakuaaPY · Todos os direitos reservados</span>
+    <span class="footer-bottom-accent">crescer · conectar · prosperar</span>
+  </div>
+</footer>
+
+<!-- Ícones flutuantes discretos -->
+<div class="float-icons">
+  <a href="/ferramenta" class="float-icon float-icon-tool" title="Acessar nossa ferramenta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/>
+      <line x1="16" y1="17" x2="8" y2="17"/>
+      <polyline points="10 9 9 9 8 9"/>
+    </svg>
+    <span class="float-icon-label">Nossa ferramenta</span>
+  </a>
+  <a href="https://wa.me/5511972414707?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20KakuaaPY%20e%20gostaria%20de%20saber%20mais." target="_blank" class="float-icon float-icon-wa" title="Fale com especialista">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="float-icon-label">Fale com especialista</span>
+  </a>
+</div>
+
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
