@@ -3190,15 +3190,16 @@ async function enviarLeadEmail(d, analiseIA) {
       'entry.632338350':   roi5,
       // ── FINANCEIRO DETALHADO
       'entry.1057303543':  fmtR(d.fat_original   || 0),
-      'entry.150754335':   fmtR(d.lucro_original || 0),
-      'entry.1732976267':  fmtR(d.folha_original || 0),
-      'entry.1038531796':  d.nFunc > 0 ? fmtR((d.folha_original || 0) / d.nFunc) + '/func.' : '—',
-      'entry.1469707986':  'R$ 1.768/mês (Gs. 2.550.307)',
-      'entry.443191795':   fmtR(d.impostos_br),
-      'entry.660127544':   fmtR(d.impostos_py),
-      'entry.708786288':   fmtR(d.encargos_br),
-      'entry.273372511':   fmtR(d.encargos_py),
-      'entry.236180952':   fmtR(d.energia_br),
+      'entry.1819812661':  fmtR(d.lucro_original  || 0),
+      'entry.150754335':   fmtR(d.folha_original  || 0),
+      'entry.1732976267':  d.nFunc > 0 && d.folha_original > 0 ? fmtR(d.folha_original / d.nFunc) : '—',
+      'entry.1038531796':  'R$ 1.768/mês (Gs. 2.550.307 · mai/2026)',
+      'entry.1469707986':  fmtR(d.impostos_br),
+      'entry.443191795':   fmtR(d.impostos_py),
+      'entry.660127544':   fmtR(d.encargos_br),
+      'entry.708786288':   fmtR(d.encargos_py),
+      'entry.273372511':   fmtR(d.energia_br),
+      'entry.236180952':   fmtR(d.energia_py),
     });
 
     await fetch(FORM_URL, {
