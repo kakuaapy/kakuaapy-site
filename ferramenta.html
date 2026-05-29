@@ -3412,25 +3412,61 @@ async function gerarAnaliseIA(d) {
   const paybackMes = d.usaInvest && d.total_invest > 0 && economia > 0
     ? (d.total_invest / (economia / 12)).toFixed(1) : null;
 
+  // ── SAÚDE FINANCEIRA BR ──
+  // Todas as despesas BR: impostos + encargos + operacional + logística + tributos faturamento
+  const despesas_br = (d.impostos_br || 0)
+    + (d.tributos_br  || 0)
+    + (d.encargos_br  || 0)
+    + (d.operacional_br || 0)
+    + (d.log_br       || 0)
+    + (d.folha_bruta_br || 0);
+
+  const fat = d.fat_original || 0;
+  const pct_despesas = fat > 0 ? ((despesas_br / fat) * 100) : 0;
+
+  let saude_label, saude_cor, saude_icon, saude_bg;
+  if (pct_despesas <= 60) {
+    saude_label = 'Operação Saudável';
+    saude_cor   = '#4DB88A';
+    saude_icon  = '🟢';
+    saude_bg    = 'rgba(77,184,138,0.12)';
+  } else if (pct_despesas <= 80) {
+    saude_label = 'Operação em Risco';
+    saude_cor   = '#F59E0B';
+    saude_icon  = '🟡';
+    saude_bg    = 'rgba(245,158,11,0.12)';
+  } else {
+    saude_label = 'Operação Inviável';
+    saude_cor   = '#F43F5E';
+    saude_icon  = '🔴';
+    saude_bg    = 'rgba(244,63,94,0.12)';
+  }
+
   const prompt = `Você é um consultor especialista em migração empresarial Brasil-Paraguai.
 Analise os dados abaixo e responda SOMENTE em JSON válido, sem texto extra.
 
 Dados do relatório:
 - Empresa: ${d.nome} | Setor: ${d.setor}
-- Custo anual Brasil: R$ ${Math.round(d.total_br).toLocaleString('pt-BR')}
-- Custo anual Paraguai: R$ ${Math.round(d.total_py).toLocaleString('pt-BR')}
-- Economia anual: R$ ${Math.round(economia).toLocaleString('pt-BR')} (${reducao}% de redução)
+- Faturamento anual BR: R$ ${Math.round(fat).toLocaleString('pt-BR')}
+- Total despesas BR: R$ ${Math.round(despesas_br).toLocaleString('pt-BR')} (${pct_despesas.toFixed(1)}% do faturamento)
+- Impostos BR: R$ ${Math.round(d.impostos_br||0).toLocaleString('pt-BR')}/ano
+- Tributos s/ faturamento BR: R$ ${Math.round(d.tributos_br||0).toLocaleString('pt-BR')}/ano
+- Encargos trabalhistas BR: R$ ${Math.round(d.encargos_br||0).toLocaleString('pt-BR')}/ano
+- Folha de pagamento BR: R$ ${Math.round(d.folha_bruta_br||0).toLocaleString('pt-BR')}/ano
+- Custos operacionais BR: R$ ${Math.round(d.operacional_br||0).toLocaleString('pt-BR')}/ano
+- Logística BR: R$ ${Math.round(d.log_br||0).toLocaleString('pt-BR')}/ano
+- Custo total Paraguai: R$ ${Math.round(d.total_py).toLocaleString('pt-BR')}/ano
+- Economia anual migrando: R$ ${Math.round(economia).toLocaleString('pt-BR')} (${reducao}% de redução)
 - Regime Maquila: ${d.usaMaquila ? 'Sim' : 'Não'}
 - Logística incluída: ${d.usaLogistica ? 'Sim' : 'Não'}
 - Investimento inicial: ${d.usaInvest && d.total_invest > 0 ? 'R$ ' + Math.round(d.total_invest).toLocaleString('pt-BR') : 'Não calculado'}
 - Payback estimado: ${paybackMes ? paybackMes + ' meses' : 'N/A'}
-- Encargos BR: R$ ${Math.round(d.encargos_br).toLocaleString('pt-BR')}/ano
-- Encargos PY: R$ ${Math.round(d.encargos_py).toLocaleString('pt-BR')}/ano
-- Impostos BR: R$ ${Math.round(d.impostos_br).toLocaleString('pt-BR')}/ano
-- Impostos PY: R$ ${Math.round(d.impostos_py).toLocaleString('pt-BR')}/ano
+
+Diagnóstico de saúde calculado: ${saude_label} (despesas = ${pct_despesas.toFixed(1)}% do faturamento)
 
 Responda APENAS com este JSON (sem markdown, sem explicação):
 {
+  "saude_comentario": "frase única de até 20 palavras explicando o diagnóstico de saúde",
   "pontos_fortes": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)", "frase 3 (máx 15 palavras)"],
   "pontos_atencao": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)"]
 }`;
@@ -3447,7 +3483,45 @@ Responda APENAS com este JSON (sem markdown, sem explicação):
     const text = (data.text || '').trim();
     const json = JSON.parse(text.replace(/```json|```/g, '').trim());
 
+    // Barra de progresso visual
+    const barWidth = Math.min(pct_despesas, 100).toFixed(1);
+    const barColor = pct_despesas <= 60 ? '#4DB88A' : pct_despesas <= 80 ? '#F59E0B' : '#F43F5E';
+
     el.innerHTML = `
+      <!-- SAÚDE FINANCEIRA BR -->
+      <div style="background:${saude_bg};border:1px solid ${saude_cor}33;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">
+              🇧🇷 Saúde Financeira — Brasil
+            </div>
+            <div style="font-size:18px;font-weight:700;color:${saude_cor};">
+              ${saude_icon} ${saude_label}
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:28px;font-weight:800;color:${saude_cor};font-family:'Barlow Condensed',sans-serif;line-height:1;">
+              ${pct_despesas.toFixed(1)}%
+            </div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">despesas / faturamento</div>
+          </div>
+        </div>
+        <!-- Barra de progresso -->
+        <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;margin-bottom:10px;">
+          <div style="height:100%;width:${barWidth}%;background:${barColor};border-radius:99px;transition:width 1s ease;"></div>
+        </div>
+        <!-- Legenda -->
+        <div style="display:flex;gap:12px;font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:10px;flex-wrap:wrap;">
+          <span style="color:#4DB88A;">■ ≤60% Saudável</span>
+          <span style="color:#F59E0B;">■ 61–80% Em Risco</span>
+          <span style="color:#F43F5E;">■ 81–100% Inviável</span>
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;font-style:italic;">
+          "${json.saude_comentario}"
+        </div>
+      </div>
+
+      <!-- PONTOS-CHAVE DA MIGRAÇÃO -->
       <div class="ia-cols">
         <div>
           <div class="ia-col-title pos">✦ Pontos Fortes</div>
