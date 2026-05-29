@@ -3436,7 +3436,7 @@ Responda APENAS com este JSON (sem markdown, sem explicação):
 }`;
 
   try {
-    const res = await fetch('https://kakuaapy-site.vercel.app/api/claude', {
+    const res = await fetch('/api/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt })
