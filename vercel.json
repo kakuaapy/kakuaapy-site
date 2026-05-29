@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/api/claude", "destination": "/api/claude" },
     { "source": "/sobre",      "destination": "/sobre.html" },
     { "source": "/servicos",   "destination": "/servicos.html" },
     { "source": "/contato",    "destination": "/contato.html" },
