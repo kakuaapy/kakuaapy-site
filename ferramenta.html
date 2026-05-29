@@ -3382,6 +3382,86 @@ function highlightCard(titulo, brVal, pyVal, aliqBR, aliqPY, cor, icon) {
 // ══════════════════════════════════════════════════════
 // RENDERIZAR DASHBOARD COMPLETO
 // ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// ANÁLISE IA — via /api/claude (Vercel Function proxy)
+// ══════════════════════════════════════════════════════
+async function gerarAnaliseIA(d) {
+  const el = document.getElementById('ia-conteudo');
+  if (!el) return;
+
+  const economia   = d.total_br - d.total_py;
+  const reducao    = d.total_br > 0 ? ((economia / d.total_br) * 100).toFixed(1) : 0;
+  const paybackMes = d.usaInvest && d.total_invest > 0 && economia > 0
+    ? (d.total_invest / (economia / 12)).toFixed(1) : null;
+
+  const prompt = `Você é um consultor especialista em migração empresarial Brasil-Paraguai.
+Analise os dados abaixo e responda SOMENTE em JSON válido, sem texto extra.
+
+Dados do relatório:
+- Empresa: ${d.nome} | Setor: ${d.setor}
+- Custo anual Brasil: R$ ${Math.round(d.total_br).toLocaleString('pt-BR')}
+- Custo anual Paraguai: R$ ${Math.round(d.total_py).toLocaleString('pt-BR')}
+- Economia anual: R$ ${Math.round(economia).toLocaleString('pt-BR')} (${reducao}% de redução)
+- Regime Maquila: ${d.usaMaquila ? 'Sim' : 'Não'}
+- Logística incluída: ${d.usaLogistica ? 'Sim' : 'Não'}
+- Investimento inicial: ${d.usaInvest && d.total_invest > 0 ? 'R$ ' + Math.round(d.total_invest).toLocaleString('pt-BR') : 'Não calculado'}
+- Payback estimado: ${paybackMes ? paybackMes + ' meses' : 'N/A'}
+- Encargos BR: R$ ${Math.round(d.encargos_br).toLocaleString('pt-BR')}/ano
+- Encargos PY: R$ ${Math.round(d.encargos_py).toLocaleString('pt-BR')}/ano
+- Impostos BR: R$ ${Math.round(d.impostos_br).toLocaleString('pt-BR')}/ano
+- Impostos PY: R$ ${Math.round(d.impostos_py).toLocaleString('pt-BR')}/ano
+
+Responda APENAS com este JSON (sem markdown, sem explicação):
+{
+  "pontos_fortes": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)", "frase 3 (máx 15 palavras)"],
+  "pontos_atencao": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)"]
+}`;
+
+  try {
+    const res = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+
+    if (!res.ok) throw new Error('API error: ' + res.status);
+    const data = await res.json();
+    const text = (data.text || '').trim();
+    const json = JSON.parse(text.replace(/```json|```/g, '').trim());
+
+    el.innerHTML = `
+      <div class="ia-cols">
+        <div>
+          <div class="ia-col-title pos">✦ Pontos Fortes</div>
+          ${json.pontos_fortes.map(p => `
+            <div class="ia-item">
+              <div class="ia-dot pos"></div>
+              <span>${p}</span>
+            </div>`).join('')}
+        </div>
+        <div>
+          <div class="ia-col-title neg">⚠ Atenção</div>
+          ${json.pontos_atencao.map(p => `
+            <div class="ia-item">
+              <div class="ia-dot neg"></div>
+              <span>${p}</span>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="ia-disclaimer">Análise gerada por IA com base nos dados informados. Não substitui consultoria especializada.</div>`;
+
+    // Enviar lead ao Google Forms após análise IA concluída
+    enviarLeadEmail(d, json);
+
+  } catch (e) {
+    el.innerHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.3);font-style:italic;">
+      Análise IA indisponível no momento. Os dados do relatório permanecem válidos.
+    </div>`;
+    // Enviar lead mesmo se IA falhar
+    enviarLeadEmail(d, null);
+  }
+}
+
 function renderDashboard(d) {
   const T = I18N[LANG];
   const pyColor = d.usaMaquila ? '#A855F7' : '#4A9EFF';
