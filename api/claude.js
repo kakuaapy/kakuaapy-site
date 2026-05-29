@@ -1,16 +1,19 @@
 module.exports = async function handler(req, res) {
-  // Headers CORS — permite chamada do domínio customizado
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Responde preflight OPTIONS
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'API key não configurada' });
   }
 
   const { prompt } = req.body;
@@ -22,27 +25,31 @@ module.exports = async function handler(req, res) {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Content-Type':      'application/json',
-        'x-api-key':         process.env.ANTHROPIC_API_KEY,
+        'content-type':      'application/json',
+        'x-api-key':         apiKey.trim(),
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model:      'claude-sonnet-4-20250514',
-        max_tokens: 400,
+        model:      'claude-haiku-4-5-20251001',
+        max_tokens: 500,
         messages:   [{ role: 'user', content: prompt }]
       })
     });
 
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const err = await response.text();
-      return res.status(response.status).json({ error: err });
+      return res.status(200).json({ 
+        error: 'Anthropic retornou ' + response.status,
+        details: responseText 
+      });
     }
 
-    const data = await response.json();
+    const data = JSON.parse(responseText);
     const text = data.content?.map(i => i.text || '').join('').trim();
     return res.status(200).json({ text });
 
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(200).json({ error: 'Erro: ' + error.message });
   }
 };
