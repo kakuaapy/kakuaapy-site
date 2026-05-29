@@ -1445,8 +1445,6 @@ footer strong { color: white; }
   }
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init('B6VQ72dvJQYP9G5N1');</script>
 </head>
 <body>
 
@@ -3110,10 +3108,12 @@ function gerarResultado(nome, setor, regime, fat, lucro, folha, folhaPY, nFunc, 
 // ══════════════════════════════════════════════════════
 async function enviarLeadEmail(d, analiseIA) {
   try {
-    const economia  = d.total_br - d.total_py;
-    const reducao   = d.total_br > 0 ? ((economia / d.total_br) * 100).toFixed(1) : 0;
+    const economia   = d.total_br - d.total_py;
+    const reducao    = d.total_br > 0 ? ((economia / d.total_br) * 100).toFixed(1) : 0;
     const paybackMes = d.usaInvest && d.total_invest > 0 && economia > 0
       ? (d.total_invest / (economia / 12)).toFixed(1) + ' meses' : 'N/A';
+    const roi5       = d.usaInvest && d.total_invest > 0 && economia > 0
+      ? (((economia * 5 - d.total_invest) / d.total_invest) * 100).toFixed(0) + '%' : 'N/A';
 
     const fmtR = v => {
       if (!v || v === 0) return '—';
@@ -3122,279 +3122,79 @@ async function enviarLeadEmail(d, analiseIA) {
       return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
     };
 
-    // Montar análise IA em HTML
-    let iaHtml = '<p style="color:#888;font-style:italic;">Análise IA não disponível.</p>';
-    if (analiseIA && analiseIA.pontos_fortes) {
-      iaHtml = `
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <td width="50%" valign="top" style="padding-right:12px;">
-              <p style="color:#1D4E3A;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;">✦ Pontos Fortes</p>
-              ${analiseIA.pontos_fortes.map(p => `<p style="margin:0 0 6px;font-size:13px;color:#2C2C2A;">● ${p}</p>`).join('')}
-            </td>
-            <td width="50%" valign="top" style="padding-left:12px;border-left:1px solid #E8E6E0;">
-              <p style="color:#C45000;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;">⚠ Pontos de Atenção</p>
-              ${analiseIA.pontos_atencao.map(p => `<p style="margin:0 0 6px;font-size:13px;color:#2C2C2A;">● ${p}</p>`).join('')}
-            </td>
-          </tr>
-        </table>`;
-    }
+    const iaTexto = analiseIA
+      ? '✦ Pontos Fortes: ' + (analiseIA.pontos_fortes?.join(' | ') || '—') +
+        ' | ⚠ Atenção: ' + (analiseIA.pontos_atencao?.join(' | ') || '—')
+      : 'Análise IA não disponível.';
 
-    // HTML do relatório completo
-    const relatorio = `
-<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8">
-<style>
-  body{font-family:'Inter',Arial,sans-serif;background:#F5F4F0;margin:0;padding:0;}
-  .wrap{max-width:640px;margin:0 auto;background:#fff;}
-  .header{background:#1A2B23;padding:28px 32px;text-align:center;}
-  .header-logo{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:8px;}
-  .logo-name{font-size:26px;font-weight:300;color:#fff;letter-spacing:2px;}
-  .logo-py{font-weight:600;color:#4DB88A;}
-  .tagline{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;}
-  .empresa-box{background:#1D4E3A;padding:20px 32px;border-bottom:3px solid #4DB88A;}
-  .empresa-nome{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
-  .empresa-meta{font-size:12px;color:rgba(255,255,255,0.6);}
-  .section{padding:24px 32px;border-bottom:1px solid #E8E6E0;}
-  .section-title{font-size:11px;font-weight:700;color:#6B7A72;letter-spacing:2px;text-transform:uppercase;margin:0 0 16px;}
-  .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-  .kpi{background:#F5F4F0;border-radius:8px;padding:14px;}
-  .kpi-label{font-size:10px;color:#6B7A72;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
-  .kpi-value{font-size:22px;font-weight:800;font-family:Arial,sans-serif;}
-  .kpi-sub{font-size:10px;color:#6B7A72;margin-top:2px;}
-  .destaque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-  .destaque{border-radius:8px;overflow:hidden;}
-  .destaque-header{padding:8px 12px;font-size:10px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;}
-  .destaque-body{padding:10px 12px;background:#F5F4F0;}
-  .destaque-val{font-size:16px;font-weight:800;font-family:Arial,sans-serif;}
-  .destaque-eco{font-size:10px;color:#6B7A72;margin-top:3px;}
-  table.dados td{padding:6px 10px;font-size:12px;border-bottom:1px solid #eee;vertical-align:top;}
-  table.dados td:first-child{color:#6B7A72;white-space:nowrap;width:40%;}
-  table.dados td:last-child{font-weight:600;color:#2C2C2A;}
-  .ia-box{background:#0F2A1C;border-radius:8px;padding:20px 24px;margin:0;}
-  .footer{background:#1A2B23;padding:20px 32px;text-align:center;}
-  .footer p{font-size:10px;color:rgba(255,255,255,0.3);margin:0;}
-</style>
-</head>
-<body>
-<div class="wrap">
+    const regime_label = d.regime === 'lucro_real' ? 'Lucro Real'
+      : d.regime === 'lucro_presumido' ? 'Lucro Presumido' : 'Simples Nacional';
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 72" width="22" height="33">
-        <polygon points="0,62 14,0 28,62"   fill="#fff" opacity="0.9"/>
-        <polygon points="8,62 22,20 36,62"  fill="#fff" opacity="0.5"/>
-        <polygon points="16,62 30,35 44,62" fill="#fff" opacity="0.25"/>
-      </svg>
-      <div>
-        <div class="logo-name">Kakuaa<span class="logo-py">PY</span></div>
-        <div class="tagline">crescer · conectar · prosperar</div>
-      </div>
-    </div>
-    <p style="font-size:11px;color:rgba(255,255,255,0.4);margin:8px 0 0;">Relatório de Migração Empresarial · ${new Date().toLocaleDateString('pt-BR')}</p>
-  </div>
+    const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd9dsTd6orHl_VE-945pMrLHgDCGOqS1zLDtgvtkDqb9FfgNg/formResponse';
 
-  <!-- EMPRESA -->
-  <div class="empresa-box">
-    <div class="empresa-nome">${d.nome}</div>
-    <div class="empresa-meta">
-      👤 ${d.responsavel} &nbsp;·&nbsp; ✉️ ${d.email} &nbsp;·&nbsp; 📱 ${d.telefone}<br>
-      🏭 Setor: ${d.setor}${d.usaMaquila ? ' &nbsp;·&nbsp; <strong style="color:#4DB88A;">Regime Maquila Ativo</strong>' : ''}
-    </div>
-  </div>
-
-  <!-- KPIs -->
-  <div class="section">
-    <p class="section-title">Resumo Executivo</p>
-    <div class="kpi-grid">
-      <div class="kpi">
-        <div class="kpi-label">🇧🇷 Custo Total Brasil</div>
-        <div class="kpi-value" style="color:#2E7D32;">${fmtR(d.total_br)}</div>
-        <div class="kpi-sub">por ano</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">🇵🇾 Custo Total Paraguai</div>
-        <div class="kpi-value" style="color:#1A2B23;">${fmtR(d.total_py)}</div>
-        <div class="kpi-sub">${d.usaMaquila ? 'Regime Maquila' : 'por ano'}</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">💰 Economia Potencial</div>
-        <div class="kpi-value" style="color:#C8A84B;">${fmtR(economia)}</div>
-        <div class="kpi-sub">por ano</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">📉 Redução de Custos</div>
-        <div class="kpi-value" style="color:#C45000;">${reducao}%</div>
-        <div class="kpi-sub">${d.usaInvest && d.total_invest > 0 ? 'Payback: ' + paybackMes : 'ao ano'}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DESTAQUES -->
-  <div class="section">
-    <p class="section-title">Destaques: Impostos · Energia · Encargos</p>
-    <div class="destaque-grid">
-      <div class="destaque">
-        <div class="destaque-header" style="background:#C8A84B;">💰 Impostos s/ Lucro</div>
-        <div class="destaque-body">
-          <div style="font-size:10px;color:#6B7A72;margin-bottom:4px;">🇧🇷 ${fmtR(d.impostos_br)} → 🇵🇾 ${fmtR(d.impostos_py)}</div>
-          <div class="destaque-val" style="color:#1A2B23;">${fmtR(d.impostos_br - d.impostos_py)}</div>
-          <div class="destaque-eco">economia anual</div>
-        </div>
-      </div>
-      <div class="destaque">
-        <div class="destaque-header" style="background:#1A56A0;">⚡ Energia Elétrica</div>
-        <div class="destaque-body">
-          <div style="font-size:10px;color:#6B7A72;margin-bottom:4px;">🇧🇷 ${fmtR(d.energia_br)} → 🇵🇾 ${fmtR(d.energia_py)}</div>
-          <div class="destaque-val" style="color:#1A2B23;">${fmtR(d.energia_br - d.energia_py)}</div>
-          <div class="destaque-eco">economia anual</div>
-        </div>
-      </div>
-      <div class="destaque">
-        <div class="destaque-header" style="background:#1D4E3A;">👷 Encargos Trab.</div>
-        <div class="destaque-body">
-          <div style="font-size:10px;color:#6B7A72;margin-bottom:4px;">🇧🇷 ${fmtR(d.encargos_br)} → 🇵🇾 ${fmtR(d.encargos_py)}</div>
-          <div class="destaque-val" style="color:#1A2B23;">${fmtR(d.encargos_br - d.encargos_py)}</div>
-          <div class="destaque-eco">economia anual</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DADOS DO LEAD -->
-  <div class="section">
-    <p class="section-title">Dados do Lead</p>
-    <table class="dados" width="100%" cellpadding="0" cellspacing="0">
-      <tr><td>Empresa</td><td>${d.nome}</td></tr>
-      <tr><td>Responsável</td><td>${d.responsavel}</td></tr>
-      <tr><td>E-mail</td><td>${d.email}</td></tr>
-      <tr><td>Telefone</td><td>${d.telefone}</td></tr>
-      <tr><td>Setor</td><td>${d.setor}</td></tr>
-      <tr><td>Regime Tributário</td><td>${d.regime === 'lucro_real' ? 'Lucro Real' : d.regime === 'lucro_presumido' ? 'Lucro Presumido' : 'Simples Nacional'}</td></tr>
-      <tr><td>Faturamento Anual</td><td>${fmtR(d.fat_original || 0)}</td></tr>
-      <tr><td>Nº de Funcionários</td><td>${d.nFunc || '—'}</td></tr>
-      <tr><td>Regime Maquila</td><td>${d.usaMaquila ? '✅ Sim' : '❌ Não'}</td></tr>
-      <tr><td>Logística</td><td>${d.usaLogistica ? '✅ Sim' : '❌ Não'}</td></tr>
-      <tr><td>Investimento Inicial</td><td>${d.usaInvest ? '✅ Sim — ' + fmtR(d.total_invest) : '❌ Não'}</td></tr>
-    </table>
-  </div>
-
-  <!-- ANÁLISE IA -->
-  <div class="section" style="background:#0F2A1C;">
-    <p class="section-title" style="color:#4DB88A;">✦ Análise IA — Pontos-chave</p>
-    <div class="ia-box">${iaHtml}</div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <p>KakuaaPY · crescer · conectar · prosperar</p>
-    <p style="margin-top:4px;">Relatório gerado em ${new Date().toLocaleString('pt-BR')} · Uso confidencial</p>
-  </div>
-
-</div>
-</body>
-</html>`;
-
-    await emailjs.send('service_vsg4bsi', 'template_49orqok', {
-      to_email:   'thcs65@gmail.com',
-      from_name:  'KakuaaPY — Sistema',
-      subject:    'Lead KakuaaPY — ' + d.nome,
-      empresa:    d.nome,
-      responsavel: d.responsavel,
-      email:      d.email,
-      telefone:   d.telefone,
-      setor:      d.setor,
-      relatorio:  relatorio,
-      message:    relatorio,
+    const params = new URLSearchParams({
+      // ── DADOS DO LEAD
+      'entry.770505862':         d.nome,
+      'entry.994286359':  d.responsavel,
+      'entry.999727212':        d.email,
+      'entry.1772740587':     d.telefone,
+      'entry.2012396652':        d.setor,
+      'entry.1612098520':       regime_label,
+      'entry.79023609':        String(d.nFunc || '—'),
+      'entry.2052908499':      d.usaMaquila   ? 'Sim' : 'Não',
+      'entry.1098320621':    d.usaLogistica ? 'Sim' : 'Não',
+      'entry.105668307': d.usaInvest    ? 'Sim' : 'Não',
+      // ── RESUMO FINANCEIRO
+      'entry.360864080':     fmtR(d.total_br),
+      'entry.1675509645':     fmtR(d.total_py),
+      'entry.870524537':     fmtR(economia) + ' (' + reducao + '%)',
+      'entry.159249606':   iaTexto,
+      // ── LOGÍSTICA
+      'entry.1548849024':        d.modalSelecionado || '—',
+      'entry.977501656':      String(d.distPF || '—'),
+      'entry.1798516769':      String(d.distFD || '—'),
+      'entry.711195794':      String(d.volTon || '—'),
+      'entry.1477750613':     fmtR(d.frete_br),
+      'entry.784103378':     fmtR(d.frete_py),
+      'entry.609085146':     fmtR(d.desp_br + d.desp_py),
+      // ── INVESTIMENTO
+      'entry.954267318':  d.tipoImovel  || '—',
+      'entry.937749833':   d.modImovel   || '—',
+      'entry.182498348':    d.cidadePY    || '—',
+      'entry.1488044429':      String(d.areaM2 || '—'),
+      'entry.1052832340':   'USD ' + Math.round(window._imovelTotalUSD || 0).toLocaleString('pt-BR'),
+      'entry.758284216':     d.tipoSoc     || '—',
+      'entry.1308771356':      'USD ' + Math.round(window._docTotalUSD   || 0).toLocaleString('pt-BR'),
+      'entry.1577320826':    fmtR(d.valEquip   || 0),
+      'entry.95200403':fmtR(d.seguroEquip || 0),
+      'entry.857471724':   fmtR(d.despEquip  || 0),
+      'entry.1021504104': fmtR(d.total_invest),
+      'entry.1614355658':      paybackMes,
+      'entry.632338350':    roi5,
+      // ── FINANCEIRO DETALHADO
+      'entry.1057303543':  fmtR(d.fat_original || 0),
+      'entry.150754335':        fmtR(d.lucro_original || 0),
+      'entry.1732976267': fmtR(d.folha_original || 0),
+      'entry.1038531796': fmtR(d.salario_medio_br || 0),
+      'entry.1469707986':   'R$ 1.768/mês (Gs. 2.550.307)',
+      'entry.443191795':  fmtR(d.impostos_br),
+      'entry.660127544':  fmtR(d.impostos_py),
+      'entry.708786288':  fmtR(d.encargos_br),
+      'entry.273372511':  fmtR(d.encargos_py),
+      'entry.236180952':   fmtR(d.energia_br),
     });
 
-    console.log('✅ Lead enviado com sucesso para thcs65@gmail.com');
+    await fetch(FORM_URL, {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body:    params.toString(),
+    });
+
+    console.log('✅ Lead completo registrado no Google Forms — 45 campos.');
 
   } catch (err) {
-    // Falha silenciosa — não bloqueia o relatório
-    console.warn('⚠️ Falha ao enviar lead por e-mail.');
-    console.warn('Código do erro:', err?.status || 'N/A');
-    console.warn('Texto do erro:', err?.text || err?.message || JSON.stringify(err));
-  }
-}
-
-// ══════════════════════════════════════════════════════
-// ANÁLISE IA — ANTHROPIC API
-// ══════════════════════════════════════════════════════
-async function gerarAnaliseIA(d) {
-  const el = document.getElementById('ia-conteudo');
-  if (!el) return;
-
-  const economia   = d.total_br - d.total_py;
-  const reducao    = d.total_br > 0 ? ((economia / d.total_br) * 100).toFixed(1) : 0;
-  const paybackMes = d.usaInvest && d.total_invest > 0 && economia > 0
-    ? (d.total_invest / (economia / 12)).toFixed(1) : null;
-
-  const prompt = `Você é um consultor especialista em migração empresarial Brasil-Paraguai.
-Analise os dados abaixo e responda SOMENTE em JSON válido, sem texto extra.
-
-Dados do relatório:
-- Empresa: ${d.nome} | Setor: ${d.setor}
-- Custo anual Brasil: R$ ${Math.round(d.total_br).toLocaleString('pt-BR')}
-- Custo anual Paraguai: R$ ${Math.round(d.total_py).toLocaleString('pt-BR')}
-- Economia anual: R$ ${Math.round(economia).toLocaleString('pt-BR')} (${reducao}% de redução)
-- Regime Maquila: ${d.usaMaquila ? 'Sim' : 'Não'}
-- Logística incluída: ${d.usaLogistica ? 'Sim' : 'Não'}
-- Investimento inicial: ${d.usaInvest && d.total_invest > 0 ? 'R$ ' + Math.round(d.total_invest).toLocaleString('pt-BR') : 'Não calculado'}
-- Payback estimado: ${paybackMes ? paybackMes + ' meses' : 'N/A'}
-- Encargos BR: R$ ${Math.round(d.encargos_br).toLocaleString('pt-BR')}/ano
-- Encargos PY: R$ ${Math.round(d.encargos_py).toLocaleString('pt-BR')}/ano
-- Impostos BR: R$ ${Math.round(d.impostos_br).toLocaleString('pt-BR')}/ano
-- Impostos PY: R$ ${Math.round(d.impostos_py).toLocaleString('pt-BR')}/ano
-
-Responda APENAS com este JSON (sem markdown, sem explicação):
-{
-  "pontos_fortes": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)", "frase 3 (máx 15 palavras)"],
-  "pontos_atencao": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)"]
-}`;
-
-  try {
-    const res = await fetch('/api/claude', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt })
-    });
-
-    if (!res.ok) throw new Error('API error: ' + res.status);
-    const data = await res.json();
-    const text = (data.text || '').trim();
-    const json = JSON.parse(text.replace(/```json|```/g, '').trim());
-
-    el.innerHTML = `
-      <div class="ia-cols">
-        <div>
-          <div class="ia-col-title pos">✦ Pontos Fortes</div>
-          ${json.pontos_fortes.map(p => `
-            <div class="ia-item">
-              <div class="ia-dot pos"></div>
-              <span>${p}</span>
-            </div>`).join('')}
-        </div>
-        <div>
-          <div class="ia-col-title neg">⚠ Atenção</div>
-          ${json.pontos_atencao.map(p => `
-            <div class="ia-item">
-              <div class="ia-dot neg"></div>
-              <span>${p}</span>
-            </div>`).join('')}
-        </div>
-      </div>
-      <div class="ia-disclaimer">Análise gerada por IA com base nos dados informados. Não substitui consultoria especializada.</div>`;
-
-    // Enviar lead + relatório por e-mail após análise IA concluída
-    enviarLeadEmail(d, json);
-
-  } catch (e) {
-    el.innerHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.3);font-style:italic;">
-      Análise IA indisponível no momento. Os dados do relatório permanecem válidos.
-    </div>`;
+    console.warn('⚠️ Falha ao registrar lead:', err?.message || err);
   }
 }
 
