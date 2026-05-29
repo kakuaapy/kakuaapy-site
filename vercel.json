@@ -1,13 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/",          "destination": "/index.html" },
-    { "source": "/sobre",     "destination": "/sobre.html" },
-    { "source": "/servicos",  "destination": "/servicos.html" },
-    { "source": "/contato",   "destination": "/contato.html" },
-    { "source": "/news",      "destination": "/news.html" },
-    { "source": "/ferramenta","destination": "/ferramenta.html" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/",          "dest": "/index.html" },
+    { "src": "/sobre",     "dest": "/sobre.html" },
+    { "src": "/servicos",  "dest": "/servicos.html" },
+    { "src": "/contato",   "dest": "/contato.html" },
+    { "src": "/news",      "dest": "/news.html" },
+    { "src": "/ferramenta","dest": "/ferramenta.html" }
   ],
   "headers": [
     {
