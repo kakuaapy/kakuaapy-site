@@ -9,6 +9,11 @@
     { "source": "/ferramenta", "destination": "/ferramenta.html" },
     { "source": "/",           "destination": "/index.html" }
   ],
+  "functions": {
+    "api/claude.js": {
+      "maxDuration": 15
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
