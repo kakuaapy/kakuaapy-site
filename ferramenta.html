@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KakuaaPY v9.0 — Comparativo de Migração Empresarial</title>
+<title>KakuaaPY — Comparativo de Migração Empresarial BR↔PY</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -1322,10 +1322,11 @@ footer strong { color: white; }
 .footer-brand .brand-tag { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.22); margin-bottom:16px; }
 .footer-brand p { font-size:12px; line-height:1.75; color:rgba(255,255,255,0.32); max-width:260px; }
 .footer-cols { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
-.footer-col-title { font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.32); margin-bottom:16px; }
-.footer-col ul { list-style:none; }
-.footer-col ul li { margin-bottom:9px; }
-.footer-col ul li a { font-size:13px; color:rgba(255,255,255,0.42); text-decoration:none; transition:color 0.2s; }
+.footer-col { text-align:left; }
+.footer-col-title { font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.32); margin-bottom:16px; text-align:left; }
+.footer-col ul { list-style:none; text-align:left; }
+.footer-col ul li { margin-bottom:9px; text-align:left; }
+.footer-col ul li a { font-size:13px; color:rgba(255,255,255,0.42); text-decoration:none; transition:color 0.2s; display:block; text-align:left; }
 .footer-col ul li a:hover { color:var(--kk-accent); }
 .footer-bottom { max-width:1100px; margin:0 auto; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; font-size:11px; color:rgba(255,255,255,0.2); }
 .footer-bottom-accent { color:rgba(77,184,138,0.38); letter-spacing:0.12em; }
@@ -1340,12 +1341,192 @@ footer strong { color: white; }
 .float-icon-label::after { content:''; position:absolute; right:-5px; top:50%; transform:translateY(-50%); border:5px solid transparent; border-right:none; border-left-color:rgba(15,26,20,0.95); }
 .float-icon:hover .float-icon-label { opacity:1; transform:translateX(0); }
 @media (max-width:768px) {
-  .site-nav { padding:0 20px; }
+  /* ── NAV ── */
+  .site-nav { padding:0 16px; height:56px; }
   .site-nav-links { display:none; }
   .mobile-menu-btn { display:flex; }
-  .site-footer-inner { grid-template-columns:1fr; gap:32px; padding:36px 24px; }
-  .footer-cols { grid-template-columns:1fr 1fr; }
-  .footer-bottom { flex-direction:column; gap:8px; padding:16px 24px; text-align:center; }
+  .site-nav-tricolor { top:56px; }
+
+  /* ── HERO ── */
+  .hero { padding:28px 16px 24px; }
+  .hero h1 { font-size:20px; letter-spacing:-0.5px; line-height:1.25; }
+  .hero > p { padding:12px 14px !important; font-size:12px !important; }
+  .hero > p span[style*="font-size:13px"] { font-size:12px !important; }
+  .hero-chips { gap:5px; flex-wrap:wrap; justify-content:center; }
+  .hero-chip { font-size:10px; padding:4px 10px; }
+
+  /* ── STEPS ── */
+  .steps { gap:0; overflow-x:auto; padding-bottom:2px; }
+  .step { padding:8px 10px; font-size:10px; white-space:nowrap; flex-shrink:0; }
+  .step-num { width:18px; height:18px; font-size:9px; }
+
+  /* ── FORMULÁRIO ── */
+  .container { padding:0 12px; }
+  section { padding:20px 0; }
+  .section-title { font-size:17px; }
+  .form-card { padding:14px; }
+  .form-card-title { font-size:12px; flex-wrap:wrap; gap:6px; }
+  .form-grid,
+  .logistica-grid { grid-template-columns:1fr !important; gap:12px; }
+
+  /* Inputs — evitar zoom iOS */
+  input, select {
+    font-size:16px !important;
+    padding:11px 12px;
+  }
+  .input-currency .prefix { font-size:13px; }
+  .input-currency input { padding-left:30px !important; }
+  label { font-size:11px; }
+  .field-note { font-size:9px; line-height:1.4; }
+
+  /* Preview folha */
+  #folha-preview-wrap > div { padding:12px 14px !important; }
+  .folha-preview-cols,
+  #folha-preview-wrap > div > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+
+  /* ── TOGGLES ── */
+  .maquila-toggle-wrap,
+  .logistica-wrap,
+  .investimento-wrap { padding:14px; }
+  .maquila-header,
+  .logistica-wrap > div:first-child,
+  .investimento-wrap > div:first-child {
+    flex-direction:column;
+    gap:10px;
+  }
+  .switch-wrap { align-self:flex-start; }
+  .maquila-info p,
+  .logistica-wrap p,
+  .investimento-wrap p { font-size:11px; max-width:100%; }
+  .maquila-detalhes.visivel { padding-top:12px; margin-top:12px; }
+  .info-box { font-size:10px; padding:10px 12px; }
+
+  /* Logística — modais */
+  .modal-cards { grid-template-columns:repeat(2,1fr) !important; gap:8px; }
+  .modal-icon { font-size:20px; }
+  .modal-nome { font-size:10px; }
+  .modal-desc { font-size:9px; }
+  .distancia-display { font-size:15px; }
+  .slider-labels { font-size:9px; }
+
+  /* ── INVESTIMENTO ── */
+  .invest-section { margin-top:14px; padding-top:14px; }
+  .invest-section-title { font-size:10px; }
+  .opcao-cards.cols-2,
+  .opcao-cards.cols-3,
+  .opcao-cards.cols-4 { grid-template-columns:1fr 1fr !important; gap:8px; }
+  .opcao-card { padding:9px 7px; }
+  .opcao-icon { font-size:18px; margin-bottom:3px; }
+  .opcao-nome { font-size:9px; }
+  .opcao-desc { font-size:8px; }
+  .cidade-cards { grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  .cidade-icon { font-size:20px; }
+  .cidade-nome { font-size:10px; }
+  .cidade-desc { font-size:8px; }
+  .estimativa-grid { grid-template-columns:1fr 1fr !important; gap:8px; }
+  .estimativa-item { padding:9px 7px; }
+  .estimativa-item .ei-valor { font-size:13px; }
+  .estimativa-item .ei-label { font-size:8px; }
+  .estimativa-item .ei-sub   { font-size:8px; }
+  .estimativa-total { flex-direction:column; align-items:flex-start; gap:4px; }
+  .estimativa-total .et-valor { font-size:18px; }
+  .estimativa-total .et-label { font-size:9px; }
+  .estimativa-nota { font-size:9px; }
+  #invest_total_display { font-size:20px; }
+
+  /* ── BOTÃO CALCULAR ── */
+  .btn-calcular { font-size:14px; padding:14px; margin-top:18px; }
+  .loader { padding:28px 14px; }
+
+  /* ── RESULTADO / DASHBOARD ── */
+  #resultado > div { padding:10px 10px !important; }
+
+  /* Topbar */
+  #rpt-topbar { padding:8px 12px !important; gap:6px !important; flex-wrap:wrap; }
+  #rpt-topbar > div:first-child { flex-direction:column; align-items:flex-start !important; gap:3px !important; }
+  #rpt-topbar span[id="rpt-titulo"] { font-size:10px !important; }
+  #rpt-topbar select, #rpt-topbar button { font-size:10px !important; padding:4px 8px !important; }
+
+  /* Cabeçalho empresa */
+  #resultado > div > div:first-child { flex-direction:column !important; gap:8px !important; padding:12px 14px !important; }
+  #rpt-empresa-nome { font-size:14px !important; }
+  #rpt-empresa-meta { font-size:9px !important; line-height:1.6; }
+  #resultado > div > div:first-child > div:last-child { flex-direction:row !important; gap:10px !important; justify-content:flex-start; flex-wrap:wrap; }
+
+  /* KPIs — 2 colunas */
+  #rpt-kpis { grid-template-columns:1fr 1fr !important; gap:7px !important; }
+  #rpt-kpis > div { padding:12px 10px !important; }
+  #rpt-kpis > div > div:nth-child(1) { font-size:8px !important; }
+  #rpt-kpis > div > div:nth-child(2) { font-size:17px !important; font-weight:800 !important; }
+  #rpt-kpis > div > div:nth-child(3) { font-size:8px !important; }
+
+  /* Card IA — barras de saúde */
+  .ia-card { padding:14px 12px !important; }
+  .ia-cols { grid-template-columns:1fr !important; gap:12px; }
+  .ia-header { gap:8px; margin-bottom:14px; }
+  .ia-badge { font-size:10px; padding:3px 10px; }
+
+  /* Gráficos — coluna única */
+  #resultado > div > div:nth-child(3) { grid-template-columns:1fr !important; gap:10px !important; }
+  #rpt-bar-chart svg { font-size:8px !important; }
+
+  /* Destaques — coluna única */
+  #rpt-destaques { grid-template-columns:1fr !important; gap:8px !important; }
+  #rpt-destaques > div { padding:12px !important; }
+  #rpt-destaques > div > div:first-child { font-size:11px !important; }
+
+  /* Tabela — scroll horizontal */
+  .tabela-rpt, .tabela-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  #rpt-tabela, table { min-width:440px; }
+  #rpt-tabela thead th, thead th { font-size:9px !important; padding:7px 8px !important; }
+  #rpt-tabela td, td { font-size:10px !important; padding:6px 8px !important; }
+  td.br-val, td.py-val { font-size:11px !important; }
+  .badge { font-size:9px; padding:2px 6px; }
+  tbody tr.categoria td { font-size:9px !important; padding:7px 8px !important; }
+
+  /* Payback */
+  #rpt-payback-content { grid-template-columns:1fr 1fr !important; gap:7px !important; }
+
+  /* Resultado — cards resumo */
+  .cards-resumo { grid-template-columns:1fr !important; gap:8px; margin-bottom:14px; }
+  .card-resumo { padding:14px; }
+  .card-resumo .valor { font-size:18px; }
+  .card-resumo .label { font-size:9px; }
+  #card-invest-wrap .card-resumo { padding:14px; }
+  .maquila-badge-resultado { font-size:10px; padding:4px 10px; flex-wrap:wrap; }
+
+  /* Gráfico barras */
+  .grafico-section { padding:14px 12px; }
+  .grafico-title { font-size:12px; margin-bottom:12px; }
+  .barra-legend { gap:8px; font-size:9px; margin-bottom:10px; }
+  .barra-country { width:40px; font-size:9px; }
+  .barra-val { width:55px; font-size:9px; }
+  .barra-label { font-size:10px; }
+  .barra-label .poupanca { font-size:9px; }
+  .barra-item { margin-bottom:12px; }
+
+  /* Disclaimer / fontes */
+  .disclaimer { font-size:10px; padding:10px 12px; flex-direction:column; gap:5px; }
+  .fontes-card { padding:14px; }
+  .fontes-grid { grid-template-columns:1fr !important; gap:3px; font-size:9px; }
+
+  /* Resultado header + botão PDF */
+  .resultado-header { flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:14px; }
+  .btn-pdf { width:100%; justify-content:center; padding:10px; font-size:12px; }
+
+  /* Rodapé resultado */
+  #resultado > div > div:last-child { font-size:9px !important; padding:10px !important; }
+
+  /* ── FOOTER DO SITE ── */
+  .site-footer-inner { grid-template-columns:1fr; gap:24px; padding:28px 16px; }
+  .footer-cols { grid-template-columns:1fr 1fr; gap:16px; }
+  .footer-col-title { font-size:10px; margin-bottom:10px; }
+  .footer-col ul li a { font-size:12px; }
+  .footer-brand p { font-size:11px; max-width:100%; }
+  .footer-bottom { flex-direction:column; gap:6px; padding:14px 16px; text-align:center; font-size:10px; }
   .float-icons { display:none; }
 }
 
@@ -1353,12 +1534,11 @@ footer strong { color: white; }
    IMPRESSÃO — APENAS RELATÓRIO
    ══════════════════════════════════════ */
 @media print {
-  /* Ocultar tudo que não é relatório */
+  /* Ocultar elementos de navegação e interface */
   .site-nav,
   .site-nav-tricolor,
   .mobile-menu,
   .hero,
-  #formulario,
   .site-footer,
   .kk-tricolor,
   .float-icons,
@@ -1368,6 +1548,14 @@ footer strong { color: white; }
   .loader,
   nav,
   header {
+    display: none !important;
+  }
+
+  /* Ocultar steps e botões dentro do formulário */
+  .steps-bar,
+  .form-actions,
+  .lgpd-wrap,
+  .campo-erro .erro-msg {
     display: none !important;
   }
 
@@ -1386,25 +1574,94 @@ footer strong { color: white; }
     print-color-adjust: exact;
   }
 
-  /* Mostrar e formatar o relatório */
+  /* ── FORMULÁRIO — mostrar como resumo de dados ── */
+  #formulario {
+    display: block !important;
+    background: white !important;
+    padding: 0 !important;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #1A2B23;
+    padding-bottom: 16px;
+  }
+
+  /* Ocultar cards desnecessários no formulário — manter só Informações Gerais + Dados Financeiros */
+  #formulario .form-card:not(:first-child) {
+    display: none !important;
+  }
+
+  /* Título da seção no formulário */
+  #formulario .form-card-title {
+    font-size: 11pt !important;
+    font-weight: 700 !important;
+    color: #1A2B23 !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 0 8px 0 !important;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+  }
+
+  /* Grid do formulário em 3 colunas no A4 */
+  #formulario .form-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* Campos do formulário — estilo limpo para impressão */
+  #formulario .form-group {
+    break-inside: avoid;
+  }
+  #formulario label {
+    font-size: 8pt !important;
+    font-weight: 700 !important;
+    color: #666 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 2px !important;
+  }
+  #formulario input,
+  #formulario select {
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    font-size: 10pt !important;
+    font-weight: 600 !important;
+    color: #111 !important;
+    padding: 3px 0 !important;
+    box-shadow: none !important;
+  }
+  #formulario .input-currency .prefix {
+    display: none !important;
+  }
+  #formulario .field-note,
+  #formulario .erro-msg {
+    display: none !important;
+  }
+
+  /* Separador entre formulário e relatório */
+  #formulario::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #1A2B23;
+    margin-top: 16px;
+  }
+
+  /* ── RELATÓRIO ── */
   #resultado {
     display: block !important;
   }
 
-  /* KPIs em 2 colunas para caber no A4 */
+  /* KPIs em 2 colunas */
   #rpt-kpis {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 8px !important;
   }
 
-  /* Destaques em coluna única */
+  /* Destaques em 3 colunas */
   #rpt-destaques {
     grid-template-columns: repeat(3, 1fr) !important;
-  }
-
-  /* Gráficos lado a lado */
-  #resultado > div > div:nth-child(4) {
-    grid-template-columns: 2fr 1fr !important;
   }
 
   /* Forçar cores de fundo */
@@ -1419,26 +1676,16 @@ footer strong { color: white; }
     break-inside: avoid;
   }
 
-  /* Análise IA — garantir visibilidade */
   .ia-card {
     break-inside: avoid;
     margin-bottom: 12px !important;
   }
 
-  /* Tabela sem corte de página */
   .tabela-wrap {
     overflow: visible !important;
     break-inside: avoid;
   }
 
-  /* Rodapé do relatório */
-  #resultado > div > div:last-child {
-    margin-top: 12px;
-    font-size: 8pt;
-    color: #999 !important;
-  }
-
-  /* Padding do container */
   #resultado > div {
     padding: 0 !important;
     max-width: 100% !important;
@@ -1508,7 +1755,25 @@ footer strong { color: white; }
     <svg width="54" height="80"><use href="#kk-sym-dark"/></svg>
   </div>
   <h1>Decisões estratégicas baseadas<br>em <span>dados reais</span></h1>
-  <p>Comparativo detalhado de impostos, encargos trabalhistas, logística e Regime Maquila entre Brasil e Paraguai — com dados de fontes oficiais.</p>
+  <p style="max-width:580px;margin:0 auto 20px;text-align:left;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 20px;">
+    <span style="display:block;font-size:11px;font-weight:600;color:var(--kk-accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Como usar esta ferramenta</span>
+    <span style="display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:13px;color:rgba(255,255,255,0.7);">
+      <span style="color:var(--kk-accent);font-weight:700;flex-shrink:0;">1.</span>
+      Preencha os dados da sua empresa — faturamento, folha, regime tributário e número de funcionários.
+    </span>
+    <span style="display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:13px;color:rgba(255,255,255,0.7);">
+      <span style="color:var(--kk-accent);font-weight:700;flex-shrink:0;">2.</span>
+      Ative os módulos opcionais: Regime Maquila, Logística e Investimento Inicial conforme sua operação.
+    </span>
+    <span style="display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:13px;color:rgba(255,255,255,0.7);">
+      <span style="color:var(--kk-accent);font-weight:700;flex-shrink:0;">3.</span>
+      <span>Clique em <strong style="color:white;font-weight:700;">Gerar Comparativo Completo</strong> para visualizar o relatório com análise de IA.</span>
+    </span>
+    <span style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.7);">
+      <span style="color:var(--kk-accent);font-weight:700;flex-shrink:0;">4.</span>
+      Use o botão de impressão para salvar ou compartilhar o relatório em PDF.
+    </span>
+  </p>
   <div class="hero-chips">
     <span class="hero-chip">✅ Impostos e encargos</span>
     <span class="hero-chip new">🏭 Regime Maquila</span>
@@ -1534,7 +1799,7 @@ footer strong { color: white; }
     <div class="form-card">
       <div class="form-card-title">🏢 Informações Gerais</div>
       <div class="form-grid">
-        <div class="form-group full">
+        <div class="form-group">
           <label>Nome da Empresa <span style="color:#F43F5E;">*</span></label>
           <div class="input-wrap" id="wrap_nome_empresa">
             <input type="text" id="nome_empresa" placeholder="Ex: Grupo Exemplo Ltda."
@@ -1542,7 +1807,7 @@ footer strong { color: white; }
             <div class="erro-msg">⚠ Informe o nome da empresa para continuar.</div>
           </div>
         </div>
-        <div class="form-group full">
+        <div class="form-group">
           <label>Nome do Responsável <span style="color:#F43F5E;">*</span></label>
           <div class="input-wrap" id="wrap_nome_responsavel">
             <input type="text" id="nome_responsavel" placeholder="Ex: João Silva"
@@ -3413,60 +3678,67 @@ async function gerarAnaliseIA(d) {
     ? (d.total_invest / (economia / 12)).toFixed(1) : null;
 
   // ── SAÚDE FINANCEIRA BR ──
-  // Todas as despesas BR: impostos + encargos + operacional + logística + tributos faturamento
-  const despesas_br = (d.impostos_br || 0)
-    + (d.tributos_br  || 0)
-    + (d.encargos_br  || 0)
+  const despesas_br = (d.impostos_br    || 0)
+    + (d.tributos_br    || 0)
+    + (d.encargos_br    || 0)
     + (d.operacional_br || 0)
-    + (d.log_br       || 0)
+    + (d.log_br         || 0)
     + (d.folha_bruta_br || 0);
 
   const fat = d.fat_original || 0;
-  const pct_despesas = fat > 0 ? ((despesas_br / fat) * 100) : 0;
+  const pct_br = fat > 0 ? ((despesas_br / fat) * 100) : 0;
 
-  let saude_label, saude_cor, saude_icon, saude_bg;
-  if (pct_despesas <= 60) {
-    saude_label = 'Operação Saudável';
-    saude_cor   = '#4DB88A';
-    saude_icon  = '🟢';
-    saude_bg    = 'rgba(77,184,138,0.12)';
-  } else if (pct_despesas <= 80) {
-    saude_label = 'Operação em Risco';
-    saude_cor   = '#F59E0B';
-    saude_icon  = '🟡';
-    saude_bg    = 'rgba(245,158,11,0.12)';
-  } else {
-    saude_label = 'Operação Inviável';
-    saude_cor   = '#F43F5E';
-    saude_icon  = '🔴';
-    saude_bg    = 'rgba(244,63,94,0.12)';
+  // ── SAÚDE FINANCEIRA PY ──
+  // Impostos PY + Tributos PY + Encargos PY + Operacional PY + Folha PY
+  // + Logística BR (mantida conforme operação real)
+  const despesas_py = (d.impostos_py    || 0)
+    + (d.tributos_py    || 0)
+    + (d.encargos_py    || 0)
+    + (d.operacional_py || 0)
+    + (d.log_br         || 0)   // logística BR mantida
+    + (d.folha_bruta_py || 0);
+
+  const pct_py = fat > 0 ? ((despesas_py / fat) * 100) : 0;
+
+  // Função auxiliar de classificação
+  function classificar(pct) {
+    if (pct <= 60) return { label: 'Operação Saudável', cor: '#4DB88A', icon: '🟢', bg: 'rgba(77,184,138,0.12)' };
+    if (pct <= 80) return { label: 'Operação em Risco', cor: '#F59E0B', icon: '🟡', bg: 'rgba(245,158,11,0.12)' };
+    return           { label: 'Operação Inviável',  cor: '#F43F5E', icon: '🔴', bg: 'rgba(244,63,94,0.12)' };
   }
+
+  const saude_br = classificar(pct_br);
+  const saude_py = classificar(pct_py);
 
   const prompt = `Você é um consultor especialista em migração empresarial Brasil-Paraguai.
 Analise os dados abaixo e responda SOMENTE em JSON válido, sem texto extra.
 
 Dados do relatório:
 - Empresa: ${d.nome} | Setor: ${d.setor}
-- Faturamento anual BR: R$ ${Math.round(fat).toLocaleString('pt-BR')}
-- Total despesas BR: R$ ${Math.round(despesas_br).toLocaleString('pt-BR')} (${pct_despesas.toFixed(1)}% do faturamento)
+- Faturamento anual: R$ ${Math.round(fat).toLocaleString('pt-BR')}
+- Total despesas BR: R$ ${Math.round(despesas_br).toLocaleString('pt-BR')} (${pct_br.toFixed(1)}% do faturamento)
+- Total despesas PY: R$ ${Math.round(despesas_py).toLocaleString('pt-BR')} (${pct_py.toFixed(1)}% do faturamento)
 - Impostos BR: R$ ${Math.round(d.impostos_br||0).toLocaleString('pt-BR')}/ano
-- Tributos s/ faturamento BR: R$ ${Math.round(d.tributos_br||0).toLocaleString('pt-BR')}/ano
-- Encargos trabalhistas BR: R$ ${Math.round(d.encargos_br||0).toLocaleString('pt-BR')}/ano
-- Folha de pagamento BR: R$ ${Math.round(d.folha_bruta_br||0).toLocaleString('pt-BR')}/ano
-- Custos operacionais BR: R$ ${Math.round(d.operacional_br||0).toLocaleString('pt-BR')}/ano
-- Logística BR: R$ ${Math.round(d.log_br||0).toLocaleString('pt-BR')}/ano
-- Custo total Paraguai: R$ ${Math.round(d.total_py).toLocaleString('pt-BR')}/ano
+- Impostos PY: R$ ${Math.round(d.impostos_py||0).toLocaleString('pt-BR')}/ano
+- Encargos BR: R$ ${Math.round(d.encargos_br||0).toLocaleString('pt-BR')}/ano
+- Encargos PY: R$ ${Math.round(d.encargos_py||0).toLocaleString('pt-BR')}/ano
+- Folha BR: R$ ${Math.round(d.folha_bruta_br||0).toLocaleString('pt-BR')}/ano
+- Folha PY: R$ ${Math.round(d.folha_bruta_py||0).toLocaleString('pt-BR')}/ano
+- Operacional BR: R$ ${Math.round(d.operacional_br||0).toLocaleString('pt-BR')}/ano
+- Operacional PY: R$ ${Math.round(d.operacional_py||0).toLocaleString('pt-BR')}/ano
+- Logística BR (mantida em ambos): R$ ${Math.round(d.log_br||0).toLocaleString('pt-BR')}/ano
 - Economia anual migrando: R$ ${Math.round(economia).toLocaleString('pt-BR')} (${reducao}% de redução)
 - Regime Maquila: ${d.usaMaquila ? 'Sim' : 'Não'}
-- Logística incluída: ${d.usaLogistica ? 'Sim' : 'Não'}
 - Investimento inicial: ${d.usaInvest && d.total_invest > 0 ? 'R$ ' + Math.round(d.total_invest).toLocaleString('pt-BR') : 'Não calculado'}
 - Payback estimado: ${paybackMes ? paybackMes + ' meses' : 'N/A'}
 
-Diagnóstico de saúde calculado: ${saude_label} (despesas = ${pct_despesas.toFixed(1)}% do faturamento)
+Diagnóstico BR: ${saude_br.label} (${pct_br.toFixed(1)}% do faturamento)
+Diagnóstico PY: ${saude_py.label} (${pct_py.toFixed(1)}% do faturamento)
 
 Responda APENAS com este JSON (sem markdown, sem explicação):
 {
-  "saude_comentario": "frase única de até 20 palavras explicando o diagnóstico de saúde",
+  "saude_comentario_br": "frase única de até 20 palavras sobre a saúde financeira no Brasil",
+  "saude_comentario_py": "frase única de até 20 palavras sobre a saúde financeira no Paraguai",
   "pontos_fortes": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)", "frase 3 (máx 15 palavras)"],
   "pontos_atencao": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)"]
 }`;
@@ -3483,45 +3755,46 @@ Responda APENAS com este JSON (sem markdown, sem explicação):
     const text = (data.text || '').trim();
     const json = JSON.parse(text.replace(/```json|```/g, '').trim());
 
-    // Barra de progresso visual
-    const barWidth = Math.min(pct_despesas, 100).toFixed(1);
-    const barColor = pct_despesas <= 60 ? '#4DB88A' : pct_despesas <= 80 ? '#F59E0B' : '#F43F5E';
-
-    el.innerHTML = `
-      <!-- SAÚDE FINANCEIRA BR -->
-      <div style="background:${saude_bg};border:1px solid ${saude_cor}33;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
-          <div>
-            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">
-              🇧🇷 Saúde Financeira — Brasil
+    // Função auxiliar para renderizar barra de saúde
+    function barSaude(flag, titulo, pct, saude, comentario) {
+      const w   = Math.min(pct, 100).toFixed(1);
+      const cor = pct <= 60 ? '#4DB88A' : pct <= 80 ? '#F59E0B' : '#F43F5E';
+      return `
+        <div style="background:${saude.bg};border:1px solid ${saude.cor}33;border-radius:10px;padding:16px 18px;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <div>
+              <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">
+                ${flag} ${titulo}
+              </div>
+              <div style="font-size:18px;font-weight:700;color:${saude.cor};">
+                ${saude.icon} ${saude.label}
+              </div>
             </div>
-            <div style="font-size:18px;font-weight:700;color:${saude_cor};">
-              ${saude_icon} ${saude_label}
+            <div style="text-align:right;">
+              <div style="font-size:28px;font-weight:800;color:${saude.cor};font-family:'Barlow Condensed',sans-serif;line-height:1;">
+                ${pct.toFixed(1)}%
+              </div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">despesas / faturamento</div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:28px;font-weight:800;color:${saude_cor};font-family:'Barlow Condensed',sans-serif;line-height:1;">
-              ${pct_despesas.toFixed(1)}%
-            </div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">despesas / faturamento</div>
+          <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;margin-bottom:10px;">
+            <div style="height:100%;width:${w}%;background:${cor};border-radius:99px;transition:width 1s ease;"></div>
           </div>
-        </div>
-        <!-- Barra de progresso -->
-        <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;margin-bottom:10px;">
-          <div style="height:100%;width:${barWidth}%;background:${barColor};border-radius:99px;transition:width 1s ease;"></div>
-        </div>
-        <!-- Legenda -->
-        <div style="display:flex;gap:12px;font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:10px;flex-wrap:wrap;">
-          <span style="color:#4DB88A;">■ ≤60% Saudável</span>
-          <span style="color:#F59E0B;">■ 61–80% Em Risco</span>
-          <span style="color:#F43F5E;">■ 81–100% Inviável</span>
-        </div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;font-style:italic;">
-          "${json.saude_comentario}"
-        </div>
-      </div>
+          <div style="display:flex;gap:12px;font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:10px;flex-wrap:wrap;">
+            <span style="color:#4DB88A;">■ ≤60% Saudável</span>
+            <span style="color:#F59E0B;">■ 61–80% Em Risco</span>
+            <span style="color:#F43F5E;">■ 81–100% Inviável</span>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;font-style:italic;">
+            "${comentario}"
+          </div>
+        </div>`;
+    }
 
-      <!-- PONTOS-CHAVE DA MIGRAÇÃO -->
+    el.innerHTML =
+      barSaude('🇧🇷', 'Saúde Financeira — Brasil',   pct_br, saude_br, json.saude_comentario_br) +
+      barSaude('🇵🇾', 'Saúde Financeira — Paraguai', pct_py, saude_py, json.saude_comentario_py) +
+      `<!-- PONTOS-CHAVE DA MIGRAÇÃO -->
       <div class="ia-cols">
         <div>
           <div class="ia-col-title pos">✦ Pontos Fortes</div>
