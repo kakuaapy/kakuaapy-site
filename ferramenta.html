@@ -1574,78 +1574,23 @@ footer strong { color: white; }
     print-color-adjust: exact;
   }
 
-  /* ── FORMULÁRIO — mostrar como resumo de dados ── */
+  /* ── FORMULÁRIO — ocultar na impressão (dados são exibidos via JS) ── */
   #formulario {
+    display: none !important;
+  }
+
+  /* ── BLOCO DE DADOS DO CLIENTE — gerado via JS ── */
+  #print-dados-cliente {
     display: block !important;
     background: white !important;
-    padding: 0 !important;
-    margin-bottom: 16px;
-    border-bottom: 2px solid #1A2B23;
-    padding-bottom: 16px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    break-after: avoid;
   }
 
-  /* Ocultar cards desnecessários no formulário — manter só Informações Gerais + Dados Financeiros */
-  #formulario .form-card:not(:first-child) {
+  /* Ocultar botão de impressão no final */
+  #btn-imprimir-final {
     display: none !important;
-  }
-
-  /* Título da seção no formulário */
-  #formulario .form-card-title {
-    font-size: 11pt !important;
-    font-weight: 700 !important;
-    color: #1A2B23 !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 0 8px 0 !important;
-    margin-bottom: 10px !important;
-    border-bottom: 1px solid #e0e0e0 !important;
-  }
-
-  /* Grid do formulário em 3 colunas no A4 */
-  #formulario .form-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 10px !important;
-  }
-
-  /* Campos do formulário — estilo limpo para impressão */
-  #formulario .form-group {
-    break-inside: avoid;
-  }
-  #formulario label {
-    font-size: 8pt !important;
-    font-weight: 700 !important;
-    color: #666 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    margin-bottom: 2px !important;
-  }
-  #formulario input,
-  #formulario select {
-    border: none !important;
-    border-bottom: 1px solid #ddd !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    font-size: 10pt !important;
-    font-weight: 600 !important;
-    color: #111 !important;
-    padding: 3px 0 !important;
-    box-shadow: none !important;
-  }
-  #formulario .input-currency .prefix {
-    display: none !important;
-  }
-  #formulario .field-note,
-  #formulario .erro-msg {
-    display: none !important;
-  }
-
-  /* Separador entre formulário e relatório */
-  #formulario::after {
-    content: '';
-    display: block;
-    height: 1px;
-    background: #1A2B23;
-    margin-top: 16px;
   }
 
   /* ── RELATÓRIO ── */
@@ -2587,6 +2532,26 @@ footer strong { color: white; }
     <!-- RODAPÉ -->
     <div style="text-align:center; padding:16px; font-size:10px; color:rgba(255,255,255,0.2); font-family:'DM Mono',monospace;">
       KakuaaPY · <span id="rpt-rodape-empresa"></span> · <span class="i18n" data-key="generated">Gerado em</span> <span id="rpt-rodape-data"></span>
+    </div>
+
+    <!-- BOTÃO IMPRIMIR — FINAL DO RELATÓRIO -->
+    <div id="btn-imprimir-final" style="
+      padding:24px 28px;
+      border-top:1px solid rgba(255,255,255,0.07);
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      flex-wrap:wrap;">
+      <button onclick="prepararEImprimir()" style="
+        display:inline-flex; align-items:center; gap:10px;
+        background:var(--kk-accent); color:var(--kk-primary);
+        font-family:'Inter',sans-serif; font-weight:700; font-size:15px;
+        padding:14px 36px; border:none; border-radius:10px; cursor:pointer;
+        box-shadow:0 4px 20px rgba(77,184,138,0.3);
+        transition:all 0.2s;">
+        🖨️ Salvar / Imprimir Relatório Completo
+      </button>
+      <div style="font-size:11px; color:rgba(255,255,255,0.3); text-align:center; line-height:1.5;">
+        Inclui seus dados e o comparativo completo · Formato A4
+      </div>
     </div>
 
   </div>
@@ -3737,8 +3702,8 @@ Diagnóstico PY: ${saude_py.label} (${pct_py.toFixed(1)}% do faturamento)
 
 Responda APENAS com este JSON (sem markdown, sem explicação):
 {
-  "saude_comentario_br": "frase única de até 20 palavras sobre a saúde financeira no Brasil",
-  "saude_comentario_py": "frase única de até 20 palavras sobre a saúde financeira no Paraguai",
+  "saude_comentario_br": "frase única de até 20 palavras: interprete ${pct_br.toFixed(1)}% como proporção de despesas sobre faturamento (não como margem negativa). Margem restante = ${(100-pct_br).toFixed(1)}%.",
+  "saude_comentario_py": "frase única de até 20 palavras: interprete ${pct_py.toFixed(1)}% como proporção de despesas sobre faturamento (não como margem negativa). Margem restante = ${(100-pct_py).toFixed(1)}%.",
   "pontos_fortes": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)", "frase 3 (máx 15 palavras)"],
   "pontos_atencao": ["frase 1 (máx 15 palavras)", "frase 2 (máx 15 palavras)"]
 }`;
@@ -3980,7 +3945,83 @@ function renderDashboard(d) {
   gerarAnaliseIA(d);
 }
 
-function gerarPDF() { window.print(); }
+function gerarPDF() { prepararEImprimir(); }
+
+function prepararEImprimir() {
+  // Coletar dados do formulário
+  const campos = [
+    { label: 'Nome da Empresa',       id: 'nome_empresa' },
+    { label: 'Nome do Responsável',    id: 'nome_responsavel' },
+    { label: 'E-mail Corporativo',     id: 'email_corporativo' },
+    { label: 'Telefone / WhatsApp',    id: 'telefone' },
+    { label: 'Setor de Atuação',       id: 'setor',     tipo: 'select' },
+    { label: 'Regime Tributário',      id: 'regime',    tipo: 'select' },
+    { label: 'Faturamento Anual',      id: 'faturamento' },
+    { label: 'Lucro Anual',            id: 'lucro' },
+    { label: 'Folha de Pagamento',     id: 'folha' },
+    { label: 'Nº de Funcionários',     id: 'funcionarios' },
+    { label: 'Imóvel/Energia/Mês',     id: 'imovel' },
+    { label: 'Energia Mensal',         id: 'energia' },
+  ];
+
+  // Montar linhas
+  const linhas = campos.map(c => {
+    const el = document.getElementById(c.id);
+    if (!el) return null;
+    let val = c.tipo === 'select'
+      ? (el.options[el.selectedIndex]?.text || '—')
+      : (el.value || '—');
+    if (!val || val === '0,00') return null;
+    return `<div style="display:flex;gap:8px;padding:4px 0;border-bottom:1px solid #eee;font-size:10pt;">
+      <span style="color:#666;min-width:180px;font-size:9pt;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;">${c.label}</span>
+      <span style="font-weight:600;color:#1A2B23;">${val}</span>
+    </div>`;
+  }).filter(Boolean).join('');
+
+  // Módulos ativos
+  const mods = [];
+  if (document.getElementById('maquila_toggle')?.checked)     mods.push('Regime Maquila');
+  if (document.getElementById('logistica_toggle')?.checked)   mods.push('Logística');
+  if (document.getElementById('investimento_toggle')?.checked) mods.push('Investimento Inicial');
+
+  // Criar ou atualizar bloco de dados para impressão
+  let bloco = document.getElementById('print-dados-cliente');
+  if (!bloco) {
+    bloco = document.createElement('div');
+    bloco.id = 'print-dados-cliente';
+    document.getElementById('resultado').prepend(bloco);
+  }
+
+  bloco.innerHTML = `
+    <div style="padding:20px 28px 16px;border-bottom:2px solid #1A2B23;margin-bottom:0;background:white;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 72' width='18' height='27'>
+          <polygon points='0,62 14,0 28,62'   fill='#1A2B23' opacity='0.9'/>
+          <polygon points='8,62 22,20 36,62'  fill='#1A2B23' opacity='0.5'/>
+          <polygon points='16,62 30,35 44,62' fill='#1A2B23' opacity='0.25'/>
+        </svg>
+        <div>
+          <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:300;color:#1A2B23;letter-spacing:2px;">
+            Kakuaa<span style="font-weight:600;color:#1D4E3A;">PY</span>
+          </div>
+          <div style="font-size:8pt;color:#999;letter-spacing:2px;text-transform:uppercase;">crescer · conectar · prosperar</div>
+        </div>
+        <div style="margin-left:auto;text-align:right;">
+          <div style="font-size:8pt;color:#999;">Relatório gerado em</div>
+          <div style="font-size:9pt;font-weight:600;color:#1A2B23;">${new Date().toLocaleString('pt-BR')}</div>
+        </div>
+      </div>
+      <div style="font-size:10px;font-weight:700;color:#1D4E3A;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">
+        📋 Dados Informados pelo Cliente
+      </div>
+      ${linhas}
+      ${mods.length > 0 ? `<div style="margin-top:8px;font-size:9pt;color:#555;">
+        <strong>Módulos ativados:</strong> ${mods.join(' · ')}
+      </div>` : ''}
+    </div>`;
+
+  window.print();
+}
 
 
 // Links suaves
